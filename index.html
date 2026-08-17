@@ -2466,10 +2466,232 @@ select:focus {
 }
 </style>
 
+
+<style id="bwg-login-css">
+#bwgLoginGate{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#eef6ff,#fff8e7);
+    font-family:Arial,Helvetica,sans-serif;
+}
+#bwgLoginCard{
+    width:min(420px,calc(100vw - 36px));
+    background:#fff;
+    border:1px solid #dbe5f0;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 20px 70px rgba(0,40,90,.18);
+}
+#bwgLoginCard h1{
+    margin:0 0 6px;
+    font-size:26px;
+    color:#0878d1;
+}
+#bwgLoginCard p{
+    margin:0 0 22px;
+    color:#637083;
+}
+#bwgLoginCard label{
+    display:block;
+    margin:14px 0 7px;
+    font-weight:800;
+}
+#bwgLoginCard input{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px 14px;
+    border:1px solid #cbd7e5;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+}
+#bwgLoginCard input:focus{
+    border-color:#0878d1;
+    box-shadow:0 0 0 3px rgba(8,120,209,.12);
+}
+#bwgLoginBtn{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#0878d1;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+#bwgLoginError{
+    min-height:20px;
+    margin-top:12px;
+    color:#d92525;
+    font-weight:800;
+    font-size:13px;
+}
+body.bwg-locked{
+    overflow:hidden;
+}
+</style>
+
+
+<style id="bwg-label-count-css">
+.bwg-count-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(220px,1fr));
+    gap:14px;
+}
+.bwg-count-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-count-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-count-card select,
+.bwg-count-card input{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-custom-count{
+    display:none;
+    margin-top:9px;
+}
+.bwg-custom-count.show{
+    display:block;
+}
+.bwg-count-note{
+    margin-top:8px;
+    color:#64748b;
+    font-size:12px;
+}
+@media(max-width:850px){
+    .bwg-count-grid{grid-template-columns:1fr}
+}
+</style>
+
+
+<style id="bwg-custom-page-size-css">
+.bwg-page-size-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(180px,1fr));
+    gap:14px;
+}
+.bwg-page-size-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-page-size-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-page-size-card select,
+.bwg-page-size-card input{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-custom-size-fields{
+    display:none;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+.bwg-custom-size-fields.show{
+    display:grid;
+}
+.bwg-size-note{
+    margin-top:7px;
+    color:#64748b;
+    font-size:12px;
+}
+@media(max-width:850px){
+    .bwg-page-size-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+
+
+<style id="bwg-po-box-order-gap-css">
+.bwg-order-gap-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(190px,1fr));
+    gap:14px;
+}
+.bwg-order-gap-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-order-gap-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-order-gap-card select,
+.bwg-order-gap-card input[type="range"]{
+    width:100%;
+    box-sizing:border-box;
+}
+.bwg-order-gap-card select{
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-gap-value{
+    display:block;
+    margin-top:7px;
+    color:#0878d1;
+    font-weight:900;
+}
+@media(max-width:850px){
+    .bwg-order-gap-grid{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 
 
-<body>
+<body class="bwg-locked">
+
+<div id="bwgLoginGate">
+    <div id="bwgLoginCard">
+        <h1>🚚 BWG BooksWagon Label Studio</h1>
+        <p>Login required to open the Label Studio.</p>
+
+        <label for="bwgLoginId">Login ID</label>
+        <input id="bwgLoginId" type="text" autocomplete="username"
+               placeholder="Enter Login ID">
+
+        <label for="bwgLoginPassword">Password</label>
+        <input id="bwgLoginPassword" type="password"
+               autocomplete="current-password"
+               placeholder="Enter Password">
+
+        <button id="bwgLoginBtn" type="button">🔐 Login</button>
+        <div id="bwgLoginError"></div>
+    </div>
+</div>
+
 
 
 <!-- =====================================================
@@ -3281,6 +3503,174 @@ Page Border
 
 </div>
 
+
+<div class="section bwg-label-count-section">
+    <div class="section-head">
+        <h3>Coco Blue · Labels Per Page</h3>
+        <small>Choose how many labels are placed on one page</small>
+    </div>
+
+    <div class="bwg-count-grid">
+        <div class="bwg-count-card">
+            <label for="cocoLabelsPerPage">Labels Per Page</label>
+            <select id="cocoLabelsPerPage">
+                <option value="2">2 Labels</option>
+<option value="4">4 Labels</option>
+<option value="6">6 Labels</option>
+<option value="8">8 Labels</option>
+<option value="10">10 Labels</option>
+<option value="12">12 Labels</option>
+<option value="14">14 Labels</option>
+<option value="16">16 Labels</option>
+<option value="18">18 Labels</option>
+<option value="20">20 Labels</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <div id="cocoCustomCountWrap" class="bwg-custom-count">
+                <input
+                    id="cocoCustomCount"
+                    type="number"
+                    min="1"
+                    max="200"
+                    value="10"
+                    placeholder="Custom labels per page"
+                >
+            </div>
+
+            <div class="bwg-count-note">
+                2, 4, 6 … 20 or Custom
+            </div>
+        </div>
+
+        <div class="bwg-count-card">
+            <label>Divide Labels</label>
+            <select id="cocoDivideMode">
+                <option value="auto" selected>Auto Divide</option>
+                <option value="rows">Divide by Rows</option>
+                <option value="columns">Divide by Columns</option>
+            </select>
+            <div class="bwg-count-note">
+                This controls how the selected labels are divided across the page.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section bwg-page-size-section">
+
+<div class="section-head">
+<h3>Coco Blue · Page Size</h3>
+<small>Standard or Custom page size</small>
+</div>
+
+<div class="bwg-page-size-grid">
+
+<div class="bwg-page-size-card">
+<label for="cocoPageSize">Page Size</label>
+<select id="cocoPageSize">
+    <option value="A4">A4</option>
+    <option value="A5">A5</option>
+    <option value="A6">A6</option>
+    <option value="LETTER">Letter</option>
+    <option value="4x6" selected>4 × 6 inch</option>
+    <option value="5x7">5 × 7 inch</option>
+    <option value="CUSTOM">Custom</option>
+</select>
+
+<div class="bwg-size-note">
+Choose Custom for your own page dimensions.
+</div>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Width</label>
+<input
+    id="cocoCustomPageWidth"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="4"
+    placeholder="Width"
+>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Height</label>
+<input
+    id="cocoCustomPageHeight"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="6"
+    placeholder="Height"
+>
+
+<div class="bwg-custom-size-fields" id="cocoCustomSizeFields">
+    <div>
+        <label>Unit</label>
+        <select id="cocoCustomPageUnit">
+            <option value="in" selected>Inches</option>
+            <option value="mm">Millimetres</option>
+            <option value="cm">Centimetres</option>
+        </select>
+    </div>
+    <div>
+        <label>Orientation</label>
+        <select id="cocoCustomPageOrientation">
+            <option value="portrait" selected>Portrait</option>
+            <option value="landscape">Landscape</option>
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="section bwg-order-gap-section">
+
+<div class="section-head">
+<h3>Coco Blue · PO + Box Arrangement</h3>
+<small>Order, line layout and gap</small>
+</div>
+
+<div class="bwg-order-gap-grid">
+
+<div class="bwg-order-gap-card">
+<label for="cocoPoBoxOrder">Display Order</label>
+<select id="cocoPoBoxOrder">
+    <option value="po-box" selected>PO No. First → Box No.</option>
+    <option value="box-po">Box No. First → PO No.</option>
+</select>
+</div>
+
+<div class="bwg-order-gap-card">
+<label for="cocoPoBoxLineMode">Line Layout</label>
+<select id="cocoPoBoxLineMode">
+    <option value="separate" selected>Separate Line</option>
+    <option value="same">Same Line</option>
+</select>
+</div>
+
+<div class="bwg-order-gap-card">
+<label for="cocoPoBoxGap">PO / Box Gap</label>
+<input
+    type="range"
+    id="cocoPoBoxGap"
+    min="0"
+    max="60"
+    value="10"
+    step="1"
+>
+<span class="bwg-gap-value" id="cocoPoBoxGapValue">10 px</span>
+</div>
+
+</div>
+
+</div>
 <div class="section">
 
 <div class="preview-box">
@@ -3793,6 +4183,174 @@ Page Border
 
 </div>
 
+
+<div class="section bwg-label-count-section">
+    <div class="section-head">
+        <h3>Other PO · Labels Per Page</h3>
+        <small>Choose how many labels are placed on one page</small>
+    </div>
+
+    <div class="bwg-count-grid">
+        <div class="bwg-count-card">
+            <label for="otherLabelsPerPage">Labels Per Page</label>
+            <select id="otherLabelsPerPage">
+                <option value="2">2 Labels</option>
+<option value="4">4 Labels</option>
+<option value="6">6 Labels</option>
+<option value="8">8 Labels</option>
+<option value="10">10 Labels</option>
+<option value="12">12 Labels</option>
+<option value="14">14 Labels</option>
+<option value="16">16 Labels</option>
+<option value="18">18 Labels</option>
+<option value="20">20 Labels</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <div id="otherCustomCountWrap" class="bwg-custom-count">
+                <input
+                    id="otherCustomCount"
+                    type="number"
+                    min="1"
+                    max="200"
+                    value="10"
+                    placeholder="Custom labels per page"
+                >
+            </div>
+
+            <div class="bwg-count-note">
+                2, 4, 6 … 20 or Custom
+            </div>
+        </div>
+
+        <div class="bwg-count-card">
+            <label>Divide Labels</label>
+            <select id="otherDivideMode">
+                <option value="auto" selected>Auto Divide</option>
+                <option value="rows">Divide by Rows</option>
+                <option value="columns">Divide by Columns</option>
+            </select>
+            <div class="bwg-count-note">
+                This controls how the selected labels are divided across the page.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section bwg-page-size-section">
+
+<div class="section-head">
+<h3>Other PO · Page Size</h3>
+<small>Standard or Custom page size</small>
+</div>
+
+<div class="bwg-page-size-grid">
+
+<div class="bwg-page-size-card">
+<label for="otherPageSize">Page Size</label>
+<select id="otherPageSize">
+    <option value="A4">A4</option>
+    <option value="A5">A5</option>
+    <option value="A6">A6</option>
+    <option value="LETTER">Letter</option>
+    <option value="4x6" selected>4 × 6 inch</option>
+    <option value="5x7">5 × 7 inch</option>
+    <option value="CUSTOM">Custom</option>
+</select>
+
+<div class="bwg-size-note">
+Choose Custom for your own page dimensions.
+</div>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Width</label>
+<input
+    id="otherCustomPageWidth"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="4"
+    placeholder="Width"
+>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Height</label>
+<input
+    id="otherCustomPageHeight"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="6"
+    placeholder="Height"
+>
+
+<div class="bwg-custom-size-fields" id="otherCustomSizeFields">
+    <div>
+        <label>Unit</label>
+        <select id="otherCustomPageUnit">
+            <option value="in" selected>Inches</option>
+            <option value="mm">Millimetres</option>
+            <option value="cm">Centimetres</option>
+        </select>
+    </div>
+    <div>
+        <label>Orientation</label>
+        <select id="otherCustomPageOrientation">
+            <option value="portrait" selected>Portrait</option>
+            <option value="landscape">Landscape</option>
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="section bwg-order-gap-section">
+
+<div class="section-head">
+<h3>Other PO · PO + Box Arrangement</h3>
+<small>Order, line layout and gap</small>
+</div>
+
+<div class="bwg-order-gap-grid">
+
+<div class="bwg-order-gap-card">
+<label for="otherPoBoxOrder">Display Order</label>
+<select id="otherPoBoxOrder">
+    <option value="po-box" selected>PO No. First → Box No.</option>
+    <option value="box-po">Box No. First → PO No.</option>
+</select>
+</div>
+
+<div class="bwg-order-gap-card">
+<label for="otherPoBoxLineMode">Line Layout</label>
+<select id="otherPoBoxLineMode">
+    <option value="separate" selected>Separate Line</option>
+    <option value="same">Same Line</option>
+</select>
+</div>
+
+<div class="bwg-order-gap-card">
+<label for="otherPoBoxGap">PO / Box Gap</label>
+<input
+    type="range"
+    id="otherPoBoxGap"
+    min="0"
+    max="60"
+    value="10"
+    step="1"
+>
+<span class="bwg-gap-value" id="otherPoBoxGapValue">10 px</span>
+</div>
+
+</div>
+
+</div>
 <div class="section">
 
 <div class="preview-box">
@@ -4116,6 +4674,132 @@ Page Border
 
 </div>
 
+
+<div class="section bwg-label-count-section">
+    <div class="section-head">
+        <h3>ISBN Barcode · Labels Per Page</h3>
+        <small>Choose how many labels are placed on one page</small>
+    </div>
+
+    <div class="bwg-count-grid">
+        <div class="bwg-count-card">
+            <label for="isbnLabelsPerPage">Labels Per Page</label>
+            <select id="isbnLabelsPerPage">
+                <option value="2">2 Labels</option>
+<option value="4">4 Labels</option>
+<option value="6">6 Labels</option>
+<option value="8">8 Labels</option>
+<option value="10">10 Labels</option>
+<option value="12">12 Labels</option>
+<option value="14">14 Labels</option>
+<option value="16">16 Labels</option>
+<option value="18">18 Labels</option>
+<option value="20">20 Labels</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <div id="isbnCustomCountWrap" class="bwg-custom-count">
+                <input
+                    id="isbnCustomCount"
+                    type="number"
+                    min="1"
+                    max="200"
+                    value="10"
+                    placeholder="Custom labels per page"
+                >
+            </div>
+
+            <div class="bwg-count-note">
+                2, 4, 6 … 20 or Custom
+            </div>
+        </div>
+
+        <div class="bwg-count-card">
+            <label>Divide Labels</label>
+            <select id="isbnDivideMode">
+                <option value="auto" selected>Auto Divide</option>
+                <option value="rows">Divide by Rows</option>
+                <option value="columns">Divide by Columns</option>
+            </select>
+            <div class="bwg-count-note">
+                This controls how the selected labels are divided across the page.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section bwg-page-size-section">
+
+<div class="section-head">
+<h3>ISBN Barcode · Page Size</h3>
+<small>Standard or Custom page size</small>
+</div>
+
+<div class="bwg-page-size-grid">
+
+<div class="bwg-page-size-card">
+<label for="isbnPageSize">Page Size</label>
+<select id="isbnPageSize">
+    <option value="A4">A4</option>
+    <option value="A5">A5</option>
+    <option value="A6">A6</option>
+    <option value="LETTER">Letter</option>
+    <option value="4x6" selected>4 × 6 inch</option>
+    <option value="5x7">5 × 7 inch</option>
+    <option value="CUSTOM">Custom</option>
+</select>
+
+<div class="bwg-size-note">
+Choose Custom for your own page dimensions.
+</div>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Width</label>
+<input
+    id="isbnCustomPageWidth"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="4"
+    placeholder="Width"
+>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Height</label>
+<input
+    id="isbnCustomPageHeight"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="6"
+    placeholder="Height"
+>
+
+<div class="bwg-custom-size-fields" id="isbnCustomSizeFields">
+    <div>
+        <label>Unit</label>
+        <select id="isbnCustomPageUnit">
+            <option value="in" selected>Inches</option>
+            <option value="mm">Millimetres</option>
+            <option value="cm">Centimetres</option>
+        </select>
+    </div>
+    <div>
+        <label>Orientation</label>
+        <select id="isbnCustomPageOrientation">
+            <option value="portrait" selected>Portrait</option>
+            <option value="landscape">Landscape</option>
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
 <div class="section">
 
 <div class="preview-box">
@@ -4527,6 +5211,132 @@ Page Border
 
 </div>
 
+
+<div class="section bwg-label-count-section">
+    <div class="section-head">
+        <h3>Address Label · Labels Per Page</h3>
+        <small>Choose how many labels are placed on one page</small>
+    </div>
+
+    <div class="bwg-count-grid">
+        <div class="bwg-count-card">
+            <label for="addressLabelsPerPage">Labels Per Page</label>
+            <select id="addressLabelsPerPage">
+                <option value="2">2 Labels</option>
+<option value="4">4 Labels</option>
+<option value="6">6 Labels</option>
+<option value="8">8 Labels</option>
+<option value="10">10 Labels</option>
+<option value="12">12 Labels</option>
+<option value="14">14 Labels</option>
+<option value="16">16 Labels</option>
+<option value="18">18 Labels</option>
+<option value="20">20 Labels</option>
+                <option value="custom">Custom</option>
+            </select>
+
+            <div id="addressCustomCountWrap" class="bwg-custom-count">
+                <input
+                    id="addressCustomCount"
+                    type="number"
+                    min="1"
+                    max="200"
+                    value="10"
+                    placeholder="Custom labels per page"
+                >
+            </div>
+
+            <div class="bwg-count-note">
+                2, 4, 6 … 20 or Custom
+            </div>
+        </div>
+
+        <div class="bwg-count-card">
+            <label>Divide Labels</label>
+            <select id="addressDivideMode">
+                <option value="auto" selected>Auto Divide</option>
+                <option value="rows">Divide by Rows</option>
+                <option value="columns">Divide by Columns</option>
+            </select>
+            <div class="bwg-count-note">
+                This controls how the selected labels are divided across the page.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section bwg-page-size-section">
+
+<div class="section-head">
+<h3>Address Label · Page Size</h3>
+<small>Standard or Custom page size</small>
+</div>
+
+<div class="bwg-page-size-grid">
+
+<div class="bwg-page-size-card">
+<label for="addressPageSize">Page Size</label>
+<select id="addressPageSize">
+    <option value="A4">A4</option>
+    <option value="A5">A5</option>
+    <option value="A6">A6</option>
+    <option value="LETTER">Letter</option>
+    <option value="4x6" selected>4 × 6 inch</option>
+    <option value="5x7">5 × 7 inch</option>
+    <option value="CUSTOM">Custom</option>
+</select>
+
+<div class="bwg-size-note">
+Choose Custom for your own page dimensions.
+</div>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Width</label>
+<input
+    id="addressCustomPageWidth"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="4"
+    placeholder="Width"
+>
+</div>
+
+<div class="bwg-page-size-card">
+<label>Custom Height</label>
+<input
+    id="addressCustomPageHeight"
+    type="number"
+    min="1"
+    max="1000"
+    step="0.1"
+    value="6"
+    placeholder="Height"
+>
+
+<div class="bwg-custom-size-fields" id="addressCustomSizeFields">
+    <div>
+        <label>Unit</label>
+        <select id="addressCustomPageUnit">
+            <option value="in" selected>Inches</option>
+            <option value="mm">Millimetres</option>
+            <option value="cm">Centimetres</option>
+        </select>
+    </div>
+    <div>
+        <label>Orientation</label>
+        <select id="addressCustomPageOrientation">
+            <option value="portrait" selected>Portrait</option>
+            <option value="landscape">Landscape</option>
+        </select>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
 <div class="section">
 
 <div class="section-head">
@@ -4755,10 +5565,13 @@ function showToast(message, type = "green") {
    ========================================================= */
 
 function renderAll() {
+
     renderCoco();
     renderOther();
     renderISBN();
     renderAddress();
+    updateLabelCountBadges();
+
 }
 
 
@@ -5667,6 +6480,8 @@ function renderCoco() {
 
     }
 
+    applyOnePagePreviewLimit(area);
+
 }
 
 
@@ -5979,10 +6794,7 @@ function createCocoPage(
         }
         else {
 
-            wrapper.append(
-                po,
-                box
-            );
+            arrangePoBox(wrapper, po, box, "coco");
 
         }
 
@@ -6206,10 +7018,7 @@ function renderOther() {
                 applyFinalPOBoxSliderStyles("other", null, boxLabel);
 
 
-                wrapper.append(
-                    poLabel,
-                    boxLabel
-                );
+                arrangePoBox(wrapper, poLabel, boxLabel, "other");
 
 
                 label.appendChild(
@@ -6230,8 +7039,11 @@ function renderOther() {
         );
 
         applyFinalPageDecor(page, "other");
+        applyPreviewPageSize(page, "other");
 
     }
+
+    applyOnePagePreviewLimit(area);
 
 }
 
@@ -6352,7 +7164,7 @@ function renderISBN() {
         getISBNValues();
 
 
-    const previewCount = 1;
+    const previewCount = Math.min(values.length, getLabelsPerPage("isbn", 10));
 
 
     if (!values.length) {
@@ -6473,6 +7285,7 @@ function renderISBN() {
         );
 
         applyFinalPageDecor(page, "isbn");
+        applyPreviewPageSize(page, "isbn");
 
     }
 
@@ -7016,8 +7829,11 @@ function renderAddress() {
         );
 
         applyFinalPageDecor(page, "address");
+        applyPreviewPageSize(page, "address");
 
     }
+
+    applyOnePagePreviewLimit(area);
 
 }
 
@@ -7691,7 +8507,7 @@ async function downloadCocoVectorPDF(filename) {
     const pageSize = getCocoPDFPageSize();
     const perPage = 2;
     const totalPages = Math.ceil(items.length / perPage);
-    const layout = document.querySelector('input[name="cocoLayout"]:checked')?.value || "separate";
+    const layout = arrangement.lineMode;
     const content = document.querySelector('input[name="cocoContent"]:checked')?.value || "combined";
     const poPrefix = getValue("cocoPoPrefix");
     const boxPrefix = getValue("cocoBoxPrefix", "BOX NO. ");
@@ -7738,6 +8554,21 @@ async function downloadCocoVectorPDF(filename) {
 
                 const poText = `${poPrefix}${item.po}`;
                 const boxText = `${boxPrefix}${item.box}`;
+
+                const firstIsBox =
+                    arrangement.order === "box-po";
+
+                const firstText =
+                    firstIsBox ? boxText : poText;
+
+                const secondText =
+                    firstIsBox ? poText : boxText;
+
+                const firstCfg =
+                    firstIsBox ? boxCfg : poCfg;
+
+                const secondCfg =
+                    firstIsBox ? poCfg : boxCfg;
 
                 const poCfg = getFontCfg("coco", "po");
                 const boxCfg = getFontCfg("coco", "box");
@@ -7865,14 +8696,7 @@ async function downloadCocoVectorPDF(filename) {
                     return;
                 }
 
-                const gap =
-                    Math.max(
-                        3,
-                        Math.min(
-                            9,
-                            availableHeight * 0.04
-                        )
-                    );
+                const gap = Math.max(0, arrangement.gap * 0.264583);
 
                 const poSize =
                     Math.min(
@@ -8477,10 +9301,7 @@ function getAllPDFPages(
                     );
 
 
-                    wrapper.append(
-                        poLabel,
-                        boxLabel
-                    );
+                    arrangePoBox(wrapper, poLabel, boxLabel, "other");
 
 
                     label.appendChild(
@@ -9154,6 +9975,533 @@ setupFinalSliders("coco");
 setupFinalSliders("other");
 setupFinalSliders("isbn");
 setupFinalSliders("address");
+
+
+/* =========================================================
+   LOGIN GATE
+========================================================= */
+
+(function setupBWGLogin(){
+
+    const gate = document.getElementById("bwgLoginGate");
+    const idInput = document.getElementById("bwgLoginId");
+    const passInput = document.getElementById("bwgLoginPassword");
+    const btn = document.getElementById("bwgLoginBtn");
+    const error = document.getElementById("bwgLoginError");
+
+    if (!gate || !idInput || !passInput || !btn) return;
+
+    const LOGIN_ID = "BWG213";
+    const LOGIN_PASSWORD = "D9212";
+
+    function doLogin(){
+
+        const id = idInput.value.trim();
+        const password = passInput.value;
+
+        if (id === LOGIN_ID && password === LOGIN_PASSWORD) {
+            gate.remove();
+            document.body.classList.remove("bwg-locked");
+            sessionStorage.setItem("bwgLabelStudioLoggedIn","1");
+            return;
+        }
+
+        error.textContent = "Invalid Login ID or Password.";
+        passInput.value = "";
+        passInput.focus();
+    }
+
+    if (
+        sessionStorage.getItem("bwgLabelStudioLoggedIn") === "1"
+    ) {
+        gate.remove();
+        document.body.classList.remove("bwg-locked");
+    }
+
+    btn.addEventListener("click", doLogin);
+
+    [idInput, passInput].forEach(input => {
+        input.addEventListener("keydown", event => {
+            if (event.key === "Enter") doLogin();
+        });
+    });
+
+})();
+
+
+/* =========================================================
+   LABELS PER PAGE / DIVIDE CONTROLS
+========================================================= */
+
+function getLabelsPerPage(prefix, fallback = 10){
+
+    const select = $(`${prefix}LabelsPerPage`);
+
+    if (!select) return fallback;
+
+    if (select.value === "custom") {
+        const custom =
+            Number(
+                getValue(
+                    `${prefix}CustomCount`,
+                    String(fallback)
+                )
+            );
+
+        if (
+            Number.isFinite(custom) &&
+            custom >= 1
+        ){
+            return Math.min(
+                200,
+                Math.max(1, Math.floor(custom))
+            );
+        }
+
+        return fallback;
+    }
+
+    const value = Number(select.value);
+
+    return Number.isFinite(value)
+        ? Math.max(1, Math.floor(value))
+        : fallback;
+}
+
+function getDivideMode(prefix){
+
+    return getValue(
+        `${prefix}DivideMode`,
+        "auto"
+    );
+}
+
+function setupLabelCountControls(prefix){
+
+    const select =
+        $(`${prefix}LabelsPerPage`);
+
+    const customWrap =
+        $(`${prefix}CustomCountWrap`);
+
+    const custom =
+        $(`${prefix}CustomCount`);
+
+    function refresh(){
+
+        if (!select) return;
+
+        if (customWrap){
+            customWrap.classList.toggle(
+                "show",
+                select.value === "custom"
+            );
+        }
+
+        renderAll();
+    }
+
+    if (select){
+        select.addEventListener(
+            "change",
+            refresh
+        );
+    }
+
+    if (custom){
+        custom.addEventListener(
+            "input",
+            renderAll
+        );
+
+        custom.addEventListener(
+            "change",
+            renderAll
+        );
+    }
+
+    const divide =
+        $(`${prefix}DivideMode`);
+
+    if (divide){
+        divide.addEventListener(
+            "change",
+            renderAll
+        );
+    }
+
+    refresh();
+}
+
+
+/* =========================================================
+   ONE-PAGE PREVIEW
+========================================================= */
+
+
+function updateLabelCountBadges(){
+
+    const configs = [
+        ["coco","cocoPageCount"],
+        ["other","otherPageCount"],
+        ["isbn","isbnPageCount"],
+        ["address","addressPageCount"]
+    ];
+
+    configs.forEach(([prefix,badgeId]) => {
+
+        const badge = $(badgeId);
+        if (!badge) return;
+
+        const count =
+            getLabelsPerPage(prefix, 10);
+
+        badge.textContent =
+            `${count} Labels / Page`;
+
+    });
+}
+
+
+function applyOnePagePreviewLimit(container){
+
+    if (!container) return;
+
+    const pages =
+        container.querySelectorAll(
+            ".preview-page"
+        );
+
+    pages.forEach(
+        (page,index) => {
+            page.style.display =
+                index === 0
+                    ? ""
+                    : "none";
+        }
+    );
+}
+
+
+setupLabelCountControls("coco");
+setupLabelCountControls("other");
+setupLabelCountControls("isbn");
+setupLabelCountControls("address");
+
+
+/* =========================================================
+   CUSTOM PAGE SIZE
+========================================================= */
+
+const BWG_PAGE_SIZES = {
+    A4:      { w: 8.27, h: 11.69 },
+    A5:      { w: 5.83, h: 8.27 },
+    A6:      { w: 4.13, h: 5.83 },
+    LETTER:  { w: 8.5,  h: 11.0 },
+    "4x6":   { w: 4.0,  h: 6.0 },
+    "5x7":   { w: 5.0,  h: 7.0 }
+};
+
+function getPageSizeConfig(prefix){
+
+    const select =
+        $(`${prefix}PageSize`);
+
+    const type =
+        select?.value || "4x6";
+
+    if (type !== "CUSTOM") {
+
+        const preset =
+            BWG_PAGE_SIZES[type] ||
+            BWG_PAGE_SIZES["4x6"];
+
+        return {
+            type,
+            widthIn: preset.w,
+            heightIn: preset.h,
+            unit: "in",
+            orientation: "portrait"
+        };
+    }
+
+    let width =
+        Number(
+            getValue(
+                `${prefix}CustomPageWidth`,
+                "4"
+            )
+        );
+
+    let height =
+        Number(
+            getValue(
+                `${prefix}CustomPageHeight`,
+                "6"
+            )
+        );
+
+    if (!Number.isFinite(width) || width <= 0)
+        width = 4;
+
+    if (!Number.isFinite(height) || height <= 0)
+        height = 6;
+
+    const unit =
+        getValue(
+            `${prefix}CustomPageUnit`,
+            "in"
+        );
+
+    const orientation =
+        getValue(
+            `${prefix}CustomPageOrientation`,
+            "portrait"
+        );
+
+    let widthIn = width;
+    let heightIn = height;
+
+    if (unit === "mm") {
+        widthIn = width / 25.4;
+        heightIn = height / 25.4;
+    }
+
+    if (unit === "cm") {
+        widthIn = width / 2.54;
+        heightIn = height / 2.54;
+    }
+
+    if (orientation === "landscape") {
+        [widthIn, heightIn] =
+            [heightIn, widthIn];
+    }
+
+    return {
+        type: "CUSTOM",
+        widthIn,
+        heightIn,
+        unit,
+        orientation
+    };
+}
+
+function applyPreviewPageSize(page, prefix){
+
+    const cfg =
+        getPageSizeConfig(prefix);
+
+    page.style.aspectRatio =
+        `${cfg.widthIn} / ${cfg.heightIn}`;
+
+    page.dataset.pageWidthIn =
+        String(cfg.widthIn);
+
+    page.dataset.pageHeightIn =
+        String(cfg.heightIn);
+}
+
+function setupPageSizeControls(prefix){
+
+    const select =
+        $(`${prefix}PageSize`);
+
+    const customFields =
+        $(`${prefix}CustomSizeFields`);
+
+    function refresh(){
+
+        if (customFields) {
+            customFields.classList.toggle(
+                "show",
+                select?.value === "CUSTOM"
+            );
+        }
+
+        renderAll();
+    }
+
+    if (select) {
+        select.addEventListener(
+            "change",
+            refresh
+        );
+    }
+
+    [
+        `${prefix}CustomPageWidth`,
+        `${prefix}CustomPageHeight`,
+        `${prefix}CustomPageUnit`,
+        `${prefix}CustomPageOrientation`
+    ].forEach(id => {
+
+        const el = $(id);
+        if (!el) return;
+
+        el.addEventListener(
+            "input",
+            renderAll
+        );
+
+        el.addEventListener(
+            "change",
+            renderAll
+        );
+    });
+
+    refresh();
+}
+
+function getJsPdfPageFormat(prefix){
+
+    const cfg =
+        getPageSizeConfig(prefix);
+
+    return {
+        format: [
+            cfg.widthIn * 25.4,
+            cfg.heightIn * 25.4
+        ],
+        widthMm: cfg.widthIn * 25.4,
+        heightMm: cfg.heightIn * 25.4,
+        orientation:
+            cfg.widthIn > cfg.heightIn
+                ? "landscape"
+                : "portrait"
+    };
+}
+
+
+setupPageSizeControls("coco");
+setupPageSizeControls("other");
+setupPageSizeControls("isbn");
+setupPageSizeControls("address");
+
+
+/* =========================================================
+   PO + BOX ORDER / LINE / GAP
+========================================================= */
+
+function getPoBoxArrangement(prefix){
+
+    return {
+        order:
+            getValue(
+                `${prefix}PoBoxOrder`,
+                "po-box"
+            ),
+        lineMode:
+            getValue(
+                `${prefix}PoBoxLineMode`,
+                "separate"
+            ),
+        gap:
+            Math.max(
+                0,
+                Number(
+                    getValue(
+                        `${prefix}PoBoxGap`,
+                        "10"
+                    )
+                ) || 0
+            )
+    };
+}
+
+function arrangePoBox(wrapper, poEl, boxEl, prefix){
+
+    if (!wrapper || !poEl || !boxEl)
+        return;
+
+    const cfg =
+        getPoBoxArrangement(prefix);
+
+    wrapper.innerHTML = "";
+
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "center";
+    wrapper.style.justifyContent = "center";
+    wrapper.style.flexDirection =
+        cfg.lineMode === "same"
+            ? "row"
+            : "column";
+
+    wrapper.style.gap =
+        `${cfg.gap}px`;
+
+    const first =
+        cfg.order === "box-po"
+            ? boxEl
+            : poEl;
+
+    const second =
+        cfg.order === "box-po"
+            ? poEl
+            : boxEl;
+
+    wrapper.append(
+        first,
+        second
+    );
+}
+
+function setupPoBoxArrangement(prefix){
+
+    const order =
+        $(`${prefix}PoBoxOrder`);
+
+    const line =
+        $(`${prefix}PoBoxLineMode`);
+
+    const gap =
+        $(`${prefix}PoBoxGap`);
+
+    const gapValue =
+        $(`${prefix}PoBoxGapValue`);
+
+    function update(){
+
+        if (gapValue && gap) {
+            gapValue.textContent =
+                `${gap.value} px`;
+        }
+
+        renderAll();
+    }
+
+    [order,line,gap].forEach(el => {
+
+        if (!el) return;
+
+        el.addEventListener(
+            "input",
+            update
+        );
+
+        el.addEventListener(
+            "change",
+            update
+        );
+    });
+
+    update();
+}
+
+
+setupPoBoxArrangement("coco");
+setupPoBoxArrangement("other");
+
+
+document
+.querySelectorAll('input[name="cocoLayout"]')
+.forEach(input => {
+    input.addEventListener("change", () => {
+        const select = $("cocoPoBoxLineMode");
+        if (!select || !input.checked) return;
+        select.value = input.value === "same" ? "same" : "separate";
+        renderAll();
+    });
+});
 
 /* =========================================================
    INITIAL STATE
