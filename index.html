@@ -8610,324 +8610,676 @@ function drawCenteredPDFText(pdf, text, x, y, maxWidth, startSize, minSize = 7) 
     return size;
 }
 
-async function downloadCocoVectorPDF(filename) {
-    if (!window.jspdf || !window.jspdf.jsPDF) {
-        showToast("jsPDF library is not loaded. Refresh the page and try again.", "red");
+async async function downloadCocoVectorPDF(filename) {
+
+    if (
+        !window.jspdf ||
+        !window.jspdf.jsPDF
+    ) {
+        showToast(
+            "PDF engine is not loaded. Please refresh the page.",
+            "red"
+        );
         return;
     }
 
     const items = getCocoItems();
+
     if (!items.length) {
-        showToast("Please enter PO data before downloading PDF.", "red");
+        showToast(
+            "Please enter PO data before downloading PDF.",
+            "red"
+        );
         return;
     }
 
     const { jsPDF } = window.jspdf;
-    const pageSize = getCocoPDFPageSize();
-    const perPage = 2;
-    const totalPages = Math.ceil(items.length / perPage);
-    const layout = arrangement.lineMode;
-    const content = document.querySelector('input[name="cocoContent"]:checked')?.value || "combined";
-    const poPrefix = getValue("cocoPoPrefix");
-    const boxPrefix = getValue("cocoBoxPrefix", "BOX NO. ");
 
-    showToast(`Preparing ${totalPages} page PDF...`, "green");
+    const pageSize =
+        getCocoPDFPageSize();
+
+    const perPage =
+        getLabelsPerPage("coco", 10);
+
+    const totalPages =
+        Math.ceil(
+            items.length / perPage
+        );
+
+    const poBox =
+        typeof getPOBoxLayout === "function"
+            ? getPOBoxLayout("coco")
+            : {
+                order: "po-box",
+                layout: "separate",
+                gap: 10
+            };
+
+    const flow =
+        typeof getCocoFlow === "function"
+            ? getCocoFlow()
+            : "ttb";
+
+    const content =
+        document.querySelector(
+            'input[name="cocoContent"]:checked'
+        )?.value || "combined";
+
+    const poPrefix =
+        getValue("cocoPoPrefix");
+
+    const boxPrefix =
+        getValue(
+            "cocoBoxPrefix",
+            "BOX NO. "
+        );
+
+    const poCfg =
+        typeof getFontCfg === "function"
+            ? getFontCfg("coco", "po")
+            : {
+                size: 24,
+                opacity: 100,
+                bold: true,
+                italic: false,
+                underline: false,
+                borderStyle: "double",
+                borderWidth: "3px"
+            };
+
+    const boxCfg =
+        typeof getFontCfg === "function"
+            ? getFontCfg("coco", "box")
+            : {
+                size: 19,
+                opacity: 100,
+                bold: true,
+                italic: false,
+                underline: false,
+                borderStyle: "double",
+                borderWidth: "3px"
+            };
+
+    const pageCfg =
+        typeof getPageBorderConfig === "function"
+            ? getPageBorderConfig("coco")
+            : {
+                enabled: true,
+                width: 1,
+                scissors: true,
+                scissorSize: 10
+            };
+
+    const width =
+        Number(pageSize.width);
+
+    const height =
+        Number(pageSize.height);
+
+    if (
+        !Number.isFinite(width) ||
+        !Number.isFinite(height) ||
+        width <= 0 ||
+        height <= 0
+    ) {
+        showToast(
+            "Invalid page size. Please check Page Size settings.",
+            "red"
+        );
+        return;
+    }
+
+    const orientation =
+        width > height
+            ? "landscape"
+            : "portrait";
+
+    showToast(
+        `Preparing ${totalPages} page PDF...`,
+        "green"
+    );
 
     let pdf = null;
+
     try {
-        for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
-            const { width, height } = pageSize;
-            const orientation = width > height ? "landscape" : "portrait";
-            if (!pdf) {
-                pdf = new jsPDF({ orientation, unit: "mm", format: [width, height], compress: true });
+
+        for (
+            let pageIndex = 0;
+            pageIndex < totalPages;
+            pageIndex++
+        ) {
+
+            if (pageIndex === 0) {
+
+                pdf =
+                    new jsPDF({
+                        orientation,
+                        unit: "mm",
+                        format: [width, height],
+                        compress: true
+                    });
+
             } else {
-                pdf.addPage([width, height], orientation);
+
+                pdf.addPage(
+                    [width, height],
+                    orientation
+                );
+
             }
 
-            const pageItems = items.slice(pageIndex * perPage, pageIndex * perPage + perPage);
-            const flow = getCocoFlow();
+            /* ---------- PAGE BORDER ---------- */
 
-            const slotWidth = width / perPage;
-            const slotHeight = height / perPage;
+            if (
+                pageCfg.enabled &&
+                pageCfg.width > 0
+            ) {
 
-            pageItems.forEach((item, slotIndex) => {
-                const centerX =
+                pdf.setLineWidth(
+                    Math.max(
+                        0.2,
+                        pageCfg.width * 0.35
+                    )
+                );
+
+                pdf.setDrawColor(
+                    30,
+                    30,
+                    30
+                );
+
+                pdf.rect(
+                    pageCfg.width * 0.35,
+                    pageCfg.width * 0.35,
+                    width -
+                        pageCfg.width * 0.7,
+                    height -
+                        pageCfg.width * 0.7
+                );
+            }
+
+            /* ---------- SCISSOR MARKS ---------- */
+
+            if (
+                pageCfg.scissors &&
+                pageCfg.scissorSize > 0
+            ) {
+
+                pdf.setFont(
+                    "helvetica",
+                    "normal"
+                );
+
+                pdf.setFontSize(
+                    Math.max(
+                        7,
+                        pageCfg.scissorSize
+                    )
+                );
+
+                pdf.text(
+                    "x",
+                    2,
+                    7
+                );
+
+                pdf.text(
+                    "x",
+                    width - 2,
+                    7,
+                    {
+                        align: "right"
+                    }
+                );
+
+                pdf.text(
+                    "x",
+                    2,
+                    height - 2
+                );
+
+                pdf.text(
+                    "x",
+                    width - 2,
+                    height - 2,
+                    {
+                        align: "right"
+                    }
+                );
+            }
+
+            const pageItems =
+                items.slice(
+                    pageIndex * perPage,
+                    pageIndex * perPage + perPage
+                );
+
+            const slotWidth =
+                width / (
                     flow === "ttb"
-                        ? width / 2
-                        : slotIndex * slotWidth + slotWidth / 2;
+                        ? Math.ceil(
+                            Math.sqrt(perPage)
+                        )
+                        : Math.ceil(
+                            Math.sqrt(perPage)
+                        )
+                );
 
-                const centerY =
-                    flow === "ttb"
-                        ? slotIndex * slotHeight + slotHeight / 2
-                        : height / 2;
-
-                const availableWidth =
-                    flow === "ttb"
-                        ? width
-                        : slotWidth;
-
-                const availableHeight =
-                    flow === "ttb"
-                        ? slotHeight
-                        : height;
-
-                const poText = `${poPrefix}${item.po}`;
-                const boxText = `${boxPrefix}${item.box}`;
-
-                const firstIsBox =
-                    arrangement.order === "box-po";
-
-                const firstText =
-                    firstIsBox ? boxText : poText;
-
-                const secondText =
-                    firstIsBox ? poText : boxText;
-
-                const firstCfg =
-                    firstIsBox ? boxCfg : poCfg;
-
-                const secondCfg =
-                    firstIsBox ? poCfg : boxCfg;
-
-                const poCfg = getFontCfg("coco", "po");
-                const boxCfg = getFontCfg("coco", "box");
-
-                const maxTextWidth = availableWidth * 0.86;
-
-                function drawOne(text, cfg, preferredSize, x, y) {
-                    const size = Math.min(
-                        cfg.size,
-                        preferredSize
+            /*
+              We use a predictable grid:
+              - Top → Bottom fills rows first.
+              - Left → Right fills columns first.
+            */
+            const cols =
+                flow === "ttb"
+                    ? Math.ceil(
+                        Math.sqrt(perPage)
+                    )
+                    : Math.ceil(
+                        Math.sqrt(perPage)
                     );
 
-                    pdf.setFont(
-                        "helvetica",
-                        pdfFontStyle(cfg)
-                    );
-                    pdf.setFontSize(size);
+            const rows =
+                Math.ceil(
+                    perPage / cols
+                );
 
-                    const finalSize =
-                        pdfTextWithStyle(
+            const actualSlotWidth =
+                width / cols;
+
+            const actualSlotHeight =
+                height / rows;
+
+            pageItems.forEach(
+                (item, slotIndex) => {
+
+                    let row;
+                    let col;
+
+                    if (flow === "ttb") {
+
+                        row =
+                            slotIndex % rows;
+
+                        col =
+                            Math.floor(
+                                slotIndex / rows
+                            );
+
+                    } else {
+
+                        col =
+                            slotIndex % cols;
+
+                        row =
+                            Math.floor(
+                                slotIndex / cols
+                            );
+                    }
+
+                    const centerX =
+                        col *
+                            actualSlotWidth +
+                        actualSlotWidth / 2;
+
+                    const centerY =
+                        row *
+                            actualSlotHeight +
+                        actualSlotHeight / 2;
+
+                    const availableWidth =
+                        actualSlotWidth;
+
+                    const availableHeight =
+                        actualSlotHeight;
+
+                    const poText =
+                        `${poPrefix}${item.po}`;
+
+                    const boxText =
+                        `${boxPrefix}${item.box}`;
+
+                    const maxTextWidth =
+                        availableWidth * 0.86;
+
+                    function drawOne(
+                        text,
+                        cfg,
+                        preferredSize,
+                        x,
+                        y
+                    ) {
+
+                        let size =
+                            Math.min(
+                                Number(cfg.size) || preferredSize,
+                                preferredSize
+                            );
+
+                        pdf.setFont(
+                            "helvetica",
+                            pdfFontStyle(cfg)
+                        );
+
+                        pdf.setFontSize(
+                            size
+                        );
+
+                        const finalSize =
+                            pdfTextWithStyle(
+                                pdf,
+                                text,
+                                x,
+                                y,
+                                cfg,
+                                size,
+                                maxTextWidth
+                            );
+
+                        const textWidth =
+                            Math.min(
+                                maxTextWidth,
+                                pdf.getTextWidth(
+                                    text
+                                ) + 8
+                            );
+
+                        const textHeight =
+                            Math.max(
+                                8,
+                                finalSize * 0.55
+                            );
+
+                        pdfBorder(
                             pdf,
-                            text,
-                            x,
-                            y,
-                            cfg,
-                            size,
-                            maxTextWidth
+                            x -
+                                textWidth / 2,
+                            y -
+                                textHeight * 0.72,
+                            textWidth,
+                            textHeight,
+                            cfg
+                        );
+                    }
+
+                    /* ---------- CONTENT ---------- */
+
+                    if (
+                        content === "po"
+                    ) {
+
+                        drawOne(
+                            poText,
+                            poCfg,
+                            availableWidth <= 70
+                                ? 13
+                                : poCfg.size,
+                            centerX,
+                            centerY
                         );
 
-                    const textWidth =
-                        Math.min(
-                            maxTextWidth,
-                            pdf.getTextWidth(text) + 8
+                        return;
+                    }
+
+                    if (
+                        content === "box"
+                    ) {
+
+                        drawOne(
+                            boxText,
+                            boxCfg,
+                            availableWidth <= 70
+                                ? 11
+                                : boxCfg.size,
+                            centerX,
+                            centerY
                         );
 
-                    const textHeight =
+                        return;
+                    }
+
+                    /* ---------- SAME LINE ---------- */
+
+                    if (
+                        poBox.layout === "same"
+                    ) {
+
+                        const gap =
+                            Math.max(
+                                0,
+                                Number(
+                                    poBox.gap
+                                ) || 0
+                            ) * 0.264583;
+
+                        const firstIsBox =
+                            poBox.order === "box-po";
+
+                        const firstText =
+                            firstIsBox
+                                ? boxText
+                                : poText;
+
+                        const secondText =
+                            firstIsBox
+                                ? poText
+                                : boxText;
+
+                        const firstCfg =
+                            firstIsBox
+                                ? boxCfg
+                                : poCfg;
+
+                        const secondCfg =
+                            firstIsBox
+                                ? poCfg
+                                : boxCfg;
+
+                        pdf.setFont(
+                            "helvetica",
+                            pdfFontStyle(
+                                firstCfg
+                            )
+                        );
+
+                        pdf.setFontSize(
+                            firstCfg.size
+                        );
+
+                        const firstW =
+                            Math.min(
+                                maxTextWidth * 0.46,
+                                pdf.getTextWidth(
+                                    firstText
+                                ) + 8
+                            );
+
+                        pdf.setFont(
+                            "helvetica",
+                            pdfFontStyle(
+                                secondCfg
+                            )
+                        );
+
+                        pdf.setFontSize(
+                            secondCfg.size
+                        );
+
+                        const secondW =
+                            Math.min(
+                                maxTextWidth * 0.46,
+                                pdf.getTextWidth(
+                                    secondText
+                                ) + 8
+                            );
+
+                        const totalW =
+                            firstW +
+                            gap +
+                            secondW;
+
+                        drawOne(
+                            firstText,
+                            firstCfg,
+                            firstCfg.size,
+                            centerX -
+                                totalW / 2 +
+                                firstW / 2,
+                            centerY
+                        );
+
+                        drawOne(
+                            secondText,
+                            secondCfg,
+                            secondCfg.size,
+                            centerX +
+                                totalW / 2 -
+                                secondW / 2,
+                            centerY
+                        );
+
+                        return;
+                    }
+
+                    /* ---------- SEPARATE LINE ---------- */
+
+                    const gap =
                         Math.max(
-                            8,
-                            finalSize * 0.55
-                        );
+                            0,
+                            Number(
+                                poBox.gap
+                            ) || 0
+                        ) * 0.264583;
 
-                    pdfBorder(
-                        pdf,
-                        x - textWidth / 2,
-                        y - textHeight * 0.72,
-                        textWidth,
-                        textHeight,
-                        cfg
-                    );
+                    const firstIsBox =
+                        poBox.order === "box-po";
 
-                    return {
-                        width: textWidth,
-                        height: textHeight
-                    };
-                }
+                    const firstText =
+                        firstIsBox
+                            ? boxText
+                            : poText;
 
-                if (content === "po") {
-                    drawOne(
-                        poText,
-                        poCfg,
-                        availableWidth <= 70 ? 13 : poCfg.size,
-                        centerX,
-                        centerY
-                    );
-                    return;
-                }
+                    const secondText =
+                        firstIsBox
+                            ? poText
+                            : boxText;
 
-                if (content === "box") {
-                    drawOne(
-                        boxText,
-                        boxCfg,
-                        availableWidth <= 70 ? 11 : boxCfg.size,
-                        centerX,
-                        centerY
-                    );
-                    return;
-                }
+                    const firstCfg =
+                        firstIsBox
+                            ? boxCfg
+                            : poCfg;
 
-                if (layout === "same") {
-                    const gap = 4;
+                    const secondCfg =
+                        firstIsBox
+                            ? poCfg
+                            : boxCfg;
 
-                    pdf.setFont(
-                        "helvetica",
-                        pdfFontStyle(poCfg)
-                    );
-                    pdf.setFontSize(poCfg.size);
-
-                    const poW =
+                    const firstSize =
                         Math.min(
-                            maxTextWidth * 0.48,
-                            pdf.getTextWidth(poText) + 8
+                            firstCfg.size,
+                            availableWidth <= 70
+                                ? 12
+                                : firstCfg.size
                         );
 
-                    pdf.setFont(
-                        "helvetica",
-                        pdfFontStyle(boxCfg)
-                    );
-                    pdf.setFontSize(boxCfg.size);
-
-                    const boxW =
+                    const secondSize =
                         Math.min(
-                            maxTextWidth * 0.48,
-                            pdf.getTextWidth(boxText) + 8
+                            secondCfg.size,
+                            availableWidth <= 70
+                                ? 10
+                                : secondCfg.size
                         );
 
-                    const totalW =
-                        poW + gap + boxW;
+                    const firstH =
+                        Math.max(
+                            9,
+                            firstSize * 0.55
+                        );
+
+                    const secondH =
+                        Math.max(
+                            9,
+                            secondSize * 0.55
+                        );
+
+                    const totalH =
+                        firstH +
+                        gap +
+                        secondH;
+
+                    const firstY =
+                        centerY -
+                        totalH / 2 +
+                        firstH * 0.68;
+
+                    const secondY =
+                        centerY -
+                        totalH / 2 +
+                        firstH +
+                        gap +
+                        secondH * 0.68;
 
                     drawOne(
-                        poText,
-                        poCfg,
-                        poCfg.size,
-                        centerX - totalW / 2 + poW / 2,
-                        centerY
+                        firstText,
+                        firstCfg,
+                        firstSize,
+                        centerX,
+                        firstY
                     );
 
                     drawOne(
-                        boxText,
-                        boxCfg,
-                        boxCfg.size,
-                        centerX + totalW / 2 - boxW / 2,
-                        centerY
+                        secondText,
+                        secondCfg,
+                        secondSize,
+                        centerX,
+                        secondY
                     );
 
-                    return;
                 }
+            );
 
-                const gap = Math.max(0, arrangement.gap * 0.264583);
-
-                const poSize =
-                    Math.min(
-                        poCfg.size,
-                        availableWidth <= 70
-                            ? 11
-                            : poCfg.size
-                    );
-
-                const boxSize =
-                    Math.min(
-                        boxCfg.size,
-                        availableWidth <= 70
-                            ? 9
-                            : boxCfg.size
-                    );
-
-                const poH =
-                    Math.max(
-                        10,
-                        poSize * 0.55
-                    );
-
-                const boxH =
-                    Math.max(
-                        9,
-                        boxSize * 0.55
-                    );
-
-                const totalBlock =
-                    poH + gap + boxH;
-
-                const startY =
-                    centerY - totalBlock / 2;
-
-                pdf.setFont(
-                    "helvetica",
-                    pdfFontStyle(poCfg)
+            if (
+                pageIndex % 10 === 0
+            ) {
+                await new Promise(
+                    resolve =>
+                        setTimeout(
+                            resolve,
+                            0
+                        )
                 );
-                pdf.setFontSize(poSize);
-
-                const poW =
-                    Math.min(
-                        maxTextWidth,
-                        pdf.getTextWidth(poText) + 8
-                    );
-
-                pdfBorder(
-                    pdf,
-                    centerX - poW / 2,
-                    startY,
-                    poW,
-                    poH,
-                    poCfg
-                );
-
-                pdfTextWithStyle(
-                    pdf,
-                    poText,
-                    centerX,
-                    startY + poH * 0.68,
-                    poCfg,
-                    poSize,
-                    maxTextWidth
-                );
-
-                pdf.setFont(
-                    "helvetica",
-                    pdfFontStyle(boxCfg)
-                );
-                pdf.setFontSize(boxSize);
-
-                const boxW =
-                    Math.min(
-                        maxTextWidth,
-                        pdf.getTextWidth(boxText) + 8
-                    );
-
-                const boxY =
-                    startY + poH + gap;
-
-                pdfBorder(
-                    pdf,
-                    centerX - boxW / 2,
-                    boxY,
-                    boxW,
-                    boxH,
-                    boxCfg
-                );
-
-                pdfTextWithStyle(
-                    pdf,
-                    boxText,
-                    centerX,
-                    boxY + boxH * 0.68,
-                    boxCfg,
-                    boxSize,
-                    maxTextWidth
-                );
-
-            });
-
-            if (pageIndex % 20 === 0) {
-                await new Promise(resolve => setTimeout(resolve, 0));
             }
         }
 
-        pdf.save(filename);
-        showToast(`PDF downloaded successfully. ${totalPages} pages.`, "green");
+        if (!pdf) {
+            throw new Error(
+                "PDF document was not created."
+            );
+        }
+
+        pdf.save(
+            filename
+        );
+
+        showToast(
+            `PDF downloaded successfully. ${totalPages} pages.`,
+            "green"
+        );
+
     } catch (error) {
-        console.error("Coco vector PDF generation failed:", error);
-        showToast(`PDF generation failed: ${error.message || "Unknown error"}`, "red");
+
+        console.error(
+            "Coco PDF generation failed:",
+            error
+        );
+
+        showToast(
+            `PDF generation failed: ${
+                error?.message ||
+                "Unknown error"
+            }`,
+            "red"
+        );
     }
 }
 
@@ -10666,6 +11018,26 @@ document
     });
 
 })();
+
+
+window.addEventListener(
+    "error",
+    event => {
+        if (
+            event?.message &&
+            /PDF|jsPDF|html2canvas|downloadPDF/i.test(
+                String(event.message)
+            )
+        ) {
+            try {
+                showToast(
+                    `PDF error: ${event.message}`,
+                    "red"
+                );
+            } catch (_) {}
+        }
+    }
+);
 
 /* =========================================================
    INITIAL STATE
