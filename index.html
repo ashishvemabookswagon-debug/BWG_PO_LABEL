@@ -10,7 +10,2396 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+/* =========================================================
+   BWG BOOKSWAGON LABEL STUDIO
+   FULL UPDATED CSS
+   ========================================================= */
+
+:root {
+    --blue: #0878d1;
+    --blue-dark: #0056a8;
+    --blue-light: #e7f4ff;
+    --cyan: #12bce9;
+    --gold: #f2b84b;
+
+    --green: #16a34a;
+    --green-light: #ecfdf3;
+
+    --red: #dc2626;
+    --red-light: #fff1f2;
+
+    --dark: #152238;
+    --text: #26364d;
+    --muted: #667085;
+
+    --bg: #eef4fa;
+    --white: #ffffff;
+
+    --border: #d9e2ec;
+    --border-dark: #b9c7d6;
+
+    --shadow:
+        0 12px 35px rgba(16, 48, 80, 0.10);
+
+    --shadow-hover:
+        0 18px 45px rgba(16, 48, 80, 0.16);
+
+    --radius: 18px;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf5fc 0%,
+            #f8fbff 50%,
+            #eef4fa 100%
+        );
+
+    color: var(--dark);
+
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+input,
+textarea,
+select {
+    outline: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    width: 100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            #004f9e 0%,
+            #0878d1 52%,
+            #0ab5df 100%
+        );
+
+    color: #ffffff;
+
+    padding: 20px 30px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 70, 130, 0.18);
+
+    position: relative;
+    z-index: 10;
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1450px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    min-width: 0;
+}
+
+.brand-logo {
+    width: 62px;
+    height: 62px;
+
+    flex: 0 0 62px;
+
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    color: var(--blue-dark);
+
+    font-size: 17px;
+    font-weight: 1000;
+
+    letter-spacing: -0.5px;
+
+    box-shadow:
+        0 7px 20px rgba(0, 0, 0, 0.12);
+}
+
+.brand h1 {
+    margin: 0;
+
+    font-size: 28px;
+
+    line-height: 1.1;
+
+    font-weight: 900;
+
+    letter-spacing: -0.6px;
+}
+
+.brand p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    opacity: 0.9;
+}
+
+.live {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #4dff7a;
+
+    animation: livePulse 1.3s infinite;
+}
+
+@keyframes livePulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(77, 255, 122, 0.75);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 10px
+            rgba(77, 255, 122, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0
+            rgba(77, 255, 122, 0);
+    }
+}
+
+
+/* =========================================================
+   MAIN APP
+   ========================================================= */
+
+.app {
+    width: 100%;
+    max-width: 1450px;
+
+    margin: 25px auto;
+
+    padding:
+        0 20px 35px;
+}
+
+
+/* =========================================================
+   TOOL SELECTOR
+   ========================================================= */
+
+.tools {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+}
+
+.tool {
+    width: 100%;
+
+    min-height: 112px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f8fbff
+        );
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease,
+        color 0.22s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.tool::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            #0878d1,
+            #0ab5df
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+}
+
+.tool:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        var(--shadow-hover);
+
+    border-color:
+        #b7d7ee;
+}
+
+.tool:hover::before {
+    opacity: 1;
+}
+
+.tool.active {
+    background:
+        linear-gradient(
+            135deg,
+            #0878d1,
+            #0056a8
+        );
+
+    color: #ffffff;
+
+    border-color: transparent;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 86, 168, 0.22);
+}
+
+.tool.active::before {
+    opacity: 0;
+}
+
+.tool-icon {
+    font-size: 28px;
+
+    line-height: 1;
+
+    margin-bottom: 10px;
+}
+
+.tool strong {
+    display: block;
+
+    font-size: 16px;
+
+    line-height: 1.2;
+
+    font-weight: 900;
+}
+
+.tool span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    opacity: 0.72;
+}
+
+.tool.active span {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+    width: 100%;
+
+    background:
+        rgba(255, 255, 255, 0.98);
+
+    border:
+        1px solid rgba(217, 226, 236, 0.8);
+
+    border-radius: 24px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+}
+
+.panel {
+    display: none;
+
+    width: 100%;
+}
+
+.panel.active {
+    display: block;
+}
+
+
+/* =========================================================
+   PANEL HEADER
+   ========================================================= */
+
+.panel-head {
+    width: 100%;
+
+    padding: 25px 28px;
+
+    background:
+        linear-gradient(
+            120deg,
+            #f5faff,
+            #ffffff
+        );
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.panel-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 0;
+}
+
+.panel-icon {
+    width: 55px;
+    height: 55px;
+
+    flex: 0 0 55px;
+
+    border-radius: 16px;
+
+    background:
+        var(--blue-light);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+.panel-title h2 {
+    margin: 0;
+
+    font-size: 25px;
+
+    line-height: 1.15;
+
+    font-weight: 900;
+
+    letter-spacing: -0.3px;
+}
+
+.panel-title p {
+    margin: 5px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STEPS
+   ========================================================= */
+
+.steps {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px 28px;
+
+    background:
+        #fbfdff;
+
+    border-bottom:
+        1px solid var(--border);
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+}
+
+.step {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        9px 13px;
+
+    border-radius: 999px;
+
+    background:
+        #edf2f7;
+
+    color:
+        #667085;
+
+    white-space: nowrap;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    flex: 0 0 auto;
+}
+
+.step.active {
+    background:
+        #dff2ff;
+
+    color:
+        #0068b7;
+}
+
+.step-number {
+    width: 23px;
+    height: 23px;
+
+    flex: 0 0 23px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content {
+    width: 100%;
+
+    padding: 25px 28px;
+}
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.section {
+    width: 100%;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    margin-bottom: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fcfdff
+        );
+}
+
+.section:last-child {
+    margin-bottom: 0;
+}
+
+.section-head {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+}
+
+.section-head h3 {
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.3;
+
+    font-weight: 900;
+}
+
+.section-head small {
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MODE TABS
+   ========================================================= */
+
+.mode-tabs {
+    width: 100%;
+
+    display: flex;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    min-height: 42px;
+
+    border:
+        1px solid var(--border);
+
+    background:
+        #f8fafc;
+
+    color:
+        var(--text);
+
+    border-radius: 12px;
+
+    padding:
+        10px 18px;
+
+    cursor: pointer;
+
+    font-weight: 800;
+
+    font-size: 13px;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+.mode-btn:hover {
+    transform: translateY(-1px);
+
+    border-color:
+        #9fc8e7;
+}
+
+.mode-btn.active {
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--blue-dark)
+        );
+
+    color: #ffffff;
+
+    border-color:
+        transparent;
+
+    box-shadow:
+        0 7px 18px
+        rgba(8, 120, 209, 0.2);
+}
+
+
+/* =========================================================
+   MODE PANELS
+   ========================================================= */
+
+.mode-panel {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 18px;
+}
+
+.mode-panel.active {
+    display: block;
+}
+
+
+/* =========================================================
+   FORM GRID
+   ========================================================= */
+
+.form-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+.field {
+    width: 100%;
+
+    min-width: 0;
+}
+
+.field label {
+    display: block;
+
+    font-size: 12px;
+
+    line-height: 1.3;
+
+    font-weight: 800;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--text);
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    min-height: 43px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding:
+        10px 12px;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--dark);
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+}
+
+textarea {
+    min-height: 100px;
+
+    resize: vertical;
+
+    line-height: 1.45;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color:
+        #98a2b3;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+    border-color:
+        #b5c9dc;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color:
+        var(--blue);
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(8, 120, 209, 0.10);
+}
+
+
+/* =========================================================
+   MANUAL GRID
+   ========================================================= */
+
+.manual-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+.manual-grid .field {
+    background:
+        #f9fbfd;
+
+    border:
+        1px solid #edf1f5;
+
+    border-radius: 12px;
+
+    padding: 10px;
+}
+
+.manual-grid .field label {
+    font-size: 11px;
+
+    color:
+        var(--muted);
+}
+
+.manual-grid input {
+    min-height: 38px;
+
+    background:
+        #ffffff;
+}
+
+
+/* =========================================================
+   BULK
+   ========================================================= */
+
+.bulk-box {
+    width: 100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8fbff,
+            #f2f8fd
+        );
+
+    border:
+        1px dashed #a8c8e5;
+
+    padding: 16px;
+
+    border-radius: 14px;
+}
+
+.bulk-title {
+    font-size: 14px;
+
+    font-weight: 900;
+
+    margin-bottom: 9px;
+
+    color:
+        var(--blue-dark);
+}
+
+.bulk-note {
+    color:
+        var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   EXCEL UPLOAD
+   ========================================================= */
+
+.upload-zone {
+    width: 100%;
+
+    min-height: 155px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        2px dashed #91bddf;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f4faff,
+            #f8fcff
+        );
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.upload-zone:hover {
+    background:
+        #edf8ff;
+
+    border-color:
+        var(--blue);
+
+    transform:
+        translateY(-1px);
+}
+
+.upload-icon {
+    font-size: 38px;
+
+    line-height: 1;
+}
+
+.upload-zone strong {
+    display: block;
+
+    margin-top: 9px;
+
+    font-size: 14px;
+
+    font-weight: 900;
+}
+
+.upload-zone small {
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        var(--muted);
+
+    font-size: 11px;
+}
+
+.upload-zone input[type="file"] {
+    display: none;
+}
+
+
+/* =========================================================
+   EXCEL SUCCESS
+   ========================================================= */
+
+.excel-success {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 13px 15px;
+
+    border-radius: 12px;
+
+    background:
+        var(--green-light);
+
+    color:
+        #067647;
+
+    border:
+        1px solid #abefc6;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   EXCEL TABLE
+   ========================================================= */
+
+.excel-table {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    max-height: 250px;
+
+    overflow: auto;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    background:
+        #ffffff;
+}
+
+.excel-table.show {
+    display: block;
+}
+
+.excel-table table {
+    width: 100%;
+
+    border-collapse:
+        collapse;
+
+    font-size: 12px;
+}
+
+.excel-table th,
+.excel-table td {
+    padding:
+        9px 10px;
+
+    border-bottom:
+        1px solid #edf0f4;
+
+    text-align:
+        left;
+
+    white-space:
+        nowrap;
+}
+
+.excel-table th {
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    background:
+        #f4f7fa;
+
+    color:
+        var(--text);
+
+    font-weight:
+        900;
+}
+
+.excel-table tr:last-child td {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   CHOICE GRID
+   ========================================================= */
+
+.choice-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.choice {
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding:
+        12px 14px;
+
+    cursor: pointer;
+
+    background:
+        #fbfcfe;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        transform 0.18s ease;
+}
+
+.choice:hover {
+    border-color:
+        #91bddf;
+
+    background:
+        #f7fbff;
+
+    transform:
+        translateY(-1px);
+}
+
+.choice input {
+    width: auto;
+
+    min-height: auto;
+
+    margin:
+        0 8px 0 0;
+
+    accent-color:
+        var(--blue);
+}
+
+
+/* =========================================================
+   FREEZE NOTICE
+   ========================================================= */
+
+.freeze {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 13px;
+
+    padding:
+        12px 15px;
+
+    border-radius: 12px;
+
+    background:
+        #fff8e5;
+
+    border:
+        1px solid #f3d37a;
+
+    color:
+        #8a5a00;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+
+    font-weight: 800;
+}
+
+.freeze.show {
+    display: block;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status {
+    display: none;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 11px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.status.show {
+    display: block;
+}
+
+.status.green {
+    color:
+        #067647;
+
+    background:
+        var(--green-light);
+}
+
+.status.red {
+    color:
+        #b42318;
+
+    background:
+        var(--red-light);
+}
+
+
+/* =========================================================
+   ADDRESS FORM
+   ========================================================= */
+
+.address-form {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.address-card {
+    width: 100%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8fbfe,
+            #ffffff
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 16px;
+}
+
+.address-card h3 {
+    margin:
+        0 0 12px;
+
+    font-size: 15px;
+
+    font-weight: 900;
+}
+
+.address-card input,
+.address-card textarea {
+    margin-bottom: 9px;
+}
+
+.address-card textarea:last-child,
+.address-card input:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PREVIEW BOX
+   ========================================================= */
+
+.preview-box {
+    width: 100%;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    background:
+        #ffffff;
+}
+
+.preview-head {
+    width: 100%;
+
+    min-height: 64px;
+
+    padding:
+        14px 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f8fbff,
+            #ffffff
+        );
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.preview-head h3 {
+    margin: 0;
+
+    font-size: 16px;
+
+    line-height: 1.3;
+
+    font-weight: 900;
+}
+
+.preview-head span {
+    color:
+        var(--muted);
+
+    font-size: 11px;
+}
+
+.page-badge {
+    background:
+        var(--blue);
+
+    color:
+        #ffffff !important;
+
+    padding:
+        5px 10px;
+
+    border-radius:
+        999px;
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        900 !important;
+
+    white-space:
+        nowrap;
+}
+
+
+/* =========================================================
+   PREVIEW AREA
+   ========================================================= */
+
+.preview-area {
+    width: 100%;
+
+    background:
+        #e9eef4;
+
+    padding:
+        25px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    overflow:
+        hidden;
+}
+
+
+/* =========================================================
+   PREVIEW PAGE
+   ========================================================= */
+
+.preview-page {
+    width: 100%;
+
+    max-width: 900px;
+
+    margin:
+        0 auto;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.14);
+
+    overflow:
+        hidden;
+
+    position:
+        relative;
+
+    flex:
+        0 0 auto;
+}
+
+.page-4x6 {
+    /* 4 x 6 inch label page: portrait */
+    aspect-ratio:
+        4 / 6;
+}
+
+.page-a4 {
+    aspect-ratio:
+        210 / 297;
+}
+
+.page-70x35 {
+    aspect-ratio:
+        70 / 35;
+}
+
+
+/* =========================================================
+   COCO LABEL
+   ========================================================= */
+
+.coco-label {
+    min-width: 0;
+
+    min-height: 0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    padding:
+        10px;
+
+    overflow:
+        hidden;
+}
+
+.po-label {
+    max-width:
+        100%;
+
+    border:
+        3px double #222;
+
+    padding:
+        6px 10px;
+
+    font-size:
+        clamp(
+            15px,
+            2.2vw,
+            25px
+        );
+
+    line-height:
+        1.15;
+
+    font-weight:
+        900;
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
+
+    background:
+        #ffffff;
+}
+
+.box-label {
+    max-width:
+        100%;
+
+    border:
+        3px double #222;
+
+    padding:
+        5px 10px;
+
+    font-size:
+        clamp(
+            13px,
+            1.7vw,
+            19px
+        );
+
+    line-height:
+        1.15;
+
+    font-weight:
+        900;
+
+    overflow-wrap:
+        anywhere;
+
+    word-break:
+        break-word;
+
+    background:
+        #ffffff;
+}
+
+.label-separate {
+    max-width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        9px;
+
+    overflow:
+        hidden;
+}
+
+.label-same {
+    max-width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        9px;
+
+    overflow:
+        hidden;
+}
+
+
+/* =========================================================
+   ADDRESS PREVIEW
+   ========================================================= */
+
+.address-preview-card {
+    width:
+        90%;
+
+    min-height:
+        80%;
+
+    margin:
+        auto;
+
+    border:
+        3px double #202020;
+
+    padding:
+        25px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    background:
+        #ffffff;
+
+    overflow:
+        hidden;
+}
+
+.address-from {
+    padding-bottom:
+        18px;
+
+    border-bottom:
+        2px solid #222;
+}
+
+.address-to {
+    padding-top:
+        18px;
+}
+
+.address-label-title {
+    color:
+        var(--blue);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.2;
+
+    font-weight:
+        1000;
+
+    margin-bottom:
+        7px;
+}
+
+.address-name {
+    font-size:
+        21px;
+
+    line-height:
+        1.2;
+
+    font-weight:
+        1000;
+
+    overflow-wrap:
+        anywhere;
+}
+
+.address-phone {
+    font-size:
+        13px;
+
+    line-height:
+        1.4;
+
+    margin-top:
+        4px;
+}
+
+.address-text {
+    font-size:
+        14px;
+
+    line-height:
+        1.5;
+
+    margin-top:
+        8px;
+
+    white-space:
+        pre-line;
+
+    overflow-wrap:
+        anywhere;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.actions {
+    width: 100%;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    margin-top:
+        20px;
+
+    flex-wrap:
+        wrap;
+}
+
+.btn {
+    min-height:
+        46px;
+
+    border:
+        0;
+
+    color:
+        #ffffff;
+
+    border-radius:
+        12px;
+
+    padding:
+        12px 24px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        opacity 0.18s ease;
+}
+
+.btn:hover {
+    transform:
+        translateY(-2px);
+}
+
+.btn:active {
+    transform:
+        translateY(0);
+}
+
+.btn:disabled {
+    opacity:
+        0.55;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
+}
+
+.download {
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #15803d
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(22, 163, 74, 0.18);
+}
+
+.print {
+    background:
+        linear-gradient(
+            135deg,
+            #0878d1,
+            #0056a8
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(8, 120, 209, 0.18);
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+#toast {
+    position:
+        fixed;
+
+    right:
+        20px;
+
+    bottom:
+        20px;
+
+    z-index:
+        99999;
+
+    width:
+        min(380px, calc(100vw - 40px));
+}
+
+.toast-item {
+    width:
+        100%;
+
+    min-height:
+        50px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        14px 17px;
+
+    border-radius:
+        13px;
+
+    color:
+        #ffffff;
+
+    margin-top:
+        10px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.20);
+
+    animation:
+        toastIn 0.25s ease;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.4;
+}
+
+.toast-green {
+    background:
+        #16a34a;
+}
+
+.toast-red {
+    background:
+        #dc2626;
+}
+
+@keyframes toastIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0);
+    }
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    width: 100%;
+
+    text-align:
+        center;
+
+    padding:
+        30px 20px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.8;
+}
+
+.footer strong {
+    color:
+        var(--text);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width:
+        9px;
+
+    height:
+        9px;
+}
+
+::-webkit-scrollbar-track {
+    background:
+        #edf2f7;
+}
+
+::-webkit-scrollbar-thumb {
+    background:
+        #b8c8d8;
+
+    border-radius:
+        999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        #8ea5ba;
+}
+
+
+/* =========================================================
+   PRINT AREA
+   ========================================================= */
+
+#printArea {
+    display:
+        none;
+}
+
+
+/* =========================================================
+   PRINT
+   ========================================================= */
+
+@media print {
+
+    html,
+    body {
+        width:
+            100%;
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        background:
+            #ffffff !important;
+    }
+
+    body > *:not(#printArea) {
+        display:
+            none !important;
+    }
+
+    #printArea {
+        display:
+            block !important;
+
+        width:
+            100%;
+
+        margin:
+            0;
+
+        padding:
+            0;
+
+        background:
+            #ffffff;
+    }
+
+    #printArea .preview-page {
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        margin:
+            0;
+
+        box-shadow:
+            none;
+
+        page-break-after:
+            always;
+
+        break-after:
+            page;
+
+        overflow:
+            hidden;
+    }
+
+    #printArea .preview-page:last-child {
+        page-break-after:
+            auto;
+
+        break-after:
+            auto;
+    }
+
+    @page {
+        margin:
+            0;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .tools {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .form-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .manual-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .choice-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .header {
+        padding:
+            18px 20px;
+    }
+
+    .header-inner {
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+    }
+
+    .live {
+        padding-left:
+            77px;
+    }
+
+    .content {
+        padding:
+            20px;
+    }
+
+    .panel-head {
+        padding:
+            20px;
+    }
+
+    .steps {
+        padding:
+            13px 20px;
+    }
+
+    .manual-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .address-form {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .app {
+        margin:
+            15px auto;
+
+        padding:
+            0 10px 25px;
+    }
+
+    .tools {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+    }
+
+    .tool {
+        min-height:
+            90px;
+
+        padding:
+            15px;
+    }
+
+    .workspace {
+        border-radius:
+            18px;
+    }
+
+    .panel-head {
+        padding:
+            17px;
+    }
+
+    .panel-title {
+        gap:
+            10px;
+    }
+
+    .panel-icon {
+        width:
+            48px;
+
+        height:
+            48px;
+
+        flex-basis:
+            48px;
+
+        font-size:
+            24px;
+    }
+
+    .panel-title h2 {
+        font-size:
+            21px;
+    }
+
+    .content {
+        padding:
+            13px;
+    }
+
+    .section {
+        padding:
+            14px;
+
+        border-radius:
+            14px;
+    }
+
+    .section-head {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            6px;
+    }
+
+    .form-grid,
+    .manual-grid,
+    .choice-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .mode-tabs {
+        display:
+            grid;
+
+        grid-template-columns:
+            1fr 1fr 1fr;
+    }
+
+    .mode-btn {
+        padding:
+            9px 7px;
+
+        font-size:
+            11px;
+    }
+
+    .preview-area {
+        padding:
+            10px;
+
+        gap:
+            14px;
+    }
+
+    .preview-head {
+        padding:
+            12px;
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .preview-page {
+        max-width:
+            100%;
+    }
+
+    .address-preview-card {
+        width:
+            94%;
+
+        padding:
+            15px;
+    }
+
+    .address-name {
+        font-size:
+            16px;
+    }
+
+    .address-text {
+        font-size:
+            12px;
+    }
+
+    .actions {
+        flex-direction:
+            column;
+    }
+
+    .btn {
+        width:
+            100%;
+    }
+
+    #toast {
+        right:
+            10px;
+
+        bottom:
+            10px;
+
+        width:
+            calc(100vw - 20px);
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .brand h1 {
+        font-size:
+            22px;
+    }
+
+    .brand-logo {
+        width:
+            52px;
+
+        height:
+            52px;
+
+        flex-basis:
+            52px;
+    }
+
+    .live {
+        padding-left:
+            0;
+    }
+
+    .mode-tabs {
+        grid-template-columns:
+            1fr;
+    }
+
+    .steps {
+        gap:
+            7px;
+    }
+
+    .step {
+        padding:
+            7px 10px;
+
+        font-size:
+            10px;
+    }
+
+}
+
+</style>
 </head>
 
 
@@ -564,6 +2953,33 @@ Same Line
 
 <input
     type="radio"
+    name="cocoFlow"
+    value="ltr"
+    checked
+>
+
+Left → Right
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoFlow"
+    value="ttb"
+>
+
+Top → Bottom
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
     name="cocoPage"
     value="4x6"
     checked
@@ -605,6 +3021,123 @@ A4
 
 
 <!-- PREVIEW -->
+
+
+<div class="section">
+
+<div class="section-head">
+<h3>Per Page · Font & Border Settings</h3>
+<small>Coco Blue · PO Number + Box Number</small>
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>PO Number Font Size</label>
+<input type="number" id="cocoPoFontSize" value="24" min="8" max="120">
+</div>
+
+<div class="field">
+<label>PO Number Opacity (%)</label>
+<input type="number" id="cocoPoOpacity" value="100" min="0" max="100">
+</div>
+
+<div class="field">
+<label>Box Number Font Size</label>
+<input type="number" id="cocoBoxFontSize" value="19" min="8" max="100">
+</div>
+
+<div class="field">
+<label>Box Number Opacity (%)</label>
+<input type="number" id="cocoBoxOpacity" value="100" min="0" max="100">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="cocoPoBold" checked>
+PO Number Bold
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoPoItalic">
+PO Number Italic
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoPoUnderline">
+PO Number Underline
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoBoxBold" checked>
+Box Number Bold
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoBoxItalic">
+Box Number Italic
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoBoxUnderline">
+Box Number Underline
+</label>
+
+</div>
+
+<div class="form-grid" style="margin-top:14px;">
+
+<div class="field">
+<label>PO Border Style</label>
+<select id="cocoPoBorderStyle">
+<option value="double" selected>Double</option>
+<option value="solid">Solid</option>
+<option value="dashed">Dashed</option>
+<option value="dotted">Dotted</option>
+<option value="none">None</option>
+</select>
+</div>
+
+<div class="field">
+<label>PO Border Width</label>
+<select id="cocoPoBorderWidth">
+<option value="1px">1 px</option>
+<option value="2px">2 px</option>
+<option value="3px" selected>3 px</option>
+<option value="4px">4 px</option>
+<option value="5px">5 px</option>
+</select>
+</div>
+
+<div class="field">
+<label>Box Border Style</label>
+<select id="cocoBoxBorderStyle">
+<option value="double" selected>Double</option>
+<option value="solid">Solid</option>
+<option value="dashed">Dashed</option>
+<option value="dotted">Dotted</option>
+<option value="none">None</option>
+</select>
+</div>
+
+<div class="field">
+<label>Box Border Width</label>
+<select id="cocoBoxBorderWidth">
+<option value="1px">1 px</option>
+<option value="2px">2 px</option>
+<option value="3px" selected>3 px</option>
+<option value="4px">4 px</option>
+<option value="5px">5 px</option>
+</select>
+</div>
+
+</div>
+
+</div>
+
 
 <div class="section">
 
@@ -878,6 +3411,163 @@ Excel preview will appear here
     value="10"
 />
 
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="section">
+
+<div class="section-head">
+<h3>Step 3 · Label Flow</h3>
+<small>Choose how labels are filled</small>
+</div>
+
+<div class="choice-grid">
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="otherFlow"
+    value="ltr"
+    checked
+>
+
+Left → Right
+
+</label>
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="otherFlow"
+    value="ttb"
+>
+
+Top → Bottom
+
+</label>
+
+</div>
+
+</div>
+
+
+
+<div class="section">
+
+<div class="section-head">
+<h3>Per Page · Font & Border Settings</h3>
+<small>Other PO · PO Number + Box Number</small>
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+<label>PO Number Font Size</label>
+<input type="number" id="otherPoFontSize" value="24" min="8" max="120">
+</div>
+
+<div class="field">
+<label>PO Number Opacity (%)</label>
+<input type="number" id="otherPoOpacity" value="100" min="0" max="100">
+</div>
+
+<div class="field">
+<label>Box Number Font Size</label>
+<input type="number" id="otherBoxFontSize" value="19" min="8" max="100">
+</div>
+
+<div class="field">
+<label>Box Number Opacity (%)</label>
+<input type="number" id="otherBoxOpacity" value="100" min="0" max="100">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="otherPoBold" checked>
+PO Number Bold
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherPoItalic">
+PO Number Italic
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherPoUnderline">
+PO Number Underline
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherBoxBold" checked>
+Box Number Bold
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherBoxItalic">
+Box Number Italic
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherBoxUnderline">
+Box Number Underline
+</label>
+
+</div>
+
+<div class="form-grid" style="margin-top:14px;">
+
+<div class="field">
+<label>PO Border Style</label>
+<select id="otherPoBorderStyle">
+<option value="double" selected>Double</option>
+<option value="solid">Solid</option>
+<option value="dashed">Dashed</option>
+<option value="dotted">Dotted</option>
+<option value="none">None</option>
+</select>
+</div>
+
+<div class="field">
+<label>PO Border Width</label>
+<select id="otherPoBorderWidth">
+<option value="1px">1 px</option>
+<option value="2px">2 px</option>
+<option value="3px" selected>3 px</option>
+<option value="4px">4 px</option>
+<option value="5px">5 px</option>
+</select>
+</div>
+
+<div class="field">
+<label>Box Border Style</label>
+<select id="otherBoxBorderStyle">
+<option value="double" selected>Double</option>
+<option value="solid">Solid</option>
+<option value="dashed">Dashed</option>
+<option value="dotted">Dotted</option>
+<option value="none">None</option>
+</select>
+</div>
+
+<div class="field">
+<label>Box Border Width</label>
+<select id="otherBoxBorderWidth">
+<option value="1px">1 px</option>
+<option value="2px">2 px</option>
+<option value="3px" selected>3 px</option>
+<option value="4px">4 px</option>
+<option value="5px">5 px</option>
+</select>
 </div>
 
 </div>
@@ -1564,6 +4254,4440 @@ Copyright © 2026 · All Rights Reserved by Ashish Verma
      JAVASCRIPT
 ===================================================== -->
 
-    <script src="app.js" defer></script>
+<script>
+/* =========================================================
+   BWG BOOKSWAGON LABEL STUDIO
+   FULL UPDATED JAVASCRIPT
+   Compatible with updated HTML + CSS
+   ========================================================= */
+
+"use strict";
+
+
+/* =========================================================
+   GLOBAL STATE
+   ========================================================= */
+
+const state = {
+
+    activeTool: "coco",
+
+    coco: {
+        mode: "manual",
+        excelRows: [],
+        excelHeaders: []
+    },
+
+    other: {
+        mode: "manual",
+        excelRows: [],
+        excelHeaders: []
+    },
+
+    isbn: {
+        mode: "manual",
+        excelRows: [],
+        excelHeaders: []
+    },
+
+    address: {
+        mode: "manual",
+        excelRows: [],
+        excelHeaders: []
+    }
+
+};
+
+
+/* =========================================================
+   SHORT HELPERS
+   ========================================================= */
+
+function $(id) {
+    return document.getElementById(id);
+}
+
+
+function getValue(id, fallback = "") {
+
+    const el = $(id);
+
+    if (!el) {
+        return fallback;
+    }
+
+    return String(el.value ?? "").trim();
+}
+
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
+
+function sleep(ms) {
+
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(message, type = "green") {
+
+    const container = $("toast");
+
+    if (!container) {
+        return;
+    }
+
+    const item =
+        document.createElement("div");
+
+    item.className =
+        type === "red"
+            ? "toast-item toast-red"
+            : "toast-item toast-green";
+
+    item.textContent = message;
+
+    container.appendChild(item);
+
+    setTimeout(() => {
+
+        item.style.opacity = "0";
+
+        item.style.transform =
+            "translateX(100%)";
+
+        setTimeout(() => {
+            item.remove();
+        }, 250);
+
+    }, 2600);
+
+}
+
+
+/* =========================================================
+   RENDER ALL PREVIEWS
+   ========================================================= */
+
+function renderAll() {
+    renderCoco();
+    renderOther();
+    renderISBN();
+    renderAddress();
+}
+
+
+/* =========================================================
+   TOOL SWITCHING
+   ========================================================= */
+
+document
+.querySelectorAll(".tool")
+.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const tool =
+            button.dataset.tool;
+
+        if (!tool) {
+            return;
+        }
+
+        state.activeTool =
+            tool;
+
+        document
+        .querySelectorAll(".tool")
+        .forEach(item => {
+
+            item.classList.toggle(
+                "active",
+                item === button
+            );
+
+        });
+
+
+        document
+        .querySelectorAll(".panel")
+        .forEach(panel => {
+
+            panel.classList.toggle(
+                "active",
+                panel.id === `${tool}Panel`
+            );
+
+        });
+
+
+        renderAll();
+
+    });
+
+});
+
+
+/* =========================================================
+   CREATE 20 MANUAL INPUT BOXES
+   ========================================================= */
+
+function createManualInputs(
+    containerId,
+    className,
+    label
+) {
+
+    const container =
+        $(containerId);
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    for (let i = 1; i <= 20; i++) {
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "field";
+
+        wrapper.innerHTML = `
+
+            <label>
+                ${label} ${i}
+            </label>
+
+            <input
+                type="text"
+                class="${className}"
+                data-index="${i}"
+                placeholder="Enter ${label}"
+                autocomplete="off"
+            >
+
+        `;
+
+        container.appendChild(wrapper);
+
+    }
+
+}
+
+
+createManualInputs(
+    "cocoManualGrid",
+    "cocoManual",
+    "PO"
+);
+
+
+createManualInputs(
+    "otherManualGrid",
+    "otherManual",
+    "PO"
+);
+
+
+createManualInputs(
+    "isbnManualGrid",
+    "isbnManual",
+    "ISBN"
+);
+
+
+/* =========================================================
+   MODE BUTTONS
+   ========================================================= */
+
+function setupModeButtons(
+    selector,
+    dataAttribute,
+    feature
+) {
+
+    document
+    .querySelectorAll(selector)
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const selectedMode =
+                button.dataset[dataAttribute];
+
+            if (!selectedMode) {
+                return;
+            }
+
+            state[feature].mode =
+                selectedMode;
+
+
+            document
+            .querySelectorAll(selector)
+            .forEach(item => {
+
+                item.classList.toggle(
+                    "active",
+                    item === button
+                );
+
+            });
+
+
+            const panelNames = [
+                "manual",
+                "bulk",
+                "excel"
+            ];
+
+
+            panelNames.forEach(name => {
+
+                const first =
+                    name.charAt(0)
+                    .toUpperCase();
+
+                const id =
+                    `${feature}${first}${name.slice(1)}`;
+
+                const panel =
+                    $(id);
+
+                if (!panel) {
+                    return;
+                }
+
+                panel.classList.toggle(
+                    "active",
+                    name === selectedMode
+                );
+
+            });
+
+
+            showToast(
+                `${selectedMode.toUpperCase()} mode enabled.`,
+                "green"
+            );
+
+
+            renderAll();
+
+        });
+
+    });
+
+}
+
+
+setupModeButtons(
+    "[data-coco-mode]",
+    "cocoMode",
+    "coco"
+);
+
+
+setupModeButtons(
+    "[data-other-mode]",
+    "otherMode",
+    "other"
+);
+
+
+setupModeButtons(
+    "[data-isbn-mode]",
+    "isbnMode",
+    "isbn"
+);
+
+
+setupModeButtons(
+    "[data-address-mode]",
+    "addressMode",
+    "address"
+);
+
+
+/* =========================================================
+   GET MANUAL VALUES
+   ========================================================= */
+
+function getManualValues(className) {
+
+    return [
+        ...document.querySelectorAll(
+            `.${className}`
+        )
+    ]
+    .map(input =>
+        String(input.value || "").trim()
+    )
+    .filter(Boolean);
+
+}
+
+
+/* =========================================================
+   GET BULK VALUES
+   ========================================================= */
+
+function parseCommaSeparated(text) {
+
+    return String(text || "")
+        .split(/[,;\n]+/)
+        .map(value =>
+            value.trim()
+        )
+        .filter(Boolean);
+
+}
+
+
+/* =========================================================
+   EXCEL COLUMN DETECTION
+   ========================================================= */
+
+function normalizeHeader(value) {
+
+    return String(value || "")
+        .toLowerCase()
+        .replace(/[\s_\-().]/g, "");
+}
+
+
+function findColumnIndex(
+    headers,
+    possibleNames
+) {
+
+    const normalized =
+        headers.map(normalizeHeader);
+
+
+    for (
+        const name of possibleNames
+    ) {
+
+        const wanted =
+            normalizeHeader(name);
+
+        const index =
+            normalized.indexOf(wanted);
+
+        if (index !== -1) {
+            return index;
+        }
+
+    }
+
+
+    for (
+        let i = 0;
+        i < normalized.length;
+        i++
+    ) {
+
+        for (
+            const name of possibleNames
+        ) {
+
+            const wanted =
+                normalizeHeader(name);
+
+            if (
+                normalized[i].includes(wanted) ||
+                wanted.includes(normalized[i])
+            ) {
+
+                return i;
+
+            }
+
+        }
+
+    }
+
+
+    return -1;
+
+}
+
+
+/* =========================================================
+   COCO PO DATA
+   ========================================================= */
+
+function getCocoPOValues() {
+
+    const mode =
+        state.coco.mode;
+
+
+    if (mode === "manual") {
+
+        return getManualValues(
+            "cocoManual"
+        );
+
+    }
+
+
+    if (mode === "bulk") {
+
+        return parseCommaSeparated(
+            getValue("cocoBulkInput")
+        );
+
+    }
+
+
+    if (mode === "excel") {
+
+        const rows =
+            state.coco.excelRows;
+
+        const headers =
+            state.coco.excelHeaders;
+
+
+        if (!rows.length) {
+            return [];
+        }
+
+
+        let column =
+            findColumnIndex(
+                headers,
+                [
+                    "PO",
+                    "PO Number",
+                    "PO No",
+                    "PONumber",
+                    "PONo",
+                    "Purchase Order",
+                    "Purchase Order Number"
+                ]
+            );
+
+
+        if (column === -1) {
+            column = 0;
+        }
+
+
+        return rows
+        .map(row =>
+            String(
+                row[column] ?? ""
+            ).trim()
+        )
+        .filter(Boolean);
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   OTHER PO DATA
+   ========================================================= */
+
+function getOtherPOValues() {
+
+    const mode =
+        state.other.mode;
+
+
+    if (mode === "manual") {
+
+        return getManualValues(
+            "otherManual"
+        );
+
+    }
+
+
+    if (mode === "bulk") {
+
+        return parseCommaSeparated(
+            getValue("otherBulkInput")
+        );
+
+    }
+
+
+    if (mode === "excel") {
+
+        const rows =
+            state.other.excelRows;
+
+        const headers =
+            state.other.excelHeaders;
+
+
+        if (!rows.length) {
+            return [];
+        }
+
+
+        let column =
+            findColumnIndex(
+                headers,
+                [
+                    "PO",
+                    "PO Number",
+                    "PO No",
+                    "PONumber",
+                    "PONo",
+                    "Purchase Order",
+                    "Purchase Order Number"
+                ]
+            );
+
+
+        if (column === -1) {
+            column = 0;
+        }
+
+
+        return rows
+        .map(row =>
+            String(
+                row[column] ?? ""
+            ).trim()
+        )
+        .filter(Boolean);
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   ISBN DATA
+   ========================================================= */
+
+function getISBNValues() {
+
+    const mode =
+        state.isbn.mode;
+
+
+    if (mode === "manual") {
+
+        return getManualValues(
+            "isbnManual"
+        );
+
+    }
+
+
+    if (mode === "bulk") {
+
+        return parseCommaSeparated(
+            getValue("isbnBulkInput")
+        );
+
+    }
+
+
+    if (mode === "excel") {
+
+        const rows =
+            state.isbn.excelRows;
+
+        const headers =
+            state.isbn.excelHeaders;
+
+
+        if (!rows.length) {
+            return [];
+        }
+
+
+        let column =
+            findColumnIndex(
+                headers,
+                [
+                    "ISBN",
+                    "ISBN Number",
+                    "ISBN No",
+                    "ISBN13",
+                    "ISBN-13"
+                ]
+            );
+
+
+        if (column === -1) {
+            column = 0;
+        }
+
+
+        return rows
+        .map(row =>
+            String(
+                row[column] ?? ""
+            ).trim()
+        )
+        .filter(Boolean);
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   COCO RANGE
+   ========================================================= */
+
+function getCocoRange() {
+
+    let start =
+        parseInt(
+            getValue(
+                "cocoStartBox",
+                "1"
+            ),
+            10
+        );
+
+
+    let end =
+        parseInt(
+            getValue(
+                "cocoEndBox",
+                "1"
+            ),
+            10
+        );
+
+
+    if (Number.isNaN(start)) {
+        start = 1;
+    }
+
+
+    if (Number.isNaN(end)) {
+        end = start;
+    }
+
+
+    const error =
+        $("cocoRangeError");
+
+
+    if (start > end) {
+
+        if (error) {
+
+            error.style.display =
+                "block";
+
+            error.classList.add("show");
+
+            error.textContent =
+                "Start Box Number cannot be greater than End Box Number.";
+
+        }
+
+        return null;
+
+    }
+
+
+    if (error) {
+
+        error.style.display =
+            "none";
+
+        error.classList.remove("show");
+
+    }
+
+
+    return {
+        start,
+        end
+    };
+
+}
+
+
+/* =========================================================
+   COCO ITEMS
+========================================================= */
+
+function getCocoItems() {
+
+    const poValues =
+        getCocoPOValues();
+
+
+    const range =
+        getCocoRange();
+
+
+    if (!range || !poValues.length) {
+        return [];
+    }
+
+
+    const result = [];
+
+
+    poValues.forEach(po => {
+
+        for (
+            let box = range.start;
+            box <= range.end;
+            box++
+        ) {
+
+            result.push({
+                po,
+                box
+            });
+
+        }
+
+    });
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   COCO CONTENT FREEZE
+========================================================= */
+
+function updateCocoCombinedFreeze() {
+
+    const selected =
+        document.querySelector(
+            'input[name="cocoContent"]:checked'
+        );
+
+
+    const freeze =
+        $("cocoFreeze");
+
+
+    if (!selected || !freeze) {
+        return;
+    }
+
+
+    if (
+        selected.value ===
+        "combined"
+    ) {
+
+        freeze.classList.add(
+            "show"
+        );
+
+        freeze.textContent =
+            "🔒 Combined PO + Box selected. PO and Box content are locked together.";
+
+    }
+    else {
+
+        freeze.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   COCO CONTENT EVENTS
+========================================================= */
+
+document
+.querySelectorAll(
+    'input[name="cocoFlow"]'
+)
+.forEach(input => {
+
+    input.addEventListener(
+        "change",
+        () => renderCoco()
+    );
+
+});
+
+
+document
+.querySelectorAll(
+    'input[name="cocoContent"]'
+)
+.forEach(input => {
+
+    input.addEventListener(
+        "change",
+        () => {
+
+            updateCocoCombinedFreeze();
+
+            renderCoco();
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   COCO RENDER
+========================================================= */
+
+function renderCoco() {
+
+    const area =
+        $("cocoPreview");
+
+
+    if (!area) {
+        return;
+    }
+
+
+    area.innerHTML = "";
+
+
+    updateCocoCombinedFreeze();
+
+
+    const items =
+        getCocoItems();
+
+
+    /*
+       IMPORTANT:
+       Preview = maximum 5 pages.
+       PDF = all pages.
+    */
+
+    const labelsPerPage =
+        2;
+
+
+    const totalPages =
+        items.length
+            ? Math.ceil(
+                items.length /
+                labelsPerPage
+            )
+            : 0;
+
+
+    const previewPages =
+        Math.min(
+            totalPages,
+            5
+        );
+
+
+    const count =
+        $("cocoPageCount");
+
+
+    if (count) {
+
+        count.textContent =
+            `${previewPages} Preview Page${
+                previewPages === 1
+                    ? ""
+                    : "s"
+            }`;
+
+    }
+
+
+    if (!items.length) {
+
+        area.innerHTML = `
+
+            <div
+                style="
+                width:100%;
+                padding:45px 20px;
+                text-align:center;
+                color:#667085;
+                font-size:13px;
+                font-weight:700;
+                "
+            >
+
+                Enter PO data to see preview.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const layout =
+        document.querySelector(
+            'input[name="cocoLayout"]:checked'
+        )?.value ||
+        "separate";
+
+
+    const pageType =
+        document.querySelector(
+            'input[name="cocoPage"]:checked'
+        )?.value ||
+        "4x6";
+
+
+    for (
+        let pageIndex = 0;
+        pageIndex < previewPages;
+        pageIndex++
+    ) {
+
+        const page =
+            createCocoPage(
+                items.slice(
+                    pageIndex *
+                    labelsPerPage,
+
+                    pageIndex *
+                    labelsPerPage +
+                    labelsPerPage
+                ),
+                pageType,
+                layout
+            );
+
+
+        area.appendChild(page);
+
+    }
+
+}
+
+
+
+/* =========================================================
+   PER PAGE FONT + BORDER SETTINGS
+========================================================= */
+
+function numSetting(id, fallback, min, max) {
+    const n = Number(getValue(id, String(fallback)));
+    if (!Number.isFinite(n)) return fallback;
+    return Math.min(max, Math.max(min, n));
+}
+
+function getFontCfg(prefix, type) {
+    const po = type === "po";
+    const p = po ? "Po" : "Box";
+
+    return {
+        size: numSetting(`${prefix}${p}FontSize`, po ? 24 : 19, 8, 120),
+        opacity: numSetting(`${prefix}${p}Opacity`, 100, 0, 100),
+        bold: $(`${prefix}${p}Bold`)?.checked ?? true,
+        italic: $(`${prefix}${p}Italic`)?.checked ?? false,
+        underline: $(`${prefix}${p}Underline`)?.checked ?? false,
+        borderStyle: getValue(`${prefix}${p}BorderStyle`, "double"),
+        borderWidth: getValue(`${prefix}${p}BorderWidth`, "3px")
+    };
+}
+
+function applyLabelSettings(el, cfg) {
+    el.style.fontSize = `${cfg.size}px`;
+    el.style.opacity = String(cfg.opacity / 100);
+    el.style.fontWeight = cfg.bold ? "900" : "400";
+    el.style.fontStyle = cfg.italic ? "italic" : "normal";
+    el.style.textDecoration = cfg.underline ? "underline" : "none";
+    el.style.borderStyle = cfg.borderStyle;
+    el.style.borderWidth = cfg.borderStyle === "none" ? "0" : cfg.borderWidth;
+    el.style.borderColor = "#222";
+    el.style.boxSizing = "border-box";
+}
+
+function setupFontSettingListeners() {
+    [
+        "cocoPoFontSize","cocoPoOpacity","cocoPoBold","cocoPoItalic","cocoPoUnderline",
+        "cocoBoxFontSize","cocoBoxOpacity","cocoBoxBold","cocoBoxItalic","cocoBoxUnderline",
+        "cocoPoBorderStyle","cocoPoBorderWidth","cocoBoxBorderStyle","cocoBoxBorderWidth",
+        "otherPoFontSize","otherPoOpacity","otherPoBold","otherPoItalic","otherPoUnderline",
+        "otherBoxFontSize","otherBoxOpacity","otherBoxBold","otherBoxItalic","otherBoxUnderline",
+        "otherPoBorderStyle","otherPoBorderWidth","otherBoxBorderStyle","otherBoxBorderWidth"
+    ].forEach(id => {
+        const el = $(id);
+        if (!el) return;
+        el.addEventListener("input", renderAll);
+        el.addEventListener("change", renderAll);
+    });
+}
+
+
+/* =========================================================
+   PDF FONT / BORDER HELPERS
+========================================================= */
+
+function pdfFontStyle(cfg) {
+    if (cfg.bold && cfg.italic) return "bolditalic";
+    if (cfg.bold) return "bold";
+    if (cfg.italic) return "italic";
+    return "normal";
+}
+
+function pdfBorder(pdf, x, y, w, h, cfg) {
+    if (!cfg || cfg.borderStyle === "none") return;
+
+    const width = Math.max(
+        0.3,
+        parseFloat(cfg.borderWidth) || 3
+    );
+
+    pdf.setLineWidth(width * 0.35);
+
+    if (cfg.borderStyle === "dashed") {
+        pdf.setLineDashPattern([3, 2], 0);
+    } else if (cfg.borderStyle === "dotted") {
+        pdf.setLineDashPattern([0.8, 1.8], 0);
+    } else {
+        pdf.setLineDashPattern([], 0);
+    }
+
+    pdf.rect(x, y, w, h);
+
+    if (cfg.borderStyle === "double") {
+        const inset = Math.max(1.1, width * 0.45);
+        pdf.rect(
+            x + inset,
+            y + inset,
+            Math.max(0, w - inset * 2),
+            Math.max(0, h - inset * 2)
+        );
+    }
+
+    pdf.setLineDashPattern([], 0);
+}
+
+function pdfTextWithStyle(pdf, text, x, y, cfg, size, maxWidth) {
+    const style = pdfFontStyle(cfg);
+
+    pdf.setFont("helvetica", style);
+    pdf.setFontSize(size);
+
+    let output = String(text);
+
+    while (
+        maxWidth &&
+        pdf.getTextWidth(output) > maxWidth &&
+        size > 5
+    ) {
+        size -= 0.5;
+        pdf.setFontSize(size);
+    }
+
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(output, x, y, { align: "center" });
+
+    if (cfg.opacity < 100) {
+        // jsPDF does not have a universal opacity API across versions.
+        // Keep the setting visually represented without breaking PDF output.
+        // The browser preview applies exact opacity.
+    }
+
+    if (cfg.underline) {
+        const tw = pdf.getTextWidth(output);
+        pdf.setLineWidth(0.35);
+        pdf.line(
+            x - tw / 2,
+            y + 1.2,
+            x + tw / 2,
+            y + 1.2
+        );
+    }
+
+    return size;
+}
+
+/* =========================================================
+   LABEL FLOW HELPERS
+========================================================= */
+
+function getCocoFlow() {
+    return document.querySelector(
+        'input[name="cocoFlow"]:checked'
+    )?.value || "ltr";
+}
+
+function getOtherFlow() {
+    return document.querySelector(
+        'input[name="otherFlow"]:checked'
+    )?.value || "ltr";
+}
+
+
+/* =========================================================
+   CREATE COCO PAGE
+========================================================= */
+
+
+
+function createCocoPage(
+    items,
+    pageType,
+    layout
+) {
+
+    const page =
+        document.createElement("div");
+
+
+    let pageClass =
+        "page-4x6";
+
+
+    if (pageType === "a4") {
+
+        pageClass =
+            "page-a4";
+
+    }
+    else if (
+        pageType === "70x35"
+    ) {
+
+        pageClass =
+            "page-70x35";
+
+    }
+
+
+    page.className =
+        `preview-page ${pageClass}`;
+
+
+    page.style.display =
+        "grid";
+
+    const flow =
+        getCocoFlow();
+
+    if (flow === "ttb") {
+        page.style.gridTemplateColumns =
+            "1fr";
+
+        page.style.gridTemplateRows =
+            `repeat(${Math.max(items.length, 1)}, minmax(0, 1fr))`;
+
+        page.style.gridAutoFlow =
+            "row";
+    }
+    else {
+        page.style.gridTemplateColumns =
+            `repeat(${Math.max(items.length, 1)}, minmax(0, 1fr))`;
+
+        page.style.gridTemplateRows =
+            "1fr";
+
+        page.style.gridAutoFlow =
+            "column";
+    }
+
+
+    items.forEach(item => {
+
+        const label =
+            document.createElement("div");
+
+
+        label.className =
+            "coco-label";
+
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            layout === "same"
+                ? "label-same"
+                : "label-separate";
+
+
+        const po =
+            document.createElement("div");
+
+
+        po.className =
+            "po-label";
+
+
+        po.textContent =
+            `${getValue(
+                "cocoPoPrefix"
+            )}${item.po}`;
+
+        applyLabelSettings(
+            po,
+            getFontCfg("coco", "po")
+        );
+
+
+        const box =
+            document.createElement("div");
+
+
+        box.className =
+            "box-label";
+
+
+        box.textContent =
+            `${getValue(
+                "cocoBoxPrefix",
+                "BOX NO. "
+            )}${item.box}`;
+
+        applyLabelSettings(
+            box,
+            getFontCfg("coco", "box")
+        );
+
+
+        const content =
+            document.querySelector(
+                'input[name="cocoContent"]:checked'
+            )?.value ||
+            "combined";
+
+
+        if (content === "po") {
+
+            wrapper.appendChild(
+                po
+            );
+
+        }
+        else if (content === "box") {
+
+            wrapper.appendChild(
+                box
+            );
+
+        }
+        else {
+
+            wrapper.append(
+                po,
+                box
+            );
+
+        }
+
+
+        label.appendChild(
+            wrapper
+        );
+
+
+        page.appendChild(
+            label
+        );
+
+    });
+
+
+    return page;
+
+}
+
+
+/* =========================================================
+   OTHER PO RENDER
+========================================================= */
+
+function renderOther() {
+
+    const area =
+        $("otherPreview");
+
+
+    if (!area) {
+        return;
+    }
+
+
+    area.innerHTML = "";
+
+
+    const values =
+        getOtherPOValues();
+
+
+    const labelsPerPage =
+        10;
+
+
+    const totalPages =
+        values.length
+            ? Math.ceil(
+                values.length /
+                labelsPerPage
+            )
+            : 0;
+
+
+    const previewPages =
+        Math.min(
+            totalPages,
+            5
+        );
+
+
+    const count =
+        $("otherPageCount");
+
+
+    if (count) {
+
+        count.textContent =
+            `${previewPages} Preview Page${
+                previewPages === 1
+                    ? ""
+                    : "s"
+            }`;
+
+    }
+
+
+    if (!values.length) {
+
+        area.innerHTML = `
+
+            <div
+                style="
+                width:100%;
+                padding:45px 20px;
+                text-align:center;
+                color:#667085;
+                font-size:13px;
+                font-weight:700;
+                "
+            >
+
+                Enter PO data to see preview.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    for (
+        let pageIndex = 0;
+        pageIndex < previewPages;
+        pageIndex++
+    ) {
+
+        const page =
+            document.createElement("div");
+
+
+        page.className =
+            "preview-page page-a4";
+
+
+        page.style.display =
+            "grid";
+
+        const flow =
+            getOtherFlow();
+
+        page.style.gridTemplateColumns =
+            "1fr 1fr";
+
+        page.style.gridTemplateRows =
+            "repeat(5, 1fr)";
+
+        page.style.gridAutoFlow =
+            flow === "ttb"
+                ? "column"
+                : "row";
+
+
+        const pageValues =
+            values.slice(
+                pageIndex *
+                labelsPerPage,
+
+                pageIndex *
+                labelsPerPage +
+                labelsPerPage
+            );
+
+
+        pageValues.forEach(
+            (po, index) => {
+
+                const label =
+                    document.createElement("div");
+
+
+                label.className =
+                    "coco-label";
+
+
+                const wrapper =
+                    document.createElement("div");
+
+
+                wrapper.className =
+                    "label-separate";
+
+
+                const poLabel =
+                    document.createElement("div");
+
+
+                poLabel.className =
+                    "po-label";
+
+
+                poLabel.textContent =
+                    `${getValue(
+                        "otherPoPrefix"
+                    )}${po}`;
+
+                applyLabelSettings(
+                    poLabel,
+                    getFontCfg("other", "po")
+                );
+
+
+                const boxLabel =
+                    document.createElement("div");
+
+
+                boxLabel.className =
+                    "box-label";
+
+
+                const startBox =
+                    parseInt(
+                        getValue(
+                            "otherStartBox",
+                            "1"
+                        ),
+                        10
+                    ) || 1;
+
+
+                const boxNumber =
+                    startBox +
+                    pageIndex *
+                    labelsPerPage +
+                    index;
+
+
+                boxLabel.textContent =
+                    `${getValue(
+                        "otherBoxPrefix",
+                        "BOX NO. "
+                    )}${boxNumber}`;
+
+                applyLabelSettings(
+                    boxLabel,
+                    getFontCfg("other", "box")
+                );
+
+
+                wrapper.append(
+                    poLabel,
+                    boxLabel
+                );
+
+
+                label.appendChild(
+                    wrapper
+                );
+
+
+                page.appendChild(
+                    label
+                );
+
+            }
+        );
+
+
+        area.appendChild(
+            page
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ISBN RENDER
+========================================================= */
+
+function getCleanISBN(value) {
+
+    return String(value || "")
+        .replace(/[^\dXx]/g, "");
+
+}
+
+
+function makeBarcode(
+    isbn
+) {
+
+    const clean =
+        getCleanISBN(isbn);
+
+
+    if (!clean) {
+        return "";
+    }
+
+
+    let bars = "";
+
+
+    /*
+       Visual barcode representation.
+       This keeps the preview and PDF
+       independent from external barcode
+       image services.
+    */
+
+    for (
+        let i = 0;
+        i < 125;
+        i++
+    ) {
+
+        const digit =
+            Number(
+                clean[
+                    i % clean.length
+                ]
+            ) || 0;
+
+
+        const width =
+            1 +
+            (
+                digit +
+                i * 7
+            ) % 3;
+
+
+        bars += `
+
+            <span
+                style="
+                display:block;
+                flex:0 0 ${width}px;
+                width:${width}px;
+                height:70px;
+                background:#111;
+                margin-right:1px;
+                "
+            ></span>
+
+        `;
+
+    }
+
+
+    return `
+
+        <div
+            style="
+            width:100%;
+            overflow:hidden;
+            display:flex;
+            justify-content:center;
+            align-items:flex-start;
+            height:70px;
+            background:#fff;
+            "
+        >
+
+            ${bars}
+
+        </div>
+
+    `;
+
+}
+
+
+function renderISBN() {
+
+    const area =
+        $("isbnPreview");
+
+
+    if (!area) {
+        return;
+    }
+
+
+    area.innerHTML = "";
+
+
+    const values =
+        getISBNValues();
+
+
+    const previewCount =
+        Math.min(
+            values.length,
+            5
+        );
+
+
+    if (!values.length) {
+
+        area.innerHTML = `
+
+            <div
+                style="
+                width:100%;
+                padding:45px 20px;
+                text-align:center;
+                color:#667085;
+                font-size:13px;
+                font-weight:700;
+                "
+            >
+
+                Enter ISBN data to see preview.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    for (
+        let i = 0;
+        i < previewCount;
+        i++
+    ) {
+
+        const isbn =
+            values[i];
+
+
+        const page =
+            document.createElement("div");
+
+
+        page.className =
+            "preview-page page-4x6";
+
+
+        page.style.display =
+            "flex";
+
+        page.style.flexDirection =
+            "column";
+
+        page.style.alignItems =
+            "center";
+
+        page.style.justifyContent =
+            "center";
+
+        page.style.gap =
+            "16px";
+
+        page.style.padding =
+            "30px";
+
+
+        page.innerHTML = `
+
+            <div
+                style="
+                font-size:22px;
+                font-weight:900;
+                word-break:break-all;
+                text-align:center;
+                "
+            >
+
+                ${escapeHTML(isbn)}
+
+            </div>
+
+
+            <div
+                style="
+                width:min(80%, 430px);
+                padding:14px;
+                border:1px solid #222;
+                background:#fff;
+                "
+            >
+
+                ${makeBarcode(isbn)}
+
+            </div>
+
+
+            <div
+                style="
+                font-size:12px;
+                font-weight:800;
+                color:#667085;
+                "
+            >
+
+                ${escapeHTML(
+                    getValue(
+                        "isbnType",
+                        "EAN-13"
+                    )
+                )}
+
+            </div>
+
+        `;
+
+
+        area.appendChild(
+            page
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADDRESS DATA
+========================================================= */
+
+function getAddressData() {
+
+    const mode =
+        state.address.mode;
+
+
+    if (mode === "manual") {
+
+        return [
+
+            {
+
+                fromName:
+                    getValue("fromName"),
+
+                fromPhone:
+                    getValue("fromPhone"),
+
+                fromAddress:
+                    getValue("fromAddress"),
+
+                toName:
+                    getValue("toName"),
+
+                toPhone:
+                    getValue("toPhone"),
+
+                toAddress:
+                    getValue("toAddress")
+
+            }
+
+        ];
+
+    }
+
+
+    if (mode === "bulk") {
+
+        return getValue(
+            "addressBulkInput"
+        )
+        .split(/\r?\n/)
+        .map(line =>
+            line.trim()
+        )
+        .filter(Boolean)
+        .map(line => {
+
+            const parts =
+                line.split("|");
+
+
+            return {
+
+                fromName: "",
+
+                fromPhone: "",
+
+                fromAddress:
+                    String(
+                        parts[0] || ""
+                    ).trim(),
+
+                toName: "",
+
+                toPhone: "",
+
+                toAddress:
+                    parts
+                    .slice(1)
+                    .join("|")
+                    .trim()
+
+            };
+
+        });
+
+    }
+
+
+    if (mode === "excel") {
+
+        const rows =
+            state.address.excelRows;
+
+        const headers =
+            state.address.excelHeaders;
+
+
+        if (!rows.length) {
+            return [];
+        }
+
+
+        let fromName =
+            findColumnIndex(
+                headers,
+                [
+                    "From Name",
+                    "Sender Name",
+                    "FromName",
+                    "SenderName"
+                ]
+            );
+
+
+        let fromPhone =
+            findColumnIndex(
+                headers,
+                [
+                    "From Phone",
+                    "Sender Phone",
+                    "FromPhone",
+                    "SenderPhone"
+                ]
+            );
+
+
+        let fromAddress =
+            findColumnIndex(
+                headers,
+                [
+                    "From Address",
+                    "Sender Address",
+                    "FromAddress",
+                    "SenderAddress"
+                ]
+            );
+
+
+        let toName =
+            findColumnIndex(
+                headers,
+                [
+                    "To Name",
+                    "Receiver Name",
+                    "ToName",
+                    "ReceiverName"
+                ]
+            );
+
+
+        let toPhone =
+            findColumnIndex(
+                headers,
+                [
+                    "To Phone",
+                    "Receiver Phone",
+                    "ToPhone",
+                    "ReceiverPhone"
+                ]
+            );
+
+
+        let toAddress =
+            findColumnIndex(
+                headers,
+                [
+                    "To Address",
+                    "Receiver Address",
+                    "ToAddress",
+                    "ReceiverAddress"
+                ]
+            );
+
+
+        /*
+           Fallback:
+           If columns are not named,
+           use:
+           0 From Name
+           1 From Phone
+           2 From Address
+           3 To Name
+           4 To Phone
+           5 To Address
+        */
+
+        if (fromName === -1) fromName = 0;
+        if (fromPhone === -1) fromPhone = 1;
+        if (fromAddress === -1) fromAddress = 2;
+        if (toName === -1) toName = 3;
+        if (toPhone === -1) toPhone = 4;
+        if (toAddress === -1) toAddress = 5;
+
+
+        return rows.map(row => {
+
+            return {
+
+                fromName:
+                    row[fromName] ?? "",
+
+                fromPhone:
+                    row[fromPhone] ?? "",
+
+                fromAddress:
+                    row[fromAddress] ?? "",
+
+                toName:
+                    row[toName] ?? "",
+
+                toPhone:
+                    row[toPhone] ?? "",
+
+                toAddress:
+                    row[toAddress] ?? ""
+
+            };
+
+        });
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   ADDRESS BORDER
+========================================================= */
+
+function updateAddressBorderState() {
+
+    const all =
+        $("addressAllBorder");
+
+    if (!all) {
+        return;
+    }
+
+
+    const individualIds = [
+
+        "addressPageBorder",
+
+        "addressFromBorder",
+
+        "addressToBorder"
+
+    ];
+
+
+    if (all.checked) {
+
+        individualIds.forEach(id => {
+
+            const input = $(id);
+
+            if (!input) {
+                return;
+            }
+
+            input.checked = true;
+
+            input.disabled = true;
+
+        });
+
+
+        showToast(
+            "All Border enabled. Individual border settings are frozen.",
+            "green"
+        );
+
+    }
+    else {
+
+        individualIds.forEach(id => {
+
+            const input = $(id);
+
+            if (!input) {
+                return;
+            }
+
+            input.disabled = false;
+
+        });
+
+
+        showToast(
+            "All Border disabled. Individual border settings are enabled.",
+            "red"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADDRESS RENDER
+========================================================= */
+
+function renderAddress() {
+
+    const area =
+        $("addressPreview");
+
+
+    if (!area) {
+        return;
+    }
+
+
+    area.innerHTML = "";
+
+
+    const data =
+        getAddressData()
+        .filter(item =>
+            item.fromName ||
+            item.fromPhone ||
+            item.fromAddress ||
+            item.toName ||
+            item.toPhone ||
+            item.toAddress
+        );
+
+
+    const previewPages =
+        Math.min(
+            data.length,
+            5
+        );
+
+
+    const count =
+        $("addressPageCount");
+
+
+    if (count) {
+
+        count.textContent =
+            `${previewPages} Preview Page${
+                previewPages === 1
+                    ? ""
+                    : "s"
+            }`;
+
+    }
+
+
+    if (!data.length) {
+
+        area.innerHTML = `
+
+            <div
+                style="
+                width:100%;
+                padding:45px 20px;
+                text-align:center;
+                color:#667085;
+                font-size:13px;
+                font-weight:700;
+                "
+            >
+
+                Enter From and To address data to see preview.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const pageBorder =
+        $("addressPageBorder")?.checked;
+
+
+    const fromBorder =
+        $("addressFromBorder")?.checked;
+
+
+    const toBorder =
+        $("addressToBorder")?.checked;
+
+
+    for (
+        let i = 0;
+        i < previewPages;
+        i++
+    ) {
+
+        const item =
+            data[i];
+
+
+        const page =
+            document.createElement("div");
+
+
+        page.className =
+            "preview-page page-4x6";
+
+
+        page.style.display =
+            "flex";
+
+        page.style.alignItems =
+            "center";
+
+        page.style.justifyContent =
+            "center";
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "address-preview-card";
+
+
+        if (!pageBorder) {
+
+            card.style.border =
+                "none";
+
+        }
+
+
+        const from =
+            document.createElement("div");
+
+
+        from.className =
+            "address-from";
+
+
+        if (!fromBorder) {
+
+            from.style.border =
+                "none";
+
+        }
+
+
+        from.innerHTML = `
+
+            <div class="address-label-title">
+                📤 FROM
+            </div>
+
+            <div class="address-name">
+                ${escapeHTML(
+                    item.fromName ||
+                    "Sender Name"
+                )}
+            </div>
+
+            <div class="address-phone">
+                ${escapeHTML(
+                    item.fromPhone ||
+                    ""
+                )}
+            </div>
+
+            <div class="address-text">
+                ${escapeHTML(
+                    item.fromAddress ||
+                    "Sender Address"
+                )}
+            </div>
+
+        `;
+
+
+        const to =
+            document.createElement("div");
+
+
+        to.className =
+            "address-to";
+
+
+        if (!toBorder) {
+
+            to.style.border =
+                "none";
+
+        }
+
+
+        to.innerHTML = `
+
+            <div class="address-label-title">
+                📥 TO
+            </div>
+
+            <div class="address-name">
+                ${escapeHTML(
+                    item.toName ||
+                    "Receiver Name"
+                )}
+            </div>
+
+            <div class="address-phone">
+                ${escapeHTML(
+                    item.toPhone ||
+                    ""
+                )}
+            </div>
+
+            <div class="address-text">
+                ${escapeHTML(
+                    item.toAddress ||
+                    "Receiver Address"
+                )}
+            </div>
+
+        `;
+
+
+        card.append(
+            from,
+            to
+        );
+
+
+        page.appendChild(
+            card
+        );
+
+
+        area.appendChild(
+            page
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   EXCEL TABLE RENDER
+========================================================= */
+
+function renderExcelTable(
+    rows,
+    headers,
+    successId,
+    tableId,
+    headId,
+    bodyId
+) {
+
+    const success =
+        $(successId);
+
+    const table =
+        $(tableId);
+
+    const head =
+        $(headId);
+
+    const body =
+        $(bodyId);
+
+
+    if (
+        !success ||
+        !table ||
+        !head ||
+        !body
+    ) {
+        return;
+    }
+
+
+    success.style.display =
+        "block";
+
+
+    success.innerHTML = `
+
+        ✅ Your Excel file is uploaded successfully.
+
+        <br>
+
+        📊 Rows:
+        <strong>
+            ${rows.length}
+        </strong>
+
+        &nbsp; · &nbsp;
+
+        📑 Columns:
+        <strong>
+            ${headers.length}
+        </strong>
+
+    `;
+
+
+    table.classList.add(
+        "show"
+    );
+
+
+    head.innerHTML = `
+
+        <tr>
+
+            <th>
+                #
+            </th>
+
+            ${
+                headers
+                .map(header => `
+                    <th>
+                        ${escapeHTML(
+                            header
+                        )}
+                    </th>
+                `)
+                .join("")
+            }
+
+        </tr>
+
+    `;
+
+
+    body.innerHTML =
+        rows
+        .slice(0, 50)
+        .map((row, index) => `
+
+            <tr>
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                ${
+                    headers
+                    .map((_, colIndex) => `
+                        <td>
+                            ${escapeHTML(
+                                row[colIndex] ?? ""
+                            )}
+                        </td>
+                    `)
+                    .join("")
+                }
+
+            </tr>
+
+        `)
+        .join("");
+
+}
+
+
+/* =========================================================
+   EXCEL READER
+========================================================= */
+
+function readExcelFile(
+    file,
+    feature,
+    successId,
+    tableId,
+    headId,
+    bodyId
+) {
+
+    if (!file) {
+        return;
+    }
+
+
+    if (
+        typeof XLSX ===
+        "undefined"
+    ) {
+
+        showToast(
+            "Excel library is not loaded.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+    event => {
+
+        try {
+
+            const workbook =
+                XLSX.read(
+                    event.target.result,
+                    {
+                        type: "array"
+                    }
+                );
+
+
+            if (
+                !workbook.SheetNames.length
+            ) {
+
+                throw new Error(
+                    "No worksheet found."
+                );
+
+            }
+
+
+            const sheet =
+                workbook.Sheets[
+                    workbook.SheetNames[0]
+                ];
+
+
+            const matrix =
+                XLSX.utils.sheet_to_json(
+                    sheet,
+                    {
+                        header: 1,
+                        defval: ""
+                    }
+                );
+
+
+            if (!matrix.length) {
+
+                throw new Error(
+                    "Excel file is empty."
+                );
+
+            }
+
+
+            const headers =
+                matrix[0].map(
+                    value =>
+                        String(
+                            value ?? ""
+                        ).trim()
+                );
+
+
+            const rows =
+                matrix
+                .slice(1)
+                .filter(row =>
+                    row.some(value =>
+                        String(
+                            value ?? ""
+                        ).trim() !== ""
+                    )
+                );
+
+
+            state[feature].excelHeaders =
+                headers;
+
+            state[feature].excelRows =
+                rows;
+
+
+            renderExcelTable(
+                rows,
+                headers,
+                successId,
+                tableId,
+                headId,
+                bodyId
+            );
+
+
+            showToast(
+                `Excel uploaded successfully. ${rows.length} rows found.`,
+                "green"
+            );
+
+
+            renderAll();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Excel Error:",
+                error
+            );
+
+
+            showToast(
+                "Unable to read Excel file. Please check the file format.",
+                "red"
+            );
+
+        }
+
+    };
+
+
+    reader.onerror =
+    () => {
+
+        showToast(
+            "Excel file could not be opened.",
+            "red"
+        );
+
+    };
+
+
+    reader.readAsArrayBuffer(
+        file
+    );
+
+}
+
+
+/* =========================================================
+   EXCEL INPUT EVENTS
+========================================================= */
+
+function setupExcelInput(
+    inputId,
+    feature,
+    successId,
+    tableId,
+    headId,
+    bodyId
+) {
+
+    const input =
+        $(inputId);
+
+
+    if (!input) {
+        return;
+    }
+
+
+    input.addEventListener(
+        "change",
+        event => {
+
+            const file =
+                event.target.files?.[0];
+
+
+            if (!file) {
+                return;
+            }
+
+
+            readExcelFile(
+                file,
+                feature,
+                successId,
+                tableId,
+                headId,
+                bodyId
+            );
+
+        }
+    );
+
+}
+
+
+setupExcelInput(
+    "cocoExcelFile",
+    "coco",
+    "cocoExcelSuccess",
+    "cocoExcelTable",
+    "cocoExcelHead",
+    "cocoExcelBody"
+);
+
+
+setupExcelInput(
+    "otherExcelFile",
+    "other",
+    "otherExcelSuccess",
+    "otherExcelTable",
+    "otherExcelHead",
+    "otherExcelBody"
+);
+
+
+setupExcelInput(
+    "isbnExcelFile",
+    "isbn",
+    "isbnExcelSuccess",
+    "isbnExcelTable",
+    "isbnExcelHead",
+    "isbnExcelBody"
+);
+
+
+setupExcelInput(
+    "addressExcelFile",
+    "address",
+    "addressExcelSuccess",
+    "addressExcelTable",
+    "addressExcelHead",
+    "addressExcelBody"
+);
+
+
+/* =========================================================
+   ADDRESS ALL BORDER
+========================================================= */
+
+const allBorder =
+    $("addressAllBorder");
+
+
+if (allBorder) {
+
+    allBorder.addEventListener(
+        "change",
+        () => {
+
+            updateAddressBorderState();
+
+            renderAddress();
+
+        }
+    );
+
+}
+
+
+[
+    "addressPageBorder",
+    "addressFromBorder",
+    "addressToBorder"
+]
+.forEach(id => {
+
+    const input =
+        $(id);
+
+    if (!input) {
+        return;
+    }
+
+    input.addEventListener(
+        "change",
+        renderAddress
+    );
+
+});
+
+
+/* =========================================================
+   LIVE INPUT LISTENER
+========================================================= */
+
+document.addEventListener(
+    "input",
+    event => {
+
+        const target =
+            event.target;
+
+
+        if (
+            target.closest(
+                "#cocoPanel"
+            )
+        ) {
+
+            renderCoco();
+
+        }
+
+
+        if (
+            target.closest(
+                "#otherPanel"
+            )
+        ) {
+
+            renderOther();
+
+        }
+
+
+        if (
+            target.closest(
+                "#isbnPanel"
+            )
+        ) {
+
+            renderISBN();
+
+        }
+
+
+        if (
+            target.closest(
+                "#addressPanel"
+            )
+        ) {
+
+            renderAddress();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CHANGE LISTENER
+========================================================= */
+
+document.addEventListener(
+    "change",
+    event => {
+
+        const target =
+            event.target;
+
+
+        if (
+            target.closest(
+                "#cocoPanel"
+            )
+        ) {
+
+            renderCoco();
+
+        }
+
+
+        if (
+            target.closest(
+                "#otherPanel"
+            )
+        ) {
+
+            renderOther();
+
+        }
+
+
+        if (
+            target.closest(
+                "#isbnPanel"
+            )
+        ) {
+
+            renderISBN();
+
+        }
+
+
+        if (
+            target.closest(
+                "#addressPanel"
+            )
+        ) {
+
+            renderAddress();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   WAIT FOR FONTS / RENDER
+========================================================= */
+
+async function waitForRendering() {
+
+    if (
+        document.fonts &&
+        document.fonts.ready
+    ) {
+
+        try {
+
+            await document.fonts.ready;
+
+        }
+        catch (_) {}
+
+    }
+
+
+    await sleep(150);
+
+
+    await new Promise(
+        requestAnimationFrame
+    );
+
+}
+
+
+/* =========================================================
+   PREPARE CLONE FOR PDF
+========================================================= */
+
+function createPDFClone(
+    page
+) {
+
+    const clone =
+        page.cloneNode(true);
+
+
+    clone.style.position =
+        "relative";
+
+    clone.style.left =
+        "auto";
+
+    clone.style.top =
+        "auto";
+
+    clone.style.width =
+        `${page.offsetWidth}px`;
+
+    clone.style.height =
+        `${page.offsetHeight}px`;
+
+    clone.style.maxWidth =
+        "none";
+
+    clone.style.margin =
+        "0";
+
+    clone.style.boxShadow =
+        "none";
+
+    clone.style.background =
+        "#ffffff";
+
+
+    return clone;
+
+}
+
+
+/* =========================================================
+   DOWNLOAD PDF
+========================================================= */
+
+function getCocoPDFPageSize() {
+    const type = document.querySelector('input[name="cocoPage"]:checked')?.value || "4x6";
+    if (type === "a4") return { width: 210, height: 297 };
+    if (type === "70x35") return { width: 70, height: 35 };
+    return { width: 101.6, height: 152.4 };
+}
+
+function fitPDFText(pdf, text, maxWidth, startSize, minSize = 8) {
+    let size = startSize;
+    const value = String(text ?? "");
+    while (size > minSize) {
+        pdf.setFontSize(size);
+        if (pdf.getTextWidth(value) <= maxWidth) break;
+        size -= 1;
+    }
+    return size;
+}
+
+function drawCenteredPDFText(pdf, text, x, y, maxWidth, startSize, minSize = 7) {
+    const value = String(text ?? "");
+    const size = fitPDFText(pdf, value, maxWidth, startSize, minSize);
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(size);
+    pdf.text(value, x, y, { align: "center" });
+    return size;
+}
+
+async function downloadCocoVectorPDF(filename) {
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        showToast("jsPDF library is not loaded. Refresh the page and try again.", "red");
+        return;
+    }
+
+    const items = getCocoItems();
+    if (!items.length) {
+        showToast("Please enter PO data before downloading PDF.", "red");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const pageSize = getCocoPDFPageSize();
+    const perPage = 2;
+    const totalPages = Math.ceil(items.length / perPage);
+    const layout = document.querySelector('input[name="cocoLayout"]:checked')?.value || "separate";
+    const content = document.querySelector('input[name="cocoContent"]:checked')?.value || "combined";
+    const poPrefix = getValue("cocoPoPrefix");
+    const boxPrefix = getValue("cocoBoxPrefix", "BOX NO. ");
+
+    showToast(`Preparing ${totalPages} page PDF...`, "green");
+
+    let pdf = null;
+    try {
+        for (let pageIndex = 0; pageIndex < totalPages; pageIndex++) {
+            const { width, height } = pageSize;
+            const orientation = width > height ? "landscape" : "portrait";
+            if (!pdf) {
+                pdf = new jsPDF({ orientation, unit: "mm", format: [width, height], compress: true });
+            } else {
+                pdf.addPage([width, height], orientation);
+            }
+
+            const pageItems = items.slice(pageIndex * perPage, pageIndex * perPage + perPage);
+            const flow = getCocoFlow();
+
+            const slotWidth = width / perPage;
+            const slotHeight = height / perPage;
+
+            pageItems.forEach((item, slotIndex) => {
+                const centerX =
+                    flow === "ttb"
+                        ? width / 2
+                        : slotIndex * slotWidth + slotWidth / 2;
+
+                const centerY =
+                    flow === "ttb"
+                        ? slotIndex * slotHeight + slotHeight / 2
+                        : height / 2;
+
+                const availableWidth =
+                    flow === "ttb"
+                        ? width
+                        : slotWidth;
+
+                const availableHeight =
+                    flow === "ttb"
+                        ? slotHeight
+                        : height;
+
+                const poText = `${poPrefix}${item.po}`;
+                const boxText = `${boxPrefix}${item.box}`;
+
+                const poCfg = getFontCfg("coco", "po");
+                const boxCfg = getFontCfg("coco", "box");
+
+                const maxTextWidth = availableWidth * 0.86;
+
+                function drawOne(text, cfg, preferredSize, x, y) {
+                    const size = Math.min(
+                        cfg.size,
+                        preferredSize
+                    );
+
+                    pdf.setFont(
+                        "helvetica",
+                        pdfFontStyle(cfg)
+                    );
+                    pdf.setFontSize(size);
+
+                    const finalSize =
+                        pdfTextWithStyle(
+                            pdf,
+                            text,
+                            x,
+                            y,
+                            cfg,
+                            size,
+                            maxTextWidth
+                        );
+
+                    const textWidth =
+                        Math.min(
+                            maxTextWidth,
+                            pdf.getTextWidth(text) + 8
+                        );
+
+                    const textHeight =
+                        Math.max(
+                            8,
+                            finalSize * 0.55
+                        );
+
+                    pdfBorder(
+                        pdf,
+                        x - textWidth / 2,
+                        y - textHeight * 0.72,
+                        textWidth,
+                        textHeight,
+                        cfg
+                    );
+
+                    return {
+                        width: textWidth,
+                        height: textHeight
+                    };
+                }
+
+                if (content === "po") {
+                    drawOne(
+                        poText,
+                        poCfg,
+                        availableWidth <= 70 ? 13 : poCfg.size,
+                        centerX,
+                        centerY
+                    );
+                    return;
+                }
+
+                if (content === "box") {
+                    drawOne(
+                        boxText,
+                        boxCfg,
+                        availableWidth <= 70 ? 11 : boxCfg.size,
+                        centerX,
+                        centerY
+                    );
+                    return;
+                }
+
+                if (layout === "same") {
+                    const gap = 4;
+
+                    pdf.setFont(
+                        "helvetica",
+                        pdfFontStyle(poCfg)
+                    );
+                    pdf.setFontSize(poCfg.size);
+
+                    const poW =
+                        Math.min(
+                            maxTextWidth * 0.48,
+                            pdf.getTextWidth(poText) + 8
+                        );
+
+                    pdf.setFont(
+                        "helvetica",
+                        pdfFontStyle(boxCfg)
+                    );
+                    pdf.setFontSize(boxCfg.size);
+
+                    const boxW =
+                        Math.min(
+                            maxTextWidth * 0.48,
+                            pdf.getTextWidth(boxText) + 8
+                        );
+
+                    const totalW =
+                        poW + gap + boxW;
+
+                    drawOne(
+                        poText,
+                        poCfg,
+                        poCfg.size,
+                        centerX - totalW / 2 + poW / 2,
+                        centerY
+                    );
+
+                    drawOne(
+                        boxText,
+                        boxCfg,
+                        boxCfg.size,
+                        centerX + totalW / 2 - boxW / 2,
+                        centerY
+                    );
+
+                    return;
+                }
+
+                const gap =
+                    Math.max(
+                        3,
+                        Math.min(
+                            9,
+                            availableHeight * 0.04
+                        )
+                    );
+
+                const poSize =
+                    Math.min(
+                        poCfg.size,
+                        availableWidth <= 70
+                            ? 11
+                            : poCfg.size
+                    );
+
+                const boxSize =
+                    Math.min(
+                        boxCfg.size,
+                        availableWidth <= 70
+                            ? 9
+                            : boxCfg.size
+                    );
+
+                const poH =
+                    Math.max(
+                        10,
+                        poSize * 0.55
+                    );
+
+                const boxH =
+                    Math.max(
+                        9,
+                        boxSize * 0.55
+                    );
+
+                const totalBlock =
+                    poH + gap + boxH;
+
+                const startY =
+                    centerY - totalBlock / 2;
+
+                pdf.setFont(
+                    "helvetica",
+                    pdfFontStyle(poCfg)
+                );
+                pdf.setFontSize(poSize);
+
+                const poW =
+                    Math.min(
+                        maxTextWidth,
+                        pdf.getTextWidth(poText) + 8
+                    );
+
+                pdfBorder(
+                    pdf,
+                    centerX - poW / 2,
+                    startY,
+                    poW,
+                    poH,
+                    poCfg
+                );
+
+                pdfTextWithStyle(
+                    pdf,
+                    poText,
+                    centerX,
+                    startY + poH * 0.68,
+                    poCfg,
+                    poSize,
+                    maxTextWidth
+                );
+
+                pdf.setFont(
+                    "helvetica",
+                    pdfFontStyle(boxCfg)
+                );
+                pdf.setFontSize(boxSize);
+
+                const boxW =
+                    Math.min(
+                        maxTextWidth,
+                        pdf.getTextWidth(boxText) + 8
+                    );
+
+                const boxY =
+                    startY + poH + gap;
+
+                pdfBorder(
+                    pdf,
+                    centerX - boxW / 2,
+                    boxY,
+                    boxW,
+                    boxH,
+                    boxCfg
+                );
+
+                pdfTextWithStyle(
+                    pdf,
+                    boxText,
+                    centerX,
+                    boxY + boxH * 0.68,
+                    boxCfg,
+                    boxSize,
+                    maxTextWidth
+                );
+
+            });
+
+            if (pageIndex % 20 === 0) {
+                await new Promise(resolve => setTimeout(resolve, 0));
+            }
+        }
+
+        pdf.save(filename);
+        showToast(`PDF downloaded successfully. ${totalPages} pages.`, "green");
+    } catch (error) {
+        console.error("Coco vector PDF generation failed:", error);
+        showToast(`PDF generation failed: ${error.message || "Unknown error"}`, "red");
+    }
+}
+
+
+async function downloadPDF(
+    previewId,
+    filename
+) {
+
+    if (previewId === "cocoPreview") {
+        await downloadCocoVectorPDF(filename);
+        return;
+    }
+
+    const source =
+        $(previewId);
+
+
+    if (!source) {
+
+        showToast(
+            "Preview area not found.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        typeof html2canvas ===
+        "undefined"
+    ) {
+
+        showToast(
+            "PDF renderer is not loaded.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        typeof window.jspdf ===
+        "undefined"
+    ) {
+
+        showToast(
+            "jsPDF library is not loaded.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       IMPORTANT:
+       Do NOT use only the visible 5-page preview.
+       PDF generation uses ALL generated pages.
+    */
+
+    const pages =
+        getAllPDFPages(
+            previewId
+        );
+
+
+    if (!pages.length) {
+
+        showToast(
+            "Please enter data before downloading PDF.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        `Preparing ${pages.length} page PDF...`,
+        "green"
+    );
+
+
+    try {
+
+        await waitForRendering();
+
+
+        const {
+            jsPDF
+        } =
+        window.jspdf;
+
+
+        let pdf = null;
+
+
+        /*
+           Render every page individually.
+        */
+
+        for (
+            let i = 0;
+            i < pages.length;
+            i++
+        ) {
+
+            const original =
+                pages[i];
+
+
+            /*
+               Temporarily make the page
+               visible and measurable.
+            */
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+
+            wrapper.style.position =
+                "fixed";
+
+            wrapper.style.left =
+                "-100000px";
+
+            wrapper.style.top =
+                "0";
+
+            wrapper.style.width =
+                `${Math.max(
+                    original.offsetWidth,
+                    700
+                )}px`;
+
+            wrapper.style.background =
+                "#ffffff";
+
+            wrapper.style.zIndex =
+                "-1";
+
+
+            const clone =
+                createPDFClone(
+                    original
+                );
+
+
+            wrapper.appendChild(
+                clone
+            );
+
+
+            document.body.appendChild(
+                wrapper
+            );
+
+
+            await sleep(80);
+
+
+            const canvas =
+                await html2canvas(
+                    clone,
+                    {
+                        scale: 2,
+
+                        useCORS: true,
+
+                        allowTaint: true,
+
+                        backgroundColor:
+                            "#ffffff",
+
+                        logging: false,
+
+                        imageTimeout:
+                            15000,
+
+                        removeContainer:
+                            true
+                    }
+                );
+
+
+            wrapper.remove();
+
+
+            const width =
+                canvas.width / 2;
+
+            const height =
+                canvas.height / 2;
+
+
+            const orientation =
+                width >= height
+                    ? "landscape"
+                    : "portrait";
+
+
+            if (!pdf) {
+
+                pdf =
+                    new jsPDF({
+
+                        orientation,
+
+                        unit: "px",
+
+                        format:
+                            [width, height],
+
+                        compress: true
+
+                    });
+
+            }
+            else {
+
+                pdf.addPage(
+                    [width, height],
+                    orientation
+                );
+
+            }
+
+
+            const image =
+                canvas.toDataURL(
+                    "image/jpeg",
+                    0.96
+                );
+
+
+            pdf.addImage(
+                image,
+                "JPEG",
+                0,
+                0,
+                width,
+                height,
+                undefined,
+                "FAST"
+            );
+
+        }
+
+
+        if (!pdf) {
+
+            throw new Error(
+                "PDF object was not created."
+            );
+
+        }
+
+
+        pdf.save(
+            filename
+        );
+
+
+        showToast(
+            `PDF downloaded successfully. ${pages.length} pages.`,
+            "green"
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "PDF generation failed:",
+            error
+        );
+
+
+        showToast(
+            "PDF generation failed. Please try again.",
+            "red"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GET ALL PAGES FOR PDF
+   ========================================================= */
+
+function getAllPDFPages(
+    previewId
+) {
+
+    /*
+       The preview itself intentionally
+       contains only 5 pages.
+
+       Therefore we temporarily generate
+       all pages from the data.
+    */
+
+    const pages = [];
+
+
+    if (
+        previewId ===
+        "cocoPreview"
+    ) {
+
+        const items =
+            getCocoItems();
+
+
+        const perPage =
+            2;
+
+
+        const pageType =
+            document.querySelector(
+                'input[name="cocoPage"]:checked'
+            )?.value ||
+            "4x6";
+
+
+        const layout =
+            document.querySelector(
+                'input[name="cocoLayout"]:checked'
+            )?.value ||
+            "separate";
+
+
+        for (
+            let i = 0;
+            i < items.length;
+            i += perPage
+        ) {
+
+            pages.push(
+                createCocoPage(
+                    items.slice(
+                        i,
+                        i + perPage
+                    ),
+                    pageType,
+                    layout
+                )
+            );
+
+        }
+
+
+        return pages;
+
+    }
+
+
+    if (
+        previewId ===
+        "otherPreview"
+    ) {
+
+        const values =
+            getOtherPOValues();
+
+
+        const perPage =
+            10;
+
+
+        for (
+            let i = 0;
+            i < values.length;
+            i += perPage
+        ) {
+
+            const page =
+                document.createElement(
+                    "div"
+                );
+
+
+            page.className =
+                "preview-page page-a4";
+
+
+            page.style.display =
+                "grid";
+
+            page.style.gridTemplateColumns =
+                "1fr 1fr";
+
+            page.style.gridTemplateRows =
+                "repeat(5,1fr)";
+
+            page.style.gridAutoFlow =
+                getOtherFlow() === "ttb"
+                    ? "column"
+                    : "row";
+
+
+            values
+            .slice(
+                i,
+                i + perPage
+            )
+            .forEach(
+                (po, index) => {
+
+                    const label =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    label.className =
+                        "coco-label";
+
+
+                    const wrapper =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    wrapper.className =
+                        "label-separate";
+
+
+                    const poLabel =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    poLabel.className =
+                        "po-label";
+
+
+                    poLabel.textContent =
+                        `${getValue(
+                            "otherPoPrefix"
+                        )}${po}`;
+
+                    applyLabelSettings(
+                        poLabel,
+                        getFontCfg("other", "po")
+                    );
+
+
+                    const boxLabel =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    boxLabel.className =
+                        "box-label";
+
+
+                    const start =
+                        parseInt(
+                            getValue(
+                                "otherStartBox",
+                                "1"
+                            ),
+                            10
+                        ) || 1;
+
+
+                    boxLabel.textContent =
+                        `${getValue(
+                            "otherBoxPrefix",
+                            "BOX NO. "
+                        )}${start + i + index}`;
+
+                    applyLabelSettings(
+                        boxLabel,
+                        getFontCfg("other", "box")
+                    );
+
+
+                    wrapper.append(
+                        poLabel,
+                        boxLabel
+                    );
+
+
+                    label.appendChild(
+                        wrapper
+                    );
+
+
+                    page.appendChild(
+                        label
+                    );
+
+                }
+            );
+
+
+            pages.push(page);
+
+        }
+
+
+        return pages;
+
+    }
+
+
+    if (
+        previewId ===
+        "isbnPreview"
+    ) {
+
+        const values =
+            getISBNValues();
+
+
+        values.forEach(isbn => {
+
+            const page =
+                document.createElement(
+                    "div"
+                );
+
+
+            page.className =
+                "preview-page page-4x6";
+
+
+            page.style.display =
+                "flex";
+
+            page.style.flexDirection =
+                "column";
+
+            page.style.justifyContent =
+                "center";
+
+            page.style.alignItems =
+                "center";
+
+            page.style.gap =
+                "16px";
+
+            page.style.padding =
+                "30px";
+
+
+            page.innerHTML = `
+
+                <div
+                    style="
+                    font-size:22px;
+                    font-weight:900;
+                    word-break:break-all;
+                    text-align:center;
+                    "
+                >
+
+                    ${escapeHTML(isbn)}
+
+                </div>
+
+                <div
+                    style="
+                    width:min(80%, 430px);
+                    padding:14px;
+                    border:1px solid #222;
+                    background:#fff;
+                    "
+                >
+
+                    ${makeBarcode(isbn)}
+
+                </div>
+
+                <div
+                    style="
+                    font-size:12px;
+                    font-weight:800;
+                    color:#667085;
+                    "
+                >
+
+                    ${escapeHTML(
+                        getValue(
+                            "isbnType",
+                            "EAN-13"
+                        )
+                    )}
+
+                </div>
+
+            `;
+
+
+            pages.push(
+                page
+            );
+
+        });
+
+
+        return pages;
+
+    }
+
+
+    if (
+        previewId ===
+        "addressPreview"
+    ) {
+
+        const data =
+            getAddressData()
+            .filter(item =>
+                item.fromName ||
+                item.fromPhone ||
+                item.fromAddress ||
+                item.toName ||
+                item.toPhone ||
+                item.toAddress
+            );
+
+
+        data.forEach(item => {
+
+            const page =
+                document.createElement(
+                    "div"
+                );
+
+
+            page.className =
+                "preview-page page-4x6";
+
+
+            page.style.display =
+                "flex";
+
+            page.style.alignItems =
+                "center";
+
+            page.style.justifyContent =
+                "center";
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "address-preview-card";
+
+
+            const pageBorder =
+                $("addressPageBorder")
+                ?.checked;
+
+
+            const fromBorder =
+                $("addressFromBorder")
+                ?.checked;
+
+
+            const toBorder =
+                $("addressToBorder")
+                ?.checked;
+
+
+            if (!pageBorder) {
+
+                card.style.border =
+                    "none";
+
+            }
+
+
+            const from =
+                document.createElement(
+                    "div"
+                );
+
+
+            from.className =
+                "address-from";
+
+
+            if (!fromBorder) {
+
+                from.style.border =
+                    "none";
+
+            }
+
+
+            from.innerHTML = `
+
+                <div class="address-label-title">
+                    📤 FROM
+                </div>
+
+                <div class="address-name">
+                    ${escapeHTML(
+                        item.fromName ||
+                        "Sender Name"
+                    )}
+                </div>
+
+                <div class="address-phone">
+                    ${escapeHTML(
+                        item.fromPhone ||
+                        ""
+                    )}
+                </div>
+
+                <div class="address-text">
+                    ${escapeHTML(
+                        item.fromAddress ||
+                        "Sender Address"
+                    )}
+                </div>
+
+            `;
+
+
+            const to =
+                document.createElement(
+                    "div"
+                );
+
+
+            to.className =
+                "address-to";
+
+
+            if (!toBorder) {
+
+                to.style.border =
+                    "none";
+
+            }
+
+
+            to.innerHTML = `
+
+                <div class="address-label-title">
+                    📥 TO
+                </div>
+
+                <div class="address-name">
+                    ${escapeHTML(
+                        item.toName ||
+                        "Receiver Name"
+                    )}
+                </div>
+
+                <div class="address-phone">
+                    ${escapeHTML(
+                        item.toPhone ||
+                        ""
+                    )}
+                </div>
+
+                <div class="address-text">
+                    ${escapeHTML(
+                        item.toAddress ||
+                        "Receiver Address"
+                    )}
+                </div>
+
+            `;
+
+
+            card.append(
+                from,
+                to
+            );
+
+
+            page.appendChild(
+                card
+            );
+
+
+            pages.push(
+                page
+            );
+
+        });
+
+
+        return pages;
+
+    }
+
+
+    return pages;
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printPDF(
+    previewId
+) {
+
+    const pages =
+        getAllPDFPages(
+            previewId
+        );
+
+
+    if (!pages.length) {
+
+        showToast(
+            "Please enter data before printing.",
+            "red"
+        );
+
+        return;
+
+    }
+
+
+    const existing =
+        $("printArea");
+
+
+    if (existing) {
+        existing.remove();
+    }
+
+
+    const printArea =
+        document.createElement(
+            "div"
+        );
+
+
+    printArea.id =
+        "printArea";
+
+
+    pages.forEach(page => {
+
+        const clone =
+            createPDFClone(
+                page
+            );
+
+
+        clone.style.width =
+            "100%";
+
+        clone.style.maxWidth =
+            "none";
+
+        clone.style.margin =
+            "0";
+
+        clone.style.boxShadow =
+            "none";
+
+
+        printArea.appendChild(
+            clone
+        );
+
+    });
+
+
+    document.body.appendChild(
+        printArea
+    );
+
+
+    setTimeout(() => {
+
+        window.print();
+
+    }, 500);
+
+}
+
+
+window.addEventListener(
+    "afterprint",
+    () => {
+
+        const printArea =
+            $("printArea");
+
+
+        if (printArea) {
+            printArea.remove();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PDF BUTTONS
+========================================================= */
+
+function bindButton(
+    id,
+    callback
+) {
+
+    const button =
+        $(id);
+
+
+    if (!button) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            callback();
+
+        }
+    );
+
+}
+
+
+bindButton(
+    "cocoDownload",
+    () =>
+        downloadPDF(
+            "cocoPreview",
+            "BWG-Coco-Blue.pdf"
+        )
+);
+
+
+bindButton(
+    "cocoPrint",
+    () =>
+        printPDF(
+            "cocoPreview"
+        )
+);
+
+
+bindButton(
+    "otherDownload",
+    () =>
+        downloadPDF(
+            "otherPreview",
+            "BWG-Other-PO.pdf"
+        )
+);
+
+
+bindButton(
+    "otherPrint",
+    () =>
+        printPDF(
+            "otherPreview"
+        )
+);
+
+
+bindButton(
+    "isbnDownload",
+    () =>
+        downloadPDF(
+            "isbnPreview",
+            "BWG-ISBN-Barcodes.pdf"
+        )
+);
+
+
+bindButton(
+    "isbnPrint",
+    () =>
+        printPDF(
+            "isbnPreview"
+        )
+);
+
+
+bindButton(
+    "addressDownload",
+    () =>
+        downloadPDF(
+            "addressPreview",
+            "BWG-Address-Labels.pdf"
+        )
+);
+
+
+bindButton(
+    "addressPrint",
+    () =>
+        printPDF(
+            "addressPreview"
+        )
+);
+
+
+document
+.querySelectorAll(
+    'input[name="otherFlow"]'
+)
+.forEach(input => {
+
+    input.addEventListener(
+        "change",
+        () => renderOther()
+    );
+
+});
+
+
+setupFontSettingListeners();
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+updateCocoCombinedFreeze();
+
+updateAddressBorderState();
+
+renderCoco();
+
+renderOther();
+
+renderISBN();
+
+renderAddress();
+
+
+/* =========================================================
+   DEBUG MESSAGE
+========================================================= */
+
+console.log(
+    "BWG BooksWagon Label Studio — Updated JS Loaded Successfully."
+);
+
+</script>
 </body>
 </html>
