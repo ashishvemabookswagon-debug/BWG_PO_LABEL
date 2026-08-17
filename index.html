@@ -2668,6 +2668,27 @@ body.bwg-locked{
 }
 </style>
 
+
+<style id="bwg-logout-css">
+#bwgLogoutBtn{
+    position:fixed;
+    right:18px;
+    top:18px;
+    z-index:99998;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:10px;
+    padding:9px 14px;
+    background:#d92525;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+#bwgLogoutBtn:hover{
+    filter:brightness(.92);
+}
+</style>
+
 </head>
 
 
@@ -2692,6 +2713,10 @@ body.bwg-locked{
     </div>
 </div>
 
+
+<button id="bwgLogoutBtn" type="button" title="Log out">
+    🔒 Logout
+</button>
 
 
 <!-- =====================================================
@@ -10000,7 +10025,7 @@ setupFinalSliders("address");
         const password = passInput.value;
 
         if (id === LOGIN_ID && password === LOGIN_PASSWORD) {
-            gate.remove();
+            gate.style.display = "none";
             document.body.classList.remove("bwg-locked");
             sessionStorage.setItem("bwgLabelStudioLoggedIn","1");
             return;
@@ -10014,7 +10039,7 @@ setupFinalSliders("address");
     if (
         sessionStorage.getItem("bwgLabelStudioLoggedIn") === "1"
     ) {
-        gate.remove();
+        gate.style.display = "none";
         document.body.classList.remove("bwg-locked");
     }
 
@@ -10502,6 +10527,51 @@ document
         renderAll();
     });
 });
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+(function setupBWGLogout(){
+
+    const btn = document.getElementById("bwgLogoutBtn");
+    const gate = document.getElementById("bwgLoginGate");
+
+    if (!btn || !gate) return;
+
+    btn.addEventListener("click", () => {
+
+        sessionStorage.removeItem(
+            "bwgLabelStudioLoggedIn"
+        );
+
+        document.body.classList.add("bwg-locked");
+
+        gate.style.display = "flex";
+
+        const idInput =
+            document.getElementById("bwgLoginId");
+
+        const passInput =
+            document.getElementById("bwgLoginPassword");
+
+        const error =
+            document.getElementById("bwgLoginError");
+
+        if (idInput) idInput.value = "";
+        if (passInput) passInput.value = "";
+        if (error) error.textContent = "";
+
+        if (idInput) idInput.focus();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+    });
+
+})();
 
 /* =========================================================
    INITIAL STATE
