@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BWG BooksWagon Label Studio</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="header-inner">
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            BWG
+        </div>
+
+        <div>
+
+            <h1>
+                BooksWagon Label Studio
+            </h1>
+
+            <p>
+                Professional Label Generation System
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="live">
+
+        <span class="live-dot"></span>
+
+        Website is Live
+
+    </div>
+
+</div>
+
+</header>
+
+
+<main class="app">
+
+
+<!-- =====================================================
+     TOOLS
+===================================================== -->
+
+<section class="tools">
+
+<button
+    class="tool active"
+    data-tool="coco"
+>
+
+    <div class="tool-icon">
+        🔵
+    </div>
+
+    <strong>
+        Coco Blue
+    </strong>
+
+    <span>
+        PO + Box Labels
+    </span>
+
+</button>
+
+
+<button
+    class="tool"
+    data-tool="other"
+>
+
+    <div class="tool-icon">
+        📦
+    </div>
+
+    <strong>
+        Other PO
+    </strong>
+
+    <span>
+        PO Labels
+    </span>
+
+</button>
+
+
+<button
+    class="tool"
+    data-tool="isbn"
+>
+
+    <div class="tool-icon">
+        📚
+    </div>
+
+    <strong>
+        ISBN Barcode
+    </strong>
+
+    <span>
+        ISBN + Barcode
+    </span>
+
+</button>
+
+
+<button
+    class="tool"
+    data-tool="address"
+>
+
+    <div class="tool-icon">
+        🚚
+    </div>
+
+    <strong>
+        Address Label
+    </strong>
+
+    <span>
+        From + To Address
+    </span>
+
+</button>
+
+</section>
+
+
+<div class="workspace">
+
+
+<!-- =====================================================
+     COCO
+===================================================== -->
+
+<section
+    id="cocoPanel"
+    class="panel active"
+>
+
+<div class="panel-head">
+
+    <div class="panel-title">
+
+        <div class="panel-icon">
+            🔵
+        </div>
+
+        <div>
+
+            <h2>
+                Coco Blue
+            </h2>
+
+            <p>
+                Create professional PO + Box labels
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="steps">
+
+    <div class="step active">
+        <span class="step-number">1</span>
+        Input
+    </div>
+
+    <div class="step">
+        <span class="step-number">2</span>
+        PO & Box
+    </div>
+
+    <div class="step">
+        <span class="step-number">3</span>
+        Label Content
+    </div>
+
+    <div class="step">
+        <span class="step-number">4</span>
+        Design
+    </div>
+
+    <div class="step">
+        <span class="step-number">5</span>
+        Preview & PDF
+    </div>
+
+</div>
+
+
+<div class="content">
+
+
+<!-- INPUT -->
+
+<div class="section">
+
+<div class="section-head">
+
+    <h3>
+        Step 1 · Input Method
+    </h3>
+
+    <small>
+        Choose one method
+    </small>
+
+</div>
+
+
+<div class="mode-tabs">
+
+<button
+    class="mode-btn active"
+    data-coco-mode="manual"
+>
+    ✍️ Manual
+</button>
+
+<button
+    class="mode-btn"
+    data-coco-mode="bulk"
+>
+    🚚 Bulk
+</button>
+
+<button
+    class="mode-btn"
+    data-coco-mode="excel"
+>
+    📊 Excel
+</button>
+
+</div>
+
+
+<!-- MANUAL -->
+
+<div
+    id="cocoManual"
+    class="mode-panel active"
+>
+
+<div
+    id="cocoManualGrid"
+    class="manual-grid"
+></div>
+
+</div>
+
+
+<!-- BULK -->
+
+<div
+    id="cocoBulk"
+    class="mode-panel"
+>
+
+<div class="bulk-box">
+
+<div class="bulk-title">
+🚚 Bulk PO Numbers
+</div>
+
+<textarea
+    id="cocoBulkInput"
+    rows="5"
+    placeholder="PO001, PO002, PO003, PO004..."
+></textarea>
+
+<div class="bulk-note">
+Separate PO numbers using commas.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- EXCEL -->
+
+<div
+    id="cocoExcel"
+    class="mode-panel"
+>
+
+<label class="upload-zone">
+
+<div class="upload-icon">
+📊
+</div>
+
+<strong>
+Upload Excel File
+</strong>
+
+<small>
+PO numbers will be read automatically
+</small>
+
+<input
+    id="cocoExcelFile"
+    type="file"
+    accept=".xlsx,.xls,.csv"
+>
+
+</label>
+
+
+<div
+    id="cocoExcelSuccess"
+    class="excel-success"
+></div>
+
+
+<div
+    id="cocoExcelTable"
+    class="excel-table"
+>
+
+<table>
+
+<thead
+    id="cocoExcelHead"
+></thead>
+
+<tbody
+    id="cocoExcelBody"
+></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PO BOX -->
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+    Step 2 · PO & Box Settings
+</h3>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+PO Prefix
+</label>
+
+<input
+    id="cocoPoPrefix"
+    placeholder="PO-"
+/>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Box Prefix
+</label>
+
+<input
+    id="cocoBoxPrefix"
+    value="BOX NO. "
+/>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Start Box Number
+</label>
+
+<input
+    id="cocoStartBox"
+    type="number"
+    value="1"
+/>
+
+</div>
+
+
+<div class="field">
+
+<label>
+End Box Number
+</label>
+
+<input
+    id="cocoEndBox"
+    type="number"
+    value="10"
+/>
+
+</div>
+
+</div>
+
+
+<div
+    id="cocoRangeError"
+    class="status red"
+></div>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+    Step 3 · Label Content
+</h3>
+
+</div>
+
+
+<div class="choice-grid">
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoContent"
+    value="po"
+>
+
+PO Number Only
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoContent"
+    value="box"
+>
+
+Box Number Only
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoContent"
+    value="combined"
+    checked
+>
+
+PO + Box Combined
+
+</label>
+
+</div>
+
+
+<div
+    id="cocoFreeze"
+    class="freeze show"
+>
+
+🔒 Combined PO + Box selected.
+
+</div>
+
+</div>
+
+
+<!-- DESIGN -->
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+    Step 4 · Label Design
+</h3>
+
+</div>
+
+
+<div class="choice-grid">
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoLayout"
+    value="separate"
+    checked
+>
+
+Separate Line
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoLayout"
+    value="same"
+>
+
+Same Line
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoPage"
+    value="4x6"
+    checked
+>
+
+4 × 6 inch
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoPage"
+    value="70x35"
+>
+
+70 × 35 mm
+
+</label>
+
+
+<label class="choice">
+
+<input
+    type="radio"
+    name="cocoPage"
+    value="a4"
+>
+
+A4
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- PREVIEW -->
+
+<div class="section">
+
+<div class="preview-box">
+
+<div class="preview-head">
+
+<div>
+
+<h3>
+Step 5 · Live Preview
+</h3>
+
+<span>
+Only first 5 pages are shown here.
+</span>
+
+</div>
+
+<span
+    id="cocoPageCount"
+    class="page-badge"
+>
+0 Pages
+</span>
+
+</div>
+
+
+<div
+    id="cocoPreview"
+    class="preview-area"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+    id="cocoDownload"
+    class="btn download"
+>
+⬇️ Download PDF
+</button>
+
+
+<button
+    id="cocoPrint"
+    class="btn print"
+>
+🖨️ Print PDF
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     OTHER PO
+===================================================== -->
+
+<section
+    id="otherPanel"
+    class="panel"
+>
+
+<div class="panel-head">
+
+<div class="panel-title">
+
+<div class="panel-icon">
+📦
+</div>
+
+<div>
+
+<h2>
+Other PO
+</h2>
+
+<p>
+PO label generator
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="content">
+
+<div class="section">
+
+<div class="section-head">
+<h3>Step 1 · Input Method</h3>
+</div>
+
+
+<div class="mode-tabs">
+
+<button
+    class="mode-btn active"
+    data-other-mode="manual"
+>
+✍️ Manual
+</button>
+
+<button
+    class="mode-btn"
+    data-other-mode="bulk"
+>
+🚚 Bulk
+</button>
+
+<button
+    class="mode-btn"
+    data-other-mode="excel"
+>
+📊 Excel
+</button>
+
+</div>
+
+
+<div
+    id="otherManual"
+    class="mode-panel active"
+>
+
+<div
+    id="otherManualGrid"
+    class="manual-grid"
+></div>
+
+</div>
+
+
+<div
+    id="otherBulk"
+    class="mode-panel"
+>
+
+<div class="bulk-box">
+
+<div class="bulk-title">
+🚚 Bulk PO Numbers
+</div>
+
+<textarea
+    id="otherBulkInput"
+    rows="5"
+    placeholder="PO001, PO002, PO003..."
+></textarea>
+
+</div>
+
+</div>
+
+
+<div
+    id="otherExcel"
+    class="mode-panel"
+>
+
+<label class="upload-zone">
+
+<div class="upload-icon">
+📊
+</div>
+
+<strong>
+Upload Excel
+</strong>
+
+<small>
+Excel preview will appear here
+</small>
+
+<input
+    id="otherExcelFile"
+    type="file"
+    accept=".xlsx,.xls,.csv"
+>
+
+</label>
+
+
+<div
+    id="otherExcelSuccess"
+    class="excel-success"
+></div>
+
+
+<div
+    id="otherExcelTable"
+    class="excel-table"
+>
+
+<table>
+
+<thead id="otherExcelHead"></thead>
+
+<tbody id="otherExcelBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+<h3>Step 2 · PO & Box</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>PO Prefix</label>
+
+<input
+    id="otherPoPrefix"
+    placeholder="PO-"
+/>
+
+</div>
+
+<div class="field">
+
+<label>Box Prefix</label>
+
+<input
+    id="otherBoxPrefix"
+    value="BOX NO. "
+/>
+
+</div>
+
+<div class="field">
+
+<label>Start Box</label>
+
+<input
+    id="otherStartBox"
+    type="number"
+    value="1"
+/>
+
+</div>
+
+<div class="field">
+
+<label>End Box</label>
+
+<input
+    id="otherEndBox"
+    type="number"
+    value="10"
+/>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="preview-box">
+
+<div class="preview-head">
+
+<div>
+
+<h3>
+Live Preview
+</h3>
+
+<span>
+Maximum 5 preview pages
+</span>
+
+</div>
+
+<span
+    id="otherPageCount"
+    class="page-badge"
+>
+0 Pages
+</span>
+
+</div>
+
+<div
+    id="otherPreview"
+    class="preview-area"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+    id="otherDownload"
+    class="btn download"
+>
+⬇️ Download PDF
+</button>
+
+<button
+    id="otherPrint"
+    class="btn print"
+>
+🖨️ Print PDF
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ISBN
+===================================================== -->
+
+<section
+    id="isbnPanel"
+    class="panel"
+>
+
+<div class="panel-head">
+
+<div class="panel-title">
+
+<div class="panel-icon">
+📚
+</div>
+
+<div>
+
+<h2>
+ISBN Barcode
+</h2>
+
+<p>
+ISBN and barcode label generator
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="content">
+
+<div class="section">
+
+<div class="section-head">
+<h3>Step 1 · Input Method</h3>
+</div>
+
+
+<div class="mode-tabs">
+
+<button
+    class="mode-btn active"
+    data-isbn-mode="manual"
+>
+✍️ Manual
+</button>
+
+<button
+    class="mode-btn"
+    data-isbn-mode="bulk"
+>
+🚚 Bulk
+</button>
+
+<button
+    class="mode-btn"
+    data-isbn-mode="excel"
+>
+📊 Excel
+</button>
+
+</div>
+
+
+<div
+    id="isbnManual"
+    class="mode-panel active"
+>
+
+<div
+    id="isbnManualGrid"
+    class="manual-grid"
+></div>
+
+</div>
+
+
+<div
+    id="isbnBulk"
+    class="mode-panel"
+>
+
+<div class="bulk-box">
+
+<div class="bulk-title">
+🚚 Bulk ISBN
+</div>
+
+<textarea
+    id="isbnBulkInput"
+    rows="5"
+    placeholder="9780000000001, 9780000000002..."
+></textarea>
+
+</div>
+
+</div>
+
+
+<div
+    id="isbnExcel"
+    class="mode-panel"
+>
+
+<label class="upload-zone">
+
+<div class="upload-icon">
+📊
+</div>
+
+<strong>
+Upload ISBN Excel
+</strong>
+
+<input
+    id="isbnExcelFile"
+    type="file"
+    accept=".xlsx,.xls,.csv"
+>
+
+</label>
+
+
+<div
+    id="isbnExcelSuccess"
+    class="excel-success"
+></div>
+
+
+<div
+    id="isbnExcelTable"
+    class="excel-table"
+>
+
+<table>
+
+<thead id="isbnExcelHead"></thead>
+
+<tbody id="isbnExcelBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+<h3>Step 2 · Barcode Settings</h3>
+</div>
+
+<div class="form-grid">
+
+<div class="field">
+
+<label>
+Barcode Type
+</label>
+
+<select id="isbnType">
+
+<option>
+EAN-13
+</option>
+
+<option>
+ISBN
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="preview-box">
+
+<div class="preview-head">
+
+<div>
+
+<h3>
+Live Preview
+</h3>
+
+<span>
+Maximum 5 preview pages
+</span>
+
+</div>
+
+</div>
+
+<div
+    id="isbnPreview"
+    class="preview-area"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+    id="isbnDownload"
+    class="btn download"
+>
+⬇️ Download PDF
+</button>
+
+<button
+    id="isbnPrint"
+    class="btn print"
+>
+🖨️ Print PDF
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     ADDRESS
+===================================================== -->
+
+<section
+    id="addressPanel"
+    class="panel"
+>
+
+<div class="panel-head">
+
+<div class="panel-title">
+
+<div class="panel-icon">
+🚚
+</div>
+
+<div>
+
+<h2>
+Address Label
+</h2>
+
+<p>
+Professional From + To address labels
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="content">
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+Step 1 · Input Method
+</h3>
+
+</div>
+
+
+<div class="mode-tabs">
+
+<button
+    class="mode-btn active"
+    data-address-mode="manual"
+>
+✍️ Manual
+</button>
+
+<button
+    class="mode-btn"
+    data-address-mode="bulk"
+>
+🚚 Bulk
+</button>
+
+<button
+    class="mode-btn"
+    data-address-mode="excel"
+>
+📊 Excel
+</button>
+
+</div>
+
+
+<div
+    id="addressManual"
+    class="mode-panel active"
+>
+
+<div class="address-form">
+
+<div class="address-card">
+
+<h3>
+📤 From
+</h3>
+
+<input
+    id="fromName"
+    placeholder="From Name"
+>
+
+<input
+    id="fromPhone"
+    placeholder="From Phone"
+>
+
+<textarea
+    id="fromAddress"
+    rows="5"
+    placeholder="From Address"
+></textarea>
+
+</div>
+
+
+<div class="address-card">
+
+<h3>
+📥 To
+</h3>
+
+<input
+    id="toName"
+    placeholder="To Name"
+>
+
+<input
+    id="toPhone"
+    placeholder="To Phone"
+>
+
+<textarea
+    id="toAddress"
+    rows="5"
+    placeholder="To Address"
+></textarea>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+    id="addressBulk"
+    class="mode-panel"
+>
+
+<div class="bulk-box">
+
+<div class="bulk-title">
+🚚 Bulk Address
+</div>
+
+<textarea
+    id="addressBulkInput"
+    rows="7"
+    placeholder="FROM ADDRESS | TO ADDRESS"
+></textarea>
+
+<div class="bulk-note">
+One label per line. Separate From and To using |.
+</div>
+
+</div>
+
+</div>
+
+
+<div
+    id="addressExcel"
+    class="mode-panel"
+>
+
+<label class="upload-zone">
+
+<div class="upload-icon">
+📊
+</div>
+
+<strong>
+Upload Address Excel
+</strong>
+
+<small>
+From / To columns will be previewed.
+</small>
+
+<input
+    id="addressExcelFile"
+    type="file"
+    accept=".xlsx,.xls,.csv"
+>
+
+</label>
+
+
+<div
+    id="addressExcelSuccess"
+    class="excel-success"
+></div>
+
+
+<div
+    id="addressExcelTable"
+    class="excel-table"
+>
+
+<table>
+
+<thead id="addressExcelHead"></thead>
+
+<tbody id="addressExcelBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+Step 2 · Address Border
+</h3>
+
+</div>
+
+
+<div class="choice-grid">
+
+<label class="choice">
+
+<input
+    id="addressPageBorder"
+    type="checkbox"
+    checked
+>
+
+Page Border
+
+</label>
+
+
+<label class="choice">
+
+<input
+    id="addressFromBorder"
+    type="checkbox"
+    checked
+>
+
+From Border
+
+</label>
+
+
+<label class="choice">
+
+<input
+    id="addressToBorder"
+    type="checkbox"
+    checked
+>
+
+To Border
+
+</label>
+
+
+<label class="choice">
+
+<input
+    id="addressAllBorder"
+    type="checkbox"
+>
+
+All Border
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-head">
+
+<h3>
+Step 3 · Live Preview
+</h3>
+
+<span
+    id="addressPageCount"
+    class="page-badge"
+>
+0 Pages
+</span>
+
+</div>
+
+
+<div class="preview-box">
+
+<div class="preview-head">
+
+<div>
+
+<h3>
+Address Preview
+</h3>
+
+<span>
+Maximum 5 pages · No QR code
+</span>
+
+</div>
+
+</div>
+
+
+<div
+    id="addressPreview"
+    class="preview-area"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+    id="addressDownload"
+    class="btn download"
+>
+⬇️ Download PDF
+</button>
+
+<button
+    id="addressPrint"
+    class="btn print"
+>
+🖨️ Print PDF
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<footer class="footer">
+
+<div>
+<strong>
+Credit by Ashish Verma · 2026
+</strong>
+</div>
+
+<div>
+Copyright © 2026 · All Rights Reserved by Ashish Verma
+</div>
+
+</footer>
+
+
+<div id="toast"></div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+    <script src="app.js" defer></script>
+</body>
+</html>
