@@ -8610,7 +8610,7 @@ function drawCenteredPDFText(pdf, text, x, y, maxWidth, startSize, minSize = 7) 
     return size;
 }
 
-async async function downloadCocoVectorPDF(filename) {
+async function downloadCocoVectorPDF(filename) {
 
     if (
         !window.jspdf ||
@@ -10493,9 +10493,24 @@ setupFinalSliders("address");
 
     [idInput, passInput].forEach(input => {
         input.addEventListener("keydown", event => {
-            if (event.key === "Enter") doLogin();
+            if (event.key === "Enter") {
+                event.preventDefault();
+                doLogin();
+            }
         });
     });
+
+    setTimeout(() => {
+        if (
+            sessionStorage.getItem(
+                "bwgLabelStudioLoggedIn"
+            ) !== "1"
+        ) {
+            gate.style.display = "flex";
+            document.body.classList.add("bwg-locked");
+            idInput.focus();
+        }
+    }, 0);
 
 })();
 
