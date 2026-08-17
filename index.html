@@ -2400,6 +2400,72 @@ select:focus {
 }
 
 </style>
+
+<style id="final-slider-scissor-css">
+.slider-controls{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(240px,1fr));
+    gap:16px;
+    margin-top:12px;
+}
+.slider-control{
+    padding:12px 14px;
+    border:1px solid #d6e0ec;
+    border-radius:12px;
+    background:#f8fbff;
+}
+.slider-control label{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:7px;
+}
+.slider-control input[type="range"]{
+    width:100%;
+    accent-color:#0878d1;
+    cursor:pointer;
+}
+.slider-value{
+    min-width:60px;
+    text-align:right;
+    color:#0878d1;
+    font-weight:900;
+}
+.final-page-border{
+    position:relative;
+    box-sizing:border-box;
+}
+.final-page-border.enabled{
+    outline:var(--final-page-border-width,1px) solid #20242a;
+    outline-offset:-1px;
+}
+.final-scissor{
+    position:absolute;
+    z-index:999;
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    background:#fff;
+    border-radius:50%;
+    font-family:Arial,sans-serif;
+    line-height:1;
+    pointer-events:none;
+}
+.final-scissor.tl{left:-12px;top:-12px}
+.final-scissor.tr{right:-12px;top:-12px}
+.final-scissor.bl{left:-12px;bottom:-12px}
+.final-scissor.br{right:-12px;bottom:-12px}
+@media(max-width:850px){
+    .slider-controls{grid-template-columns:1fr}
+}
+</style>
+
 </head>
 
 
@@ -3139,6 +3205,82 @@ Box Number Underline
 </div>
 
 
+
+<div class="section final-settings-section">
+
+<div class="section-head">
+<h3>Coco Blue · Page / Cutting Controls</h3>
+<small>Live sliders</small>
+</div>
+
+<div class="slider-controls">
+
+<div class="slider-control">
+<label>
+<span>PO Font Size</span>
+<span class="slider-value" id="cocoPoFontSliderValue">24 px</span>
+</label>
+<input type="range" id="cocoPoFontSlider" min="8" max="80" value="24" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>PO Opacity</span>
+<span class="slider-value" id="cocoPoOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="cocoPoOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Font Size</span>
+<span class="slider-value" id="cocoBoxFontSliderValue">19 px</span>
+</label>
+<input type="range" id="cocoBoxFontSlider" min="8" max="70" value="19" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Opacity</span>
+<span class="slider-value" id="cocoBoxOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="cocoBoxOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Page Border</span>
+<span class="slider-value" id="cocoPageBorderSliderValue">1 px</span>
+</label>
+<input type="range" id="cocoPageBorderSlider" min="0" max="8" value="1" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>✂ Scissor Mark Size</span>
+<span class="slider-value" id="cocoScissorSliderValue">10 px</span>
+</label>
+<input type="range" id="cocoScissorSlider" min="0" max="24" value="10" step="1">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="cocoPageBorderEnabled" checked>
+Page Border
+</label>
+
+<label class="choice">
+<input type="checkbox" id="cocoScissorEnabled" checked>
+✂ Scissor Marking
+</label>
+
+</div>
+
+</div>
+
 <div class="section">
 
 <div class="preview-box">
@@ -3152,7 +3294,7 @@ Step 5 · Live Preview
 </h3>
 
 <span>
-Only first 5 pages are shown here.
+Preview shows 1 page only.
 </span>
 
 </div>
@@ -3575,6 +3717,82 @@ Box Number Underline
 </div>
 
 
+
+<div class="section final-settings-section">
+
+<div class="section-head">
+<h3>Other PO · Page / Cutting Controls</h3>
+<small>Live sliders</small>
+</div>
+
+<div class="slider-controls">
+
+<div class="slider-control">
+<label>
+<span>PO Font Size</span>
+<span class="slider-value" id="otherPoFontSliderValue">24 px</span>
+</label>
+<input type="range" id="otherPoFontSlider" min="8" max="80" value="24" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>PO Opacity</span>
+<span class="slider-value" id="otherPoOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="otherPoOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Font Size</span>
+<span class="slider-value" id="otherBoxFontSliderValue">19 px</span>
+</label>
+<input type="range" id="otherBoxFontSlider" min="8" max="70" value="19" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Opacity</span>
+<span class="slider-value" id="otherBoxOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="otherBoxOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Page Border</span>
+<span class="slider-value" id="otherPageBorderSliderValue">1 px</span>
+</label>
+<input type="range" id="otherPageBorderSlider" min="0" max="8" value="1" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>✂ Scissor Mark Size</span>
+<span class="slider-value" id="otherScissorSliderValue">10 px</span>
+</label>
+<input type="range" id="otherScissorSlider" min="0" max="24" value="10" step="1">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="otherPageBorderEnabled" checked>
+Page Border
+</label>
+
+<label class="choice">
+<input type="checkbox" id="otherScissorEnabled" checked>
+✂ Scissor Marking
+</label>
+
+</div>
+
+</div>
+
 <div class="section">
 
 <div class="preview-box">
@@ -3821,6 +4039,82 @@ ISBN
 
 </div>
 
+
+
+<div class="section final-settings-section">
+
+<div class="section-head">
+<h3>ISBN Barcode · Page / Cutting Controls</h3>
+<small>Live sliders</small>
+</div>
+
+<div class="slider-controls">
+
+<div class="slider-control">
+<label>
+<span>PO Font Size</span>
+<span class="slider-value" id="isbnPoFontSliderValue">24 px</span>
+</label>
+<input type="range" id="isbnPoFontSlider" min="8" max="80" value="24" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>PO Opacity</span>
+<span class="slider-value" id="isbnPoOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="isbnPoOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Font Size</span>
+<span class="slider-value" id="isbnBoxFontSliderValue">19 px</span>
+</label>
+<input type="range" id="isbnBoxFontSlider" min="8" max="70" value="19" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Opacity</span>
+<span class="slider-value" id="isbnBoxOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="isbnBoxOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Page Border</span>
+<span class="slider-value" id="isbnPageBorderSliderValue">1 px</span>
+</label>
+<input type="range" id="isbnPageBorderSlider" min="0" max="8" value="1" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>✂ Scissor Mark Size</span>
+<span class="slider-value" id="isbnScissorSliderValue">10 px</span>
+</label>
+<input type="range" id="isbnScissorSlider" min="0" max="24" value="10" step="1">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="isbnPageBorderEnabled" checked>
+Page Border
+</label>
+
+<label class="choice">
+<input type="checkbox" id="isbnScissorEnabled" checked>
+✂ Scissor Marking
+</label>
+
+</div>
+
+</div>
 
 <div class="section">
 
@@ -4157,6 +4451,82 @@ All Border
 </div>
 
 
+
+<div class="section final-settings-section">
+
+<div class="section-head">
+<h3>Address Label · Page / Cutting Controls</h3>
+<small>Live sliders</small>
+</div>
+
+<div class="slider-controls">
+
+<div class="slider-control">
+<label>
+<span>PO Font Size</span>
+<span class="slider-value" id="addressPoFontSliderValue">24 px</span>
+</label>
+<input type="range" id="addressPoFontSlider" min="8" max="80" value="24" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>PO Opacity</span>
+<span class="slider-value" id="addressPoOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="addressPoOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Font Size</span>
+<span class="slider-value" id="addressBoxFontSliderValue">19 px</span>
+</label>
+<input type="range" id="addressBoxFontSlider" min="8" max="70" value="19" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Box Opacity</span>
+<span class="slider-value" id="addressBoxOpacitySliderValue">100%</span>
+</label>
+<input type="range" id="addressBoxOpacitySlider" min="0" max="100" value="100" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>Page Border</span>
+<span class="slider-value" id="addressPageBorderSliderValue">1 px</span>
+</label>
+<input type="range" id="addressPageBorderSlider" min="0" max="8" value="1" step="1">
+</div>
+
+<div class="slider-control">
+<label>
+<span>✂ Scissor Mark Size</span>
+<span class="slider-value" id="addressScissorSliderValue">10 px</span>
+</label>
+<input type="range" id="addressScissorSlider" min="0" max="24" value="10" step="1">
+</div>
+
+</div>
+
+<div class="choice-grid" style="margin-top:14px;">
+
+<label class="choice">
+<input type="checkbox" id="addressPageBorderEnabled" checked>
+Page Border
+</label>
+
+<label class="choice">
+<input type="checkbox" id="addressScissorEnabled" checked>
+✂ Scissor Marking
+</label>
+
+</div>
+
+</div>
+
 <div class="section">
 
 <div class="section-head">
@@ -4186,7 +4556,7 @@ Address Preview
 </h3>
 
 <span>
-Maximum 5 pages · No QR code
+Preview shows 1 page only · No QR code
 </span>
 
 </div>
@@ -5213,11 +5583,7 @@ function renderCoco() {
             : 0;
 
 
-    const previewPages =
-        Math.min(
-            totalPages,
-            5
-        );
+    const previewPages = 1;
 
 
     const count =
@@ -5567,6 +5933,7 @@ function createCocoPage(
         );
 
 
+        applyFinalPOBoxSliderStyles("coco", po, null);
         const box =
             document.createElement("div");
 
@@ -5585,6 +5952,8 @@ function createCocoPage(
             box,
             getFontCfg("coco", "box")
         );
+
+        applyFinalPOBoxSliderStyles("coco", null, box);
 
 
         const content =
@@ -5670,11 +6039,7 @@ function renderOther() {
             : 0;
 
 
-    const previewPages =
-        Math.min(
-            totalPages,
-            5
-        );
+    const previewPages = 1;
 
 
     const count =
@@ -5799,6 +6164,8 @@ function renderOther() {
                     getFontCfg("other", "po")
                 );
 
+                applyFinalPOBoxSliderStyles("other", poLabel, null);
+
 
                 const boxLabel =
                     document.createElement("div");
@@ -5836,6 +6203,8 @@ function renderOther() {
                     getFontCfg("other", "box")
                 );
 
+                applyFinalPOBoxSliderStyles("other", null, boxLabel);
+
 
                 wrapper.append(
                     poLabel,
@@ -5859,6 +6228,8 @@ function renderOther() {
         area.appendChild(
             page
         );
+
+        applyFinalPageDecor(page, "other");
 
     }
 
@@ -5981,11 +6352,7 @@ function renderISBN() {
         getISBNValues();
 
 
-    const previewCount =
-        Math.min(
-            values.length,
-            5
-        );
+    const previewCount = 1;
 
 
     if (!values.length) {
@@ -6104,6 +6471,8 @@ function renderISBN() {
         area.appendChild(
             page
         );
+
+        applyFinalPageDecor(page, "isbn");
 
     }
 
@@ -6438,11 +6807,7 @@ function renderAddress() {
         );
 
 
-    const previewPages =
-        Math.min(
-            data.length,
-            5
-        );
+    const previewPages = 1;
 
 
     const count =
@@ -6649,6 +7014,8 @@ function renderAddress() {
         area.appendChild(
             page
         );
+
+        applyFinalPageDecor(page, "address");
 
     }
 
@@ -8662,6 +9029,131 @@ document
 
 setupFontSettingListeners();
 
+
+
+/* =========================================================
+   FINAL ONE-PAGE PREVIEW + SLIDER + SCISSOR CONTROLS
+========================================================= */
+
+function finalRange(id, fallback) {
+    const el = $(id);
+    if (!el) return fallback;
+    const n = Number(el.value);
+    return Number.isFinite(n) ? n : fallback;
+}
+
+function finalSliderText(id, text) {
+    const el = $(id);
+    if (el) el.textContent = text;
+}
+
+function finalPageConfig(prefix) {
+    return {
+        poSize: finalRange(`${prefix}PoFontSlider`, 24),
+        poOpacity: finalRange(`${prefix}PoOpacitySlider`, 100),
+        boxSize: finalRange(`${prefix}BoxFontSlider`, 19),
+        boxOpacity: finalRange(`${prefix}BoxOpacitySlider`, 100),
+        borderWidth: finalRange(`${prefix}PageBorderSlider`, 1),
+        scissorSize: finalRange(`${prefix}ScissorSlider`, 10),
+        borderEnabled: $(`${prefix}PageBorderEnabled`)?.checked ?? true,
+        scissorEnabled: $(`${prefix}ScissorEnabled`)?.checked ?? true
+    };
+}
+
+function applyFinalPageDecor(page, prefix) {
+    const cfg = finalPageConfig(prefix);
+
+    page.classList.add("final-page-border");
+
+    if (cfg.borderEnabled && cfg.borderWidth > 0) {
+        page.classList.add("enabled");
+        page.style.setProperty(
+            "--final-page-border-width",
+            `${cfg.borderWidth}px`
+        );
+    } else {
+        page.classList.remove("enabled");
+    }
+
+    page.querySelectorAll(".final-scissor").forEach(el => el.remove());
+
+    if (!cfg.scissorEnabled || cfg.scissorSize <= 0) return;
+
+    ["tl","tr","bl","br"].forEach(pos => {
+        const mark = document.createElement("span");
+        mark.className = `final-scissor ${pos}`;
+        mark.textContent = "✂";
+        mark.style.fontSize = `${cfg.scissorSize}px`;
+        page.appendChild(mark);
+    });
+}
+
+function applyFinalFontToElement(el, size, opacity) {
+    el.style.fontSize = `${size}px`;
+    el.style.opacity = String(opacity / 100);
+}
+
+function setupFinalSliders(prefix) {
+    const bindings = [
+        [`${prefix}PoFontSlider`, `${prefix}PoFontSliderValue`, v => `${v} px`],
+        [`${prefix}PoOpacitySlider`, `${prefix}PoOpacitySliderValue`, v => `${v}%`],
+        [`${prefix}BoxFontSlider`, `${prefix}BoxFontSliderValue`, v => `${v} px`],
+        [`${prefix}BoxOpacitySlider`, `${prefix}BoxOpacitySliderValue`, v => `${v}%`],
+        [`${prefix}PageBorderSlider`, `${prefix}PageBorderSliderValue`, v => `${v} px`],
+        [`${prefix}ScissorSlider`, `${prefix}ScissorSliderValue`, v => `${v} px`]
+    ];
+
+    bindings.forEach(([inputId, valueId, formatter]) => {
+        const input = $(inputId);
+        if (!input) return;
+
+        const update = () => {
+            finalSliderText(
+                valueId,
+                formatter(input.value)
+            );
+            renderAll();
+        };
+
+        input.addEventListener("input", update);
+        input.addEventListener("change", update);
+        update();
+    });
+
+    [`${prefix}PageBorderEnabled`, `${prefix}ScissorEnabled`]
+        .forEach(id => {
+            const el = $(id);
+            if (!el) return;
+            el.addEventListener("change", renderAll);
+        });
+}
+
+/* Replace old font settings for preview with sliders when available. */
+function applyFinalPOBoxSliderStyles(prefix, poEl, boxEl) {
+    const cfg = finalPageConfig(prefix);
+
+    if (poEl) {
+        applyFinalFontToElement(
+            poEl,
+            cfg.poSize,
+            cfg.poOpacity
+        );
+    }
+
+    if (boxEl) {
+        applyFinalFontToElement(
+            boxEl,
+            cfg.boxSize,
+            cfg.boxOpacity
+        );
+    }
+}
+
+
+setupFinalSliders("coco");
+setupFinalSliders("other");
+setupFinalSliders("isbn");
+setupFinalSliders("address");
 
 /* =========================================================
    INITIAL STATE
