@@ -2769,6 +2769,28 @@ body.bwg-locked{
 }
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+
+<style id="bwg-po-barcode-css">
+.bwg-po-barcode-setting{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-po-barcode-preview{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:0 auto 7px;
+}
+.bwg-po-barcode-preview svg{
+    display:block;
+    max-width:82%;
+    height:auto;
+}
+</style>
 </head>
 
 
@@ -3688,14 +3710,10 @@ Page Border
 <div class="bwg-page-size-card">
 <label for="cocoPageSize">Page Size</label>
 <select id="cocoPageSize">
-    <option value="A4">A4</option>
-    <option value="A5">A5</option>
-    <option value="A6">A6</option>
-    <option value="LETTER">Letter</option>
-    <option value="4x6" selected>4 × 6 inch</option>
-    <option value="5x7">5 × 7 inch</option>
-    <option value="CUSTOM">Custom</option>
-</select>
+<option value="A4">A4</option>
+<option value="4x6">4 × 6 inches</option>
+<option value="70x35">70 × 35 mm</option>
+<option value="CUSTOM">Custom</option></select>
 
 <div class="bwg-size-note">
 Choose Custom for your own page dimensions.
@@ -3789,6 +3807,20 @@ Choose Custom for your own page dimensions.
 
 </div>
 
+</div>
+
+<div class="section">
+<div class="section-head">
+<h3>Coco Blue · PO Barcode</h3>
+<small>Optional barcode above the PO number</small>
+</div>
+<div class="bwg-po-barcode-setting">
+<label class="choice">
+<input type="checkbox" id="cocoPOBarcodeEnabled">
+Show PO Number Barcode
+</label>
+<div class="bwg-size-note">Code 128 barcode · PO number only · appears above PO No.</div>
+</div>
 </div>
 <div class="section">
 
@@ -4368,14 +4400,10 @@ Page Border
 <div class="bwg-page-size-card">
 <label for="otherPageSize">Page Size</label>
 <select id="otherPageSize">
-    <option value="A4">A4</option>
-    <option value="A5">A5</option>
-    <option value="A6">A6</option>
-    <option value="LETTER">Letter</option>
-    <option value="4x6" selected>4 × 6 inch</option>
-    <option value="5x7">5 × 7 inch</option>
-    <option value="CUSTOM">Custom</option>
-</select>
+<option value="A4">A4</option>
+<option value="4x6">4 × 6 inches</option>
+<option value="70x35">70 × 35 mm</option>
+<option value="CUSTOM">Custom</option></select>
 
 <div class="bwg-size-note">
 Choose Custom for your own page dimensions.
@@ -4469,6 +4497,20 @@ Choose Custom for your own page dimensions.
 
 </div>
 
+</div>
+
+<div class="section">
+<div class="section-head">
+<h3>Other PO · PO Barcode</h3>
+<small>Optional barcode above the PO number</small>
+</div>
+<div class="bwg-po-barcode-setting">
+<label class="choice">
+<input type="checkbox" id="otherPOBarcodeEnabled">
+Show PO Number Barcode
+</label>
+<div class="bwg-size-note">Code 128 barcode · PO number only · appears above PO No.</div>
+</div>
 </div>
 <div class="section">
 
@@ -4859,14 +4901,10 @@ Page Border
 <div class="bwg-page-size-card">
 <label for="isbnPageSize">Page Size</label>
 <select id="isbnPageSize">
-    <option value="A4">A4</option>
-    <option value="A5">A5</option>
-    <option value="A6">A6</option>
-    <option value="LETTER">Letter</option>
-    <option value="4x6" selected>4 × 6 inch</option>
-    <option value="5x7">5 × 7 inch</option>
-    <option value="CUSTOM">Custom</option>
-</select>
+<option value="A4">A4</option>
+<option value="4x6">4 × 6 inches</option>
+<option value="70x35">70 × 35 mm</option>
+<option value="CUSTOM">Custom</option></select>
 
 <div class="bwg-size-note">
 Choose Custom for your own page dimensions.
@@ -5396,14 +5434,10 @@ Page Border
 <div class="bwg-page-size-card">
 <label for="addressPageSize">Page Size</label>
 <select id="addressPageSize">
-    <option value="A4">A4</option>
-    <option value="A5">A5</option>
-    <option value="A6">A6</option>
-    <option value="LETTER">Letter</option>
-    <option value="4x6" selected>4 × 6 inch</option>
-    <option value="5x7">5 × 7 inch</option>
-    <option value="CUSTOM">Custom</option>
-</select>
+<option value="A4">A4</option>
+<option value="4x6">4 × 6 inches</option>
+<option value="70x35">70 × 35 mm</option>
+<option value="CUSTOM">Custom</option></select>
 
 <div class="bwg-size-note">
 Choose Custom for your own page dimensions.
@@ -6918,7 +6952,10 @@ function createCocoPage(
         }
 
 
-        label.appendChild(
+        addPOBarcodeToLabel(
+            label,
+            "coco",
+            `${getValue("cocoPoPrefix")}${item.po}`,
             wrapper
         );
 
@@ -7140,7 +7177,10 @@ function renderOther() {
                 arrangePoBox(wrapper, poLabel, boxLabel, "other");
 
 
-                label.appendChild(
+                addPOBarcodeToLabel(
+                    label,
+                    "other",
+                    poLabel.textContent,
                     wrapper
                 );
 
@@ -8584,10 +8624,11 @@ function createPDFClone(
 ========================================================= */
 
 function getCocoPDFPageSize() {
-    const type = document.querySelector('input[name="cocoPage"]:checked')?.value || "4x6";
-    if (type === "a4") return { width: 210, height: 297 };
-    if (type === "70x35") return { width: 70, height: 35 };
-    return { width: 101.6, height: 152.4 };
+    const cfg=getPageSizeConfig("coco");
+    return {
+        width: cfg.widthIn * 25.4,
+        height: cfg.heightIn * 25.4
+    };
 }
 
 function fitPDFText(pdf, text, maxWidth, startSize, minSize = 8) {
@@ -8854,6 +8895,18 @@ async function downloadCocoVectorPDF(filename) {
                     pageIndex * perPage + perPage
                 );
 
+            const barcodeUrls =
+                isPOBarcodeEnabled("coco")
+                    ? await Promise.all(
+                        pageItems.map(
+                            item =>
+                                createPOBarcodeDataURL(
+                                    `${poPrefix}${item.po}`
+                                )
+                        )
+                    )
+                    : [];
+
             const slotWidth =
                 width / (
                     flow === "ttb"
@@ -8939,6 +8992,13 @@ async function downloadCocoVectorPDF(filename) {
                     const boxText =
                         `${boxPrefix}${item.box}`;
 
+                    const barcodeURL =
+                        barcodeUrls[slotIndex] || null;
+
+                    const showPOBarcode =
+                        !!barcodeURL &&
+                        content !== "box";
+
                     const maxTextWidth =
                         availableWidth * 0.86;
 
@@ -9002,6 +9062,33 @@ async function downloadCocoVectorPDF(filename) {
                         );
                     }
 
+                    /* ---------- PO BARCODE ---------- */
+
+                    if (showPOBarcode) {
+
+                        const barcodeW =
+                            Math.min(
+                                actualSlotWidth * 0.72,
+                                52
+                            );
+
+                        const barcodeH = 14;
+
+                        pdf.addImage(
+                            barcodeURL,
+                            "PNG",
+                            centerX - barcodeW / 2,
+                            centerY - actualSlotHeight * 0.30,
+                            barcodeW,
+                            barcodeH
+                        );
+                    }
+
+                    const textCenterY =
+                        showPOBarcode
+                            ? textCenterY + actualSlotHeight * 0.13
+                            : centerY;
+
                     /* ---------- CONTENT ---------- */
 
                     if (
@@ -9015,7 +9102,7 @@ async function downloadCocoVectorPDF(filename) {
                                 ? 13
                                 : poCfg.size,
                             centerX,
-                            centerY
+                            textCenterY
                         );
 
                         return;
@@ -9032,7 +9119,7 @@ async function downloadCocoVectorPDF(filename) {
                                 ? 11
                                 : boxCfg.size,
                             centerX,
-                            centerY
+                            textCenterY
                         );
 
                         return;
@@ -9208,12 +9295,12 @@ async function downloadCocoVectorPDF(filename) {
                         secondH;
 
                     const firstY =
-                        centerY -
+                        textCenterY -
                         totalH / 2 +
                         firstH * 0.68;
 
                     const secondY =
-                        centerY -
+                        textCenterY -
                         totalH / 2 +
                         firstH +
                         gap +
@@ -10681,11 +10768,8 @@ setupLabelCountControls("address");
 
 const BWG_PAGE_SIZES = {
     A4:      { w: 8.27, h: 11.69 },
-    A5:      { w: 5.83, h: 8.27 },
-    A6:      { w: 4.13, h: 5.83 },
-    LETTER:  { w: 8.5,  h: 11.0 },
-    "4x6":   { w: 4.0,  h: 6.0 },
-    "5x7":   { w: 5.0,  h: 7.0 }
+    "4x6":   { w: 4.00, h: 6.00 },
+    "70x35": { w: 70 / 25.4, h: 35 / 25.4 }
 };
 
 function getPageSizeConfig(prefix){
@@ -11053,6 +11137,95 @@ window.addEventListener(
         }
     }
 );
+
+
+/* =========================================================
+   PO NUMBER BARCODE
+========================================================= */
+
+function isPOBarcodeEnabled(prefix){
+    return !!$(`${prefix}POBarcodeEnabled`)?.checked;
+}
+
+function createPOBarcodeSVG(prefix,value){
+    if(!isPOBarcodeEnabled(prefix) || typeof JsBarcode !== "function")
+        return null;
+
+    const svg=document.createElementNS(
+        "http://www.w3.org/2000/svg","svg"
+    );
+
+    svg.className="bwg-po-barcode-preview";
+
+    try{
+        JsBarcode(svg,String(value),{
+            format:"CODE128",
+            displayValue:true,
+            fontSize:10,
+            height:42,
+            width:1.6,
+            margin:2,
+            textMargin:2,
+            lineColor:"#111"
+        });
+    }catch(e){
+        console.error("PO barcode:",e);
+        return null;
+    }
+    return svg;
+}
+
+function addPOBarcodeToLabel(label,prefix,poValue,wrapper){
+    if(!isPOBarcodeEnabled(prefix)){
+        label.appendChild(wrapper);
+        return;
+    }
+
+    const wrap=document.createElement("div");
+    wrap.className="bwg-po-barcode-preview";
+
+    const svg=createPOBarcodeSVG(prefix,poValue);
+    if(svg) wrap.appendChild(svg);
+
+    if(wrap.childNodes.length)
+        label.appendChild(wrap);
+
+    label.appendChild(wrapper);
+}
+
+function setupPOBarcodeControls(prefix){
+    const el=$(`${prefix}POBarcodeEnabled`);
+    if(!el) return;
+    el.addEventListener("change",renderAll);
+}
+
+async function createPOBarcodeDataURL(value){
+    if(typeof JsBarcode !== "function") return null;
+
+    const canvas=document.createElement("canvas");
+
+    try{
+        JsBarcode(canvas,String(value),{
+            format:"CODE128",
+            displayValue:true,
+            fontSize:13,
+            height:42,
+            width:2,
+            margin:5,
+            textMargin:3,
+            lineColor:"#111",
+            background:"#fff"
+        });
+        return canvas.toDataURL("image/png");
+    }catch(e){
+        console.error("PO barcode canvas:",e);
+        return null;
+    }
+}
+
+
+setupPOBarcodeControls("coco");
+setupPOBarcodeControls("other");
 
 /* =========================================================
    INITIAL STATE
