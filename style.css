@@ -1,3 +1,4 @@
+/* ===== CSS BLOCK 1 ===== */
 /* =========================================================
    BWG BOOKSWAGON LABEL STUDIO
    FULL UPDATED CSS
@@ -1468,8 +1469,9 @@ select:focus {
 }
 
 .page-4x6 {
+    /* 4 x 6 inch label page: portrait */
     aspect-ratio:
-        6 / 4;
+        4 / 6;
 }
 
 .page-a4 {
@@ -2383,4 +2385,387 @@ select:focus {
             10px;
     }
 
+}
+
+/* ===== CSS BLOCK 2 ===== */
+.slider-controls{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(240px,1fr));
+    gap:16px;
+    margin-top:12px;
+}
+.slider-control{
+    padding:12px 14px;
+    border:1px solid #d6e0ec;
+    border-radius:12px;
+    background:#f8fbff;
+}
+.slider-control label{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:7px;
+}
+.slider-control input[type="range"]{
+    width:100%;
+    accent-color:#0878d1;
+    cursor:pointer;
+}
+.slider-value{
+    min-width:60px;
+    text-align:right;
+    color:#0878d1;
+    font-weight:900;
+}
+.final-page-border{
+    position:relative;
+    box-sizing:border-box;
+}
+.final-page-border.enabled{
+    outline:var(--final-page-border-width,1px) solid #20242a;
+    outline-offset:-1px;
+}
+.final-scissor{
+    position:absolute;
+    z-index:999;
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#111;
+    background:#fff;
+    border-radius:50%;
+    font-family:Arial,sans-serif;
+    line-height:1;
+    pointer-events:none;
+}
+.final-scissor.tl{left:-12px;top:-12px}
+.final-scissor.tr{right:-12px;top:-12px}
+.final-scissor.bl{left:-12px;bottom:-12px}
+.final-scissor.br{right:-12px;bottom:-12px}
+@media(max-width:850px){
+    .slider-controls{grid-template-columns:1fr}
+}
+
+/* ===== CSS BLOCK 3 ===== */
+#bwgLoginGate{
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#eef6ff,#fff8e7);
+    font-family:Arial,Helvetica,sans-serif;
+}
+#bwgLoginCard{
+    width:min(420px,calc(100vw - 36px));
+    background:#fff;
+    border:1px solid #dbe5f0;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 20px 70px rgba(0,40,90,.18);
+}
+#bwgLoginCard h1{
+    margin:0 0 6px;
+    font-size:26px;
+    color:#0878d1;
+}
+#bwgLoginCard p{
+    margin:0 0 22px;
+    color:#637083;
+}
+#bwgLoginCard label{
+    display:block;
+    margin:14px 0 7px;
+    font-weight:800;
+}
+#bwgLoginCard input{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px 14px;
+    border:1px solid #cbd7e5;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+}
+#bwgLoginCard input:focus{
+    border-color:#0878d1;
+    box-shadow:0 0 0 3px rgba(8,120,209,.12);
+}
+#bwgLoginBtn{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#0878d1;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+}
+#bwgLoginError{
+    min-height:20px;
+    margin-top:12px;
+    color:#d92525;
+    font-weight:800;
+    font-size:13px;
+}
+body.bwg-locked{
+    overflow:hidden;
+}
+
+/* ===== CSS BLOCK 4 ===== */
+.bwg-count-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(220px,1fr));
+    gap:14px;
+}
+.bwg-count-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-count-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-count-card select,
+.bwg-count-card input{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-custom-count{
+    display:none;
+    margin-top:9px;
+}
+.bwg-custom-count.show{
+    display:block;
+}
+.bwg-count-note{
+    margin-top:8px;
+    color:#64748b;
+    font-size:12px;
+}
+@media(max-width:850px){
+    .bwg-count-grid{grid-template-columns:1fr}
+}
+
+/* ===== CSS BLOCK 5 ===== */
+.bwg-page-size-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(180px,1fr));
+    gap:14px;
+}
+.bwg-page-size-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-page-size-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-page-size-card select,
+.bwg-page-size-card input{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-custom-size-fields{
+    display:none;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+.bwg-custom-size-fields.show{
+    display:grid;
+}
+.bwg-size-note{
+    margin-top:7px;
+    color:#64748b;
+    font-size:12px;
+}
+@media(max-width:850px){
+    .bwg-page-size-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ===== CSS BLOCK 6 ===== */
+.bwg-order-gap-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(190px,1fr));
+    gap:14px;
+}
+.bwg-order-gap-card{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-order-gap-card label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+.bwg-order-gap-card select,
+.bwg-order-gap-card input[type="range"]{
+    width:100%;
+    box-sizing:border-box;
+}
+.bwg-order-gap-card select{
+    padding:11px 12px;
+    border:1px solid #cbd7e5;
+    border-radius:9px;
+    background:#fff;
+}
+.bwg-gap-value{
+    display:block;
+    margin-top:7px;
+    color:#0878d1;
+    font-weight:900;
+}
+@media(max-width:850px){
+    .bwg-order-gap-grid{grid-template-columns:1fr}
+}
+
+/* ===== CSS BLOCK 7 ===== */
+#bwgLogoutBtn{
+    position:fixed;
+    right:18px;
+    top:18px;
+    z-index:99998;
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:10px;
+    padding:9px 14px;
+    background:#d92525;
+    color:#fff;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+#bwgLogoutBtn:hover{
+    filter:brightness(.92);
+}
+
+/* ===== CSS BLOCK 8 ===== */
+.bwg-welcome-logo{
+    width:min(960px,calc(100% - 32px));
+    margin:22px auto 20px;
+    padding:30px 24px;
+    box-sizing:border-box;
+    border-radius:32px;
+    background:linear-gradient(135deg,#0878d1 0%,#075b9e 52%,#d5a72b 100%);
+    color:#fff;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.4);
+    box-shadow:0 16px 42px rgba(4,66,118,.22);
+}
+.bwg-welcome-logo-mark{
+    width:92px;
+    height:92px;
+    margin:0 auto 14px;
+    border-radius:26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    font-size:46px;
+    box-shadow:0 9px 24px rgba(0,0,0,.17);
+}
+.bwg-welcome-logo h1{
+    margin:0;
+    font-size:clamp(26px,4.2vw,46px);
+    line-height:1.08;
+    font-weight:950;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+.bwg-welcome-logo-subtitle{
+    margin:11px 0 0;
+    font-size:clamp(13px,2vw,18px);
+    font-weight:750;
+    opacity:.96;
+}
+.bwg-welcome-live{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:16px;
+    padding:8px 15px;
+    border-radius:999px;
+    background:rgba(255,255,255,.17);
+    border:1px solid rgba(255,255,255,.35);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.7px;
+}
+.bwg-welcome-live-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#35ef70;
+    animation:bwgWelcomePulse 1.35s infinite;
+}
+@keyframes bwgWelcomePulse{
+    0%{box-shadow:0 0 0 0 rgba(53,239,112,.7)}
+    70%{box-shadow:0 0 0 10px rgba(53,239,112,0)}
+    100%{box-shadow:0 0 0 0 rgba(53,239,112,0)}
+}
+@media(max-width:600px){
+    .bwg-welcome-logo{
+        width:calc(100% - 20px);
+        padding:23px 15px;
+        border-radius:24px;
+    }
+    .bwg-welcome-logo-mark{
+        width:70px;
+        height:70px;
+        border-radius:20px;
+        font-size:35px;
+    }
+}
+
+/* ===== CSS BLOCK 9 ===== */
+.bwg-po-barcode-setting{
+    border:1px solid #d7e2ef;
+    background:#f8fbff;
+    border-radius:12px;
+    padding:14px;
+}
+.bwg-po-barcode-preview{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:0 auto 7px;
+}
+.bwg-po-barcode-preview svg{
+    display:block;
+    max-width:82%;
+    height:auto;
+}
+
+/* ===== CSS BLOCK 10 ===== */
+.bwg-page-size-card.bwg-custom-only{
+    display:none;
+}
+.bwg-page-size-card.bwg-custom-only.show{
+    display:block;
 }
