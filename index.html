@@ -8999,69 +8999,6 @@ async function downloadCocoVectorPDF(filename) {
                         !!barcodeURL &&
                         content !== "box";
 
-                    const maxTextWidth =
-                        availableWidth * 0.86;
-
-                    function drawOne(
-                        text,
-                        cfg,
-                        preferredSize,
-                        x,
-                        y
-                    ) {
-
-                        let size =
-                            Math.min(
-                                Number(cfg.size) || preferredSize,
-                                preferredSize
-                            );
-
-                        pdf.setFont(
-                            "helvetica",
-                            pdfFontStyle(cfg)
-                        );
-
-                        pdf.setFontSize(
-                            size
-                        );
-
-                        const finalSize =
-                            pdfTextWithStyle(
-                                pdf,
-                                text,
-                                x,
-                                y,
-                                cfg,
-                                size,
-                                maxTextWidth
-                            );
-
-                        const textWidth =
-                            Math.min(
-                                maxTextWidth,
-                                pdf.getTextWidth(
-                                    text
-                                ) + 8
-                            );
-
-                        const textHeight =
-                            Math.max(
-                                8,
-                                finalSize * 0.55
-                            );
-
-                        pdfBorder(
-                            pdf,
-                            x -
-                                textWidth / 2,
-                            y -
-                                textHeight * 0.72,
-                            textWidth,
-                            textHeight,
-                            cfg
-                        );
-                    }
-
                     /* ---------- PO BARCODE ---------- */
 
                     if (showPOBarcode) {
@@ -9078,7 +9015,8 @@ async function downloadCocoVectorPDF(filename) {
                             barcodeURL,
                             "PNG",
                             centerX - barcodeW / 2,
-                            centerY - actualSlotHeight * 0.30,
+                            centerY -
+                                actualSlotHeight * 0.30,
                             barcodeW,
                             barcodeH
                         );
@@ -9086,7 +9024,8 @@ async function downloadCocoVectorPDF(filename) {
 
                     const textCenterY =
                         showPOBarcode
-                            ? textCenterY + actualSlotHeight * 0.13
+                            ? centerY +
+                                actualSlotHeight * 0.13
                             : centerY;
 
                     /* ---------- CONTENT ---------- */
