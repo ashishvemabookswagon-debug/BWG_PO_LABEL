@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BWG bookSWAGon Label Studio</title>
+<title>BWG BooksWagon Label Studio</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -12,7 +12,7 @@
 
 <style>
 /* =========================================================
-   BWG bookSWAGon LABEL STUDIO
+   BWG BOOKSWAGON LABEL STUDIO
    FULL UPDATED CSS
    ========================================================= */
 
@@ -2810,7 +2810,7 @@ body.bwg-locked{
     <div class="bwg-welcome-logo-mark">🚚</div>
     <h1>WELCOME TO BWG LABEL STUDIO</h1>
     <div class="bwg-welcome-logo-subtitle">
-        bookSWAGon Label Studio · Professional Label Generator
+        BooksWagon Label Studio · Professional Label Generator
     </div>
     <div class="bwg-welcome-live">
         <span class="bwg-welcome-live-dot"></span>
@@ -2822,7 +2822,7 @@ body.bwg-locked{
 
 <div id="bwgLoginGate">
     <div id="bwgLoginCard">
-        <h1>🚚 BWG bookSWAGon Label Studio</h1>
+        <h1>🚚 BWG BooksWagon Label Studio</h1>
         <p>Login required to open the Label Studio.</p>
 
         <label for="bwgLoginId">Login ID</label>
@@ -2862,7 +2862,7 @@ body.bwg-locked{
         <div>
 
             <h1>
-                bookSWAGon Label Studio
+                BooksWagon Label Studio
             </h1>
 
             <p>
@@ -5599,7 +5599,7 @@ Copyright © 2026 · All Rights Reserved by Ashish Verma
 
 <script>
 /* =========================================================
-   BWG bookSWAGon LABEL STUDIO
+   BWG BOOKSWAGON LABEL STUDIO
    FULL UPDATED JAVASCRIPT
    Compatible with updated HTML + CSS
    ========================================================= */
@@ -6745,6 +6745,90 @@ function pdfBorder(pdf, x, y, w, h, cfg) {
     }
 
     pdf.setLineDashPattern([], 0);
+}
+
+
+function pdfDrawOne(
+    pdf,
+    text,
+    cfg,
+    preferredSize,
+    x,
+    y,
+    availableWidth
+) {
+    const safeCfg =
+        cfg || {
+            size: preferredSize,
+            opacity: 100,
+            bold: false,
+            italic: false,
+            underline: false,
+            borderStyle: "double",
+            borderWidth: "3px"
+        };
+
+    const maxTextWidth =
+        Math.max(
+            10,
+            Number(availableWidth || 50) * 0.86
+        );
+
+    const requestedSize =
+        Math.max(
+            5,
+            Number(
+                safeCfg.size
+            ) || Number(preferredSize) || 10
+        );
+
+    const finalSize =
+        pdfTextWithStyle(
+            pdf,
+            String(text),
+            x,
+            y,
+            safeCfg,
+            requestedSize,
+            maxTextWidth
+        );
+
+    pdf.setFont(
+        "helvetica",
+        pdfFontStyle(safeCfg)
+    );
+
+    pdf.setFontSize(
+        finalSize
+    );
+
+    const textWidth =
+        Math.min(
+            maxTextWidth,
+            Math.max(
+                12,
+                pdf.getTextWidth(
+                    String(text)
+                ) + 8
+            )
+        );
+
+    const textHeight =
+        Math.max(
+            8,
+            finalSize * 0.55
+        );
+
+    pdfBorder(
+        pdf,
+        x - textWidth / 2,
+        y - textHeight * 0.72,
+        textWidth,
+        textHeight,
+        safeCfg
+    );
+
+    return finalSize;
 }
 
 function pdfTextWithStyle(pdf, text, x, y, cfg, size, maxWidth) {
@@ -9044,7 +9128,8 @@ async function downloadCocoVectorPDF(filename) {
                         content === "po"
                     ) {
 
-                        drawOne(
+                        pdfDrawOne(
+                            pdf,
                             poText,
                             poCfg,
                             availableWidth <= 70
@@ -9061,7 +9146,8 @@ async function downloadCocoVectorPDF(filename) {
                         content === "box"
                     ) {
 
-                        drawOne(
+                        pdfDrawOne(
+                            pdf,
                             boxText,
                             boxCfg,
                             availableWidth <= 70
@@ -9154,7 +9240,8 @@ async function downloadCocoVectorPDF(filename) {
                             gap +
                             secondW;
 
-                        drawOne(
+                        pdfDrawOne(
+                            pdf,
                             firstText,
                             firstCfg,
                             firstCfg.size,
@@ -9164,7 +9251,8 @@ async function downloadCocoVectorPDF(filename) {
                             centerY
                         );
 
-                        drawOne(
+                        pdfDrawOne(
+                            pdf,
                             secondText,
                             secondCfg,
                             secondCfg.size,
@@ -9255,7 +9343,8 @@ async function downloadCocoVectorPDF(filename) {
                         gap +
                         secondH * 0.68;
 
-                    drawOne(
+                    pdfDrawOne(
+                            pdf,
                         firstText,
                         firstCfg,
                         firstSize,
@@ -9263,7 +9352,8 @@ async function downloadCocoVectorPDF(filename) {
                         firstY
                     );
 
-                    drawOne(
+                    pdfDrawOne(
+                            pdf,
                         secondText,
                         secondCfg,
                         secondSize,
@@ -9293,9 +9383,62 @@ async function downloadCocoVectorPDF(filename) {
             );
         }
 
-        pdf.save(
-            filename
+        /*
+         * Do not rely on jsPDF.save() here.
+         * For very large PDFs Chrome can complete the PDF build but
+         * silently fail to trigger the browser download. Generate a Blob
+         * explicitly and trigger a real <a download> click instead.
+         */
+        const pdfBlob =
+            pdf.output("blob");
+
+        if (
+            !pdfBlob ||
+            !pdfBlob.size
+        ) {
+            throw new Error(
+                "PDF blob is empty."
+            );
+        }
+
+        const downloadURL =
+            URL.createObjectURL(
+                pdfBlob
+            );
+
+        const downloadLink =
+            document.createElement("a");
+
+        downloadLink.href =
+            downloadURL;
+
+        downloadLink.download =
+            String(filename || "BWG-Labels.pdf")
+                .replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "_"
+                );
+
+        downloadLink.style.display =
+            "none";
+
+        document.body.appendChild(
+            downloadLink
         );
+
+        downloadLink.click();
+
+        setTimeout(() => {
+            try {
+                downloadLink.remove();
+            } catch (_) {}
+
+            try {
+                URL.revokeObjectURL(
+                    downloadURL
+                );
+            } catch (_) {}
+        }, 30000);
 
         showToast(
             `PDF downloaded successfully. ${totalPages} pages.`,
@@ -11219,7 +11362,7 @@ renderAddress();
 ========================================================= */
 
 console.log(
-    "BWG bookSWAGon Label Studio — Updated JS Loaded Successfully."
+    "BWG BooksWagon Label Studio — Updated JS Loaded Successfully."
 );
 
 </script>
