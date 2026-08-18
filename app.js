@@ -8745,7 +8745,174 @@ function drawCenteredPDFText(pdf, text, x, y, maxWidth, startSize, minSize = 7) 
     return size;
 }
 
+
+/* =========================================================
+   ROBUST PDF FILE SAVE
+   Uses the browser File System Access API when available.
+   The save dialog opens during the original button click,
+   before the large PDF is generated, so Chrome does not
+   block the eventual file write.
+========================================================= */
+
+async function prepareBWGPDFSave(filename){
+
+    if(
+        typeof window.showSaveFilePicker === "function"
+    ){
+        try{
+
+            const safeName =
+                String(
+                    filename ||
+                    "BWG-Labels.pdf"
+                ).replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "_"
+                );
+
+            const handle =
+                await window.showSaveFilePicker({
+                    suggestedName: safeName,
+                    types: [
+                        {
+                            description: "PDF document",
+                            accept: {
+                                "application/pdf": [
+                                    ".pdf"
+                                ]
+                            }
+                        }
+                    ]
+                });
+
+            return {
+                type: "picker",
+                handle
+            };
+
+        }catch(error){
+
+            if(
+                error &&
+                error.name ===
+                    "AbortError"
+            ){
+                return {
+                    type: "cancelled"
+                };
+            }
+
+            console.warn(
+                "Save picker unavailable:",
+                error
+            );
+        }
+    }
+
+    return {
+        type: "download"
+    };
+}
+
+async function finishBWGPDFSave(
+    saveTarget,
+    pdfBlob,
+    filename
+){
+
+    if(
+        !pdfBlob ||
+        !pdfBlob.size
+    ){
+        throw new Error(
+            "PDF file is empty."
+        );
+    }
+
+    if(
+        saveTarget?.type ===
+            "cancelled"
+    ){
+        return false;
+    }
+
+    if(
+        saveTarget?.type ===
+            "picker" &&
+        saveTarget.handle
+    ){
+
+        const writable =
+            await saveTarget.handle.createWritable();
+
+        await writable.write(
+            pdfBlob
+        );
+
+        await writable.close();
+
+        return true;
+    }
+
+    /*
+     * Fallback for browsers without
+     * showSaveFilePicker.
+     */
+    const url =
+        URL.createObjectURL(
+            pdfBlob
+        );
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+    a.download =
+        String(
+            filename ||
+            "BWG-Labels.pdf"
+        ).replace(
+            /[^a-zA-Z0-9._-]/g,
+            "_"
+        );
+
+    a.style.position = "fixed";
+    a.style.left = "-9999px";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    setTimeout(() => {
+        try{
+            a.remove();
+        }catch(_){}
+
+        try{
+            URL.revokeObjectURL(url);
+        }catch(_){}
+    },30000);
+
+    return true;
+}
+
 async function downloadCocoVectorPDF(filename) {
+    const saveTarget =
+        await prepareBWGPDFSave(
+            filename
+        );
+
+    if(
+        saveTarget?.type ===
+            "cancelled"
+    ){
+        showToast(
+            "PDF download cancelled.",
+            "red"
+        );
+        return;
+    }
+
 
     if (
         !window.jspdf ||
@@ -9383,62 +9550,19 @@ async function downloadCocoVectorPDF(filename) {
             );
         }
 
-        /*
-         * Do not rely on jsPDF.save() here.
-         * For very large PDFs Chrome can complete the PDF build but
-         * silently fail to trigger the browser download. Generate a Blob
-         * explicitly and trigger a real <a download> click instead.
-         */
         const pdfBlob =
             pdf.output("blob");
 
-        if (
-            !pdfBlob ||
-            !pdfBlob.size
-        ) {
-            throw new Error(
-                "PDF blob is empty."
+        const saved =
+            await finishBWGPDFSave(
+                saveTarget,
+                pdfBlob,
+                filename
             );
+
+        if(!saved){
+            return;
         }
-
-        const downloadURL =
-            URL.createObjectURL(
-                pdfBlob
-            );
-
-        const downloadLink =
-            document.createElement("a");
-
-        downloadLink.href =
-            downloadURL;
-
-        downloadLink.download =
-            String(filename || "BWG-Labels.pdf")
-                .replace(
-                    /[^a-zA-Z0-9._-]/g,
-                    "_"
-                );
-
-        downloadLink.style.display =
-            "none";
-
-        document.body.appendChild(
-            downloadLink
-        );
-
-        downloadLink.click();
-
-        setTimeout(() => {
-            try {
-                downloadLink.remove();
-            } catch (_) {}
-
-            try {
-                URL.revokeObjectURL(
-                    downloadURL
-                );
-            } catch (_) {}
-        }, 30000);
 
         showToast(
             `PDF downloaded successfully. ${totalPages} pages.`,
@@ -9467,6 +9591,27 @@ async function downloadPDF(
     previewId,
     filename
 ) {
+    let genericSaveTarget = null;
+
+    if(previewId !== "cocoPreview"){
+        genericSaveTarget =
+            await prepareBWGPDFSave(
+                filename
+            );
+
+        if(
+            genericSaveTarget?.type ===
+                "cancelled"
+        ){
+            showToast(
+                "PDF download cancelled.",
+                "red"
+            );
+            return;
+        }
+    }
+
+
 
     if (previewId === "cocoPreview") {
         await downloadCocoVectorPDF(filename);
@@ -9726,15 +9871,24 @@ async function downloadPDF(
         }
 
 
-        pdf.save(
-            filename
-        );
+        const genericBlob =
+             pdf.output("blob");
 
+         const saved =
+             await finishBWGPDFSave(
+                 genericSaveTarget,
+                 genericBlob,
+                 filename
+             );
 
-        showToast(
-            `PDF downloaded successfully. ${pages.length} pages.`,
-            "green"
-        );
+         if(!saved){
+             return;
+         }
+
+         showToast(
+             `PDF downloaded successfully. ${pages.length} pages.`,
+             "green"
+         );
 
     }
     catch (error) {
