@@ -2,743 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BooksWagon Label Creations Studio</title>
-
-<!-- External libraries. Keep internet ON while using PDF functions on GitHub Pages. -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.6/JsBarcode.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
 <style>
-:root{
- --bg:#f3f7fb;--card:#fff;--text:#10233f;--muted:#66778c;--line:#d9e2ec;
- --blue:#1769e0;--blue2:#0f4fae;--green:#16a34a;--red:#dc2626;--orange:#f97316;
- --nav:#0b2038;--shadow:0 12px 35px rgba(15,35,63,.10)
-}
+:root{--bg:#f4f7fb;--card:#fff;--text:#10233f;--muted:#66768b;--line:#d8e1eb;--blue:#1769e0;--nav:#091f38;--green:#16a34a;--red:#dc2626}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
-body.dark{--bg:#07111f;--card:#0f1d2e;--text:#f4f7fb;--muted:#a9b7c8;--line:#293b51;--nav:#040b14}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:active{transform:scale(.98)}
-.app{min-height:100vh}
-.sidebar{position:fixed;inset:0 auto 0 0;width:245px;background:linear-gradient(180deg,#0a213b,#07172a);color:#fff;padding:20px;z-index:10}
-.brand{font-size:24px;font-weight:900}.brand span{color:#ff6b18}
-.brand-sub{font-size:9px;color:#aebfd1;margin-top:2px;letter-spacing:.7px}
-.nav{margin-top:28px}.nav button{width:100%;border:0;background:transparent;color:#dce8f3;text-align:left;padding:12px 13px;border-radius:10px;margin:3px 0;font-weight:800;font-size:11px}.nav button:hover,.nav button.active{background:#18579b}
-.side-foot{position:absolute;bottom:18px;font-size:9px;color:#9fb3c8;line-height:1.6}
-.main{margin-left:245px}.top{height:80px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:15px 25px}.top h1{font-size:21px;margin:0}.top p{font-size:10px;margin:4px 0 0;color:var(--muted)}
-.theme{display:flex;gap:5px;padding:5px;background:var(--bg);border-radius:11px}.theme button{border:0;background:transparent;color:var(--muted);padding:8px 11px;border-radius:8px;font-size:10px;font-weight:900}.theme button.active{background:var(--blue);color:#fff}
-.content{max-width:1500px;margin:auto;padding:18px}
-.hero{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:15px}.hero h2{margin:0;font-size:28px}.hero p{margin:6px 0 0;color:var(--muted);font-size:11px}
-.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px}
-.category{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px;text-align:left;color:var(--text);box-shadow:var(--shadow);transition:.18s}.category:hover{transform:translateY(-3px) scale(1.015)}.category .big{font-size:29px}.category h3{margin:8px 0 4px;font-size:14px}.category p{margin:0;color:var(--muted);font-size:9px}
-.workspace{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
-.head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.head h2{margin:0;font-size:17px}.head p{margin:4px 0 0;font-size:9px;color:var(--muted)}
-.status{padding:6px 10px;border-radius:20px;background:#e8f8ee;color:#15803d;font-size:8px;font-weight:900}
-.tabs{display:flex;gap:7px;padding:10px;background:var(--bg);border-bottom:1px solid var(--line);overflow:auto}.tab{white-space:nowrap;border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 12px;border-radius:8px;font-size:9px;font-weight:900}.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
-.panel{display:none}.panel.active{display:block}.editor{display:grid;grid-template-columns:minmax(360px,1fr) minmax(380px,1fr)}.controls{padding:18px;border-right:1px solid var(--line)}.preview{padding:18px;background:var(--bg)}
-.section{padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid var(--line)}.section:last-child{border-bottom:0}.section h3{font-size:12px;margin:0 0 9px}.section p{font-size:9px;color:var(--muted)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-label{display:block;font-size:9px;font-weight:900;color:var(--muted);margin-bottom:8px}
-input,select,textarea{width:100%;min-height:38px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);padding:9px;font-size:10px}textarea{min-height:90px}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.mode{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:10px;text-align:left}.mode.active{border-color:var(--blue);background:#1769e012;color:var(--blue)}.mode b{font-size:10px}.mode small{display:block;color:var(--muted);font-size:8px;margin-top:3px}
-.po-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.po-row{display:flex;gap:5px;align-items:center}.po-row b{width:20px;color:var(--muted);font-size:8px}
-.choicegrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.choice{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 4px;border-radius:7px;font-size:9px;font-weight:900}.choice.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.toggle-row{display:flex;gap:6px}.toggle{flex:1;border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px;border-radius:8px;font-size:9px;font-weight:900}.toggle.on{background:var(--green);border-color:var(--green);color:#fff}.toggle.off{background:var(--red);border-color:var(--red);color:#fff}
-.warning{margin-top:8px;background:#fff1f2;border:1px solid #fecaca;color:#b91c1c;padding:9px;border-radius:8px;font-size:9px}.hidden{display:none!important}
-.preview-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.preview-head h3{margin:0;font-size:12px}.preview-stage{min-height:600px;border:1px solid var(--line);border-radius:11px;background:#dfe8f2;display:flex;align-items:center;justify-content:center;padding:25px;overflow:auto}
-.label-page{background:#fff;color:#000;position:relative;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,.20);flex:none}
-.page-4x6{width:406px;height:600px}.page-a4{width:420px;height:594px}.page-70x35{width:420px;height:210px}.page-custom{width:420px;height:594px}
-.label-grid{width:100%;height:100%;display:grid}.label-cell{position:relative;background:#fff;color:#000;min-width:0;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;overflow:hidden}
-.cell-content{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}.po-box{max-width:94%;padding:5px 9px;line-height:.98;word-break:break-word}.po-text{font-weight:900}.box-text{font-weight:900}.same-line{display:flex;gap:8px;align-items:baseline;justify-content:center;max-width:95%;word-break:break-word}
-.barcode-wrap{width:86%;display:flex;justify-content:center;align-items:center}.barcode-wrap svg{display:block;max-width:100%;height:auto}.barcode-wrap canvas{display:block;max-width:100%}
-.cutline{display:none;position:absolute;left:2%;right:2%;top:0;border-top:3px dashed #000;z-index:5}.scissor{display:none;position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:27px;background:#fff;padding:0 7px;z-index:6}
-.cut .cutline,.cut .scissor{display:block}
-.note{margin-top:8px;padding:8px;border:1px solid var(--line);background:var(--card);border-radius:8px;color:var(--muted);font-size:9px}
-.actions{display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap;padding:13px 18px;border-top:1px solid var(--line)}.actions button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 14px;border-radius:8px;font-size:9px;font-weight:900}.actions .blue{background:var(--blue);color:#fff;border-color:var(--blue)}.actions .dark{background:#10233f;color:#fff;border-color:#10233f}
-.toast{position:fixed;right:18px;top:92px;z-index:100;background:var(--card);border-left:5px solid var(--green);padding:12px 15px;border-radius:9px;box-shadow:0 18px 40px #0003;font-size:10px;font-weight:900;opacity:0;transform:translateX(30px);transition:.2s}.toast.show{opacity:1;transform:none}.toast.bad{border-left-color:var(--red)}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:9px}
-.address-card{width:100%;border:2px solid #000;padding:12px 14px;text-align:left;line-height:1.35;background:#fff;color:#000}
-.address-block{border:1px solid #000;border-radius:8px;padding:10px;margin:6px 0}
-.address-title{font-size:12px;font-weight:900;margin-bottom:4px}
-.address-meta{font-size:10px;color:#222}
-.address-cut{border-top:3px dashed #000;margin:12px 0 8px;text-align:center;position:relative}
-.address-cut span{position:relative;top:-14px;background:#fff;padding:0 8px;font-size:22px}
-.pdf-page-break{page-break-after:always}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body.dark{--bg:#07111f;--card:#0e1b2b;--text:#f4f7fb;--muted:#aebaca;--line:#293b50;--nav:#040d18}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:linear-gradient(180deg,#0a223d,#061629);color:#fff;padding:20px;z-index:4}
+.logo{font-weight:900;font-size:23px}.logo b{color:#ff6b18}.sub{font-size:9px;color:#a8bbcf;margin-top:3px}
+.nav{margin-top:25px}.nav button{display:block;width:100%;border:0;background:transparent;color:#dfe9f2;text-align:left;padding:11px;border-radius:9px;margin:3px 0;font-size:11px;font-weight:800}.nav button:hover{background:#18579b}
+.sidefoot{position:absolute;bottom:18px;color:#9fb2c6;font-size:9px;line-height:1.6}
+.main{margin-left:235px}.top{height:78px;background:var(--card);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:14px 24px}.top h1{font-size:19px;margin:0}.top p{font-size:10px;color:var(--muted);margin:4px 0}
+.theme{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:9px}.theme button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:7px;font-size:10px;font-weight:800}.theme .active{background:var(--blue);color:#fff}
+.content{padding:18px;max-width:1450px;margin:auto}.hero{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px}.hero h2{margin:0;font-size:26px}.hero p{margin:6px 0 0;color:var(--muted);font-size:10px}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:14px 0}.cat{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left;transition:.18s}.cat:hover{transform:translateY(-3px) scale(1.015)}.cat .ico{font-size:27px}.cat h3{font-size:13px;margin:6px 0 3px}.cat p{font-size:9px;color:var(--muted);margin:0}
+.workspace{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden}.head{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.head h2{font-size:16px;margin:0}.head p{font-size:9px;color:var(--muted);margin:4px 0}.ready{font-size:8px;font-weight:900;color:#15803d;background:#e9f8ef;padding:6px 9px;border-radius:20px;height:max-content}
+.tabs{display:flex;gap:6px;padding:9px;background:var(--bg);border-bottom:1px solid var(--line)}.tab{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:9px 11px;font-size:9px;font-weight:900}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.panel{display:none}.panel.active{display:block}.editor{display:grid;grid-template-columns:1fr 1fr}.controls{padding:17px;border-right:1px solid var(--line)}.preview{padding:17px;background:var(--bg)}
+.sec{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}.sec:last-child{border:0}.sec h3{font-size:11px;margin:0 0 8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+label{display:block;color:var(--muted);font-size:9px;font-weight:900;margin-bottom:7px}input,select,textarea{width:100%;min-height:36px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);padding:8px;font-size:10px}textarea{min-height:80px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mode,.choice,.toggle{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:9px 6px;font-size:9px;font-weight:900}.mode.active,.choice.active{background:#1769e012;border-color:var(--blue);color:var(--blue)}
+.po-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.po-row{display:flex;gap:5px;align-items:center}.po-row b{font-size:8px;color:var(--muted);width:15px}.choicegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.toggle-row{display:flex;gap:6px}.toggle{flex:1}.toggle.on{background:var(--green);color:#fff;border-color:var(--green)}.toggle.off{background:var(--red);color:#fff;border-color:var(--red)}
+.warn{background:#fff1f2;border:1px solid #fecaca;color:#b91c1c;border-radius:8px;padding:8px;font-size:9px}.hidden{display:none!important}
+.stage{min-height:620px;border:1px solid var(--line);border-radius:10px;background:#dfe8f2;display:flex;justify-content:center;align-items:center;padding:22px;overflow:auto}
+.label-page{width:406px;height:600px;background:#fff;color:#000;position:relative;overflow:hidden;flex:none;box-shadow:0 12px 28px #0003}.page-a4{width:420px;height:594px}.page-70{width:420px;height:210px}.page-custom{width:420px;height:594px}
+.label-grid{width:100%;height:100%;display:grid}.cell{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:13px;overflow:hidden;background:#fff;color:#000}
+.inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.po{font-weight:900;line-height:1.05;word-break:break-word;padding:4px 8px;max-width:92%}.box{font-weight:900;line-height:1.05;word-break:break-word;padding:4px 8px;max-width:80%}.same{display:flex;align-items:center;justify-content:center;gap:7px;font-weight:900;max-width:94%;word-break:break-word}
 
-@media(max-width:1050px){.category-grid{grid-template-columns:repeat(2,1fr)}.editor{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line)}}
-@media(max-width:700px){.sidebar{width:64px;padding:10px}.brand,.brand-sub,.nav span,.side-foot{display:none}.main{margin-left:64px}.content{padding:9px}.category-grid{grid-template-columns:1fr}.grid2,.grid3,.po-grid{grid-template-columns:1fr}.choicegrid{grid-template-columns:repeat(2,1fr)}.page-4x6{width:305px;height:457px}}
-@media print{
- @page{margin:0}
- body{background:#fff!important}.sidebar,.top,.hero,.category-grid,.head,.tabs,.controls,.actions,footer,.toast{display:none!important}.main{margin:0}.content{padding:0}.workspace{border:0;box-shadow:none}.panel{display:none!important}.panel.active{display:block!important}.preview{padding:0;background:#fff}.preview-head,.note{display:none!important}.preview-stage{display:block;padding:0;background:#fff;border:0;min-height:0}.label-page{box-shadow:none;margin:0 auto;page-break-after:always}
+/* IMPORTANT BARCODE FIX */
+.barcode-block{
+ width:92%;
+ max-width:92%;
+ min-height:88px;
+ height:88px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:flex-start;
+ overflow:hidden;
+ flex:none;
 }
+.barcode-bars{
+ width:100%;
+ height:56px;
+ flex:none;
+ overflow:hidden;
+ display:flex;
+ justify-content:center;
+ align-items:flex-start;
+}
+.barcode-bars svg{
+ display:block;
+ width:100%;
+ height:56px;
+ overflow:hidden;
+}
+.barcode-human{
+ height:22px;
+ line-height:22px;
+ margin:0;
+ padding:0;
+ font-family:Arial,Helvetica,sans-serif;
+ font-size:10px;
+ font-weight:400;
+ color:#000;
+ text-align:center;
+ white-space:nowrap;
+}
+.cutline{position:absolute;left:2%;right:2%;top:3px;border-top:2px dashed #000}.sc{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#fff;padding:0 5px;font-size:22px}
+.address-card{width:100%;border:2px solid #000;padding:12px;color:#000;background:#fff}.addr-block{border:1px solid #000;border-radius:8px;padding:10px;margin:5px 0;line-height:1.35}.addr-title{font-weight:900;font-size:12px}.addr-meta{font-size:9px}.addr-cut{border-top:2px dashed #000;text-align:center;margin:10px 0}.addr-cut span{position:relative;top:-14px;background:#fff;padding:0 6px;font-size:21px}
+.info{font-size:9px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:8px}
+.actions{display:flex;gap:7px;justify-content:flex-end;padding:12px 17px;border-top:1px solid var(--line);flex-wrap:wrap}.actions button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 13px;border-radius:8px;font-size:9px;font-weight:900}.actions .blue{background:var(--blue);border-color:var(--blue);color:#fff}.actions .dark{background:#10233f;color:#fff;border-color:#10233f}
+.toast{position:fixed;right:17px;top:92px;background:var(--card);border-left:5px solid var(--green);padding:12px 14px;border-radius:9px;box-shadow:0 18px 40px #0003;font-size:10px;font-weight:900;z-index:99;opacity:0;transform:translateX(30px);transition:.2s}.toast.show{opacity:1;transform:none}.toast.bad{border-left-color:var(--red)}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:9px}
+@media(max-width:1050px){.cats{grid-template-columns:repeat(2,1fr)}.editor{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line)}}@media(max-width:700px){.sidebar{width:62px;padding:9px}.logo,.sub,.nav span,.sidefoot{display:none}.main{margin-left:62px}.content{padding:9px}.cats{grid-template-columns:1fr 1fr}.grid2,.grid3,.po-grid{grid-template-columns:1fr}.page-4x6{width:300px;height:450px}}
 </style>
 </head>
-
 <body>
-<aside class="sidebar">
-  <div class="brand">Books<span>Wagon</span></div>
-  <div class="brand-sub">LABEL CREATIONS STUDIO</div>
-  <nav class="nav">
-    <button class="active">🏠 <span>Dashboard</span></button>
-    <button>🏷️ <span>Create Labels</span></button>
-    <button>📦 <span>Bulk Processing</span></button>
-    <button>🖨️ <span>Print Center</span></button>
-  </nav>
-  <div class="side-foot">✍️ Created by Ashish Verma<br>© 2026 All Rights Reserved</div>
-</aside>
-
+<aside class="sidebar"><div class="logo">Books<b>Wagon</b></div><div class="sub">LABEL CREATIONS STUDIO</div><nav class="nav"><button>🏠 <span>Dashboard</span></button><button>🏷️ <span>Create Labels</span></button><button>📦 <span>Bulk Processing</span></button><button>🖨️ <span>Print Center</span></button></nav><div class="sidefoot">✍️ Created by Ashish Verma<br>© 2026 All Rights Reserved</div></aside>
 <main class="main">
-<header class="top">
-  <div><h1>📚 BooksWagon Label Creations Studio</h1><p>Create • Preview • Generate • Download • Print</p></div>
-  <div class="theme"><button id="lightBtn">☀️ Light</button><button id="darkBtn">🌙 Dark</button></div>
-</header>
-
+<header class="top"><div><h1>📚 BooksWagon Label Creations Studio</h1><p>Create • Preview • Generate • Download • Print</p></div><div class="theme"><button id="light" class="active">☀️ Light</button><button id="dark">🌙 Dark</button></div></header>
 <div class="content">
-<section class="hero">
-  <h2>🏷️ Professional Label Printing Studio</h2>
-  <p>📦 CocoBlu PO &nbsp; • &nbsp; 📦 Other PO &nbsp; • &nbsp; 🏷️ ISBN Barcode &nbsp; • &nbsp; 📮 Address Labels</p>
-</section>
-
-<section class="category-grid">
- <button class="category openPanel" data-panel="coco"><div class="big">📦</div><h3>CocoBlu PO</h3><p>PO + Box label printing</p></button>
- <button class="category openPanel" data-panel="other"><div class="big">📋</div><h3>Other PO</h3><p>Other purchase-order labels</p></button>
- <button class="category openPanel" data-panel="isbn"><div class="big">🔢</div><h3>ISBN Barcode</h3><p>Barcode label generator</p></button>
- <button class="category openPanel" data-panel="address"><div class="big">📮</div><h3>Address Label</h3><p>From / To address labels</p></button>
-</section>
-
+<section class="hero"><h2>🏷️ Professional Label Printing Studio</h2><p>📦 CocoBlu PO • 📋 Other PO • 🔢 ISBN Barcode • 📮 Address Label</p></section>
+<section class="cats"><button class="cat" data-open="coco"><div class="ico">📦</div><h3>CocoBlu PO</h3><p>PO + Box labels</p></button><button class="cat" data-open="other"><div class="ico">📋</div><h3>Other PO</h3><p>Other PO labels</p></button><button class="cat" data-open="isbn"><div class="ico">🔢</div><h3>ISBN Barcode</h3><p>Barcode labels</p></button><button class="cat" data-open="address"><div class="ico">📮</div><h3>Address Label</h3><p>From / To labels</p></button></section>
 <section class="workspace">
-<div class="head">
- <div><h2 id="title">📦 CocoBlu PO Label Maker</h2><p>Live preview is the same source used for PDF rendering.</p></div>
- <span class="status" id="pdfStatus">● PDF READY</span>
-</div>
+<div class="head"><div><h2 id="title">📦 CocoBlu PO Label Maker</h2><p>Preview and PDF use the same label data.</p></div><span class="ready">● PDF ENGINE READY</span></div>
+<div class="tabs"><button class="tab active" data-tab="coco">📦 CocoBlu</button><button class="tab" data-tab="other">📋 Other PO</button><button class="tab" data-tab="isbn">🔢 ISBN</button><button class="tab" data-tab="address">📮 Address</button></div>
 
-<div class="tabs">
- <button class="tab active" data-panel="coco">📦 CocoBlu</button>
- <button class="tab" data-panel="other">📋 Other PO</button>
- <button class="tab" data-panel="isbn">🔢 ISBN</button>
- <button class="tab" data-panel="address">📮 Address</button>
-</div>
+<div class="panel active" id="coco"><div class="editor"><div class="controls">
+<div class="sec"><h3>📝 Input Mode</h3><div class="modes"><button class="mode active" data-mode="manual">✍️ Manual<small>10 PO fields</small></button><button class="mode" data-mode="bulk">📚 Bulk<small>Unlimited</small></button><button class="mode" data-mode="excel">📊 Excel / CSV<small>Column A</small></button></div></div>
+<div class="sec" id="manualSec"><h3>🔢 PO Numbers</h3><div id="poInputs" class="po-grid"></div></div>
+<div class="sec hidden" id="bulkSec"><h3>📚 Bulk PO Numbers</h3><textarea id="bulk" placeholder="PO001, PO002, PO003..."></textarea></div>
+<div class="sec hidden" id="excelSec"><h3>📊 Excel / CSV</h3><input id="excel" type="file" accept=".csv"><div class="info">A1 is header. For Excel, save the sheet as CSV first.</div></div>
+<div class="sec"><h3>📦 Box Range</h3><div class="grid2"><label>PO Prefix<input id="poPrefix"></label><label>Box Prefix<input id="boxPrefix" value="BOX"></label></div><div class="grid2"><label>Start Box<input id="start" type="number" value="1"></label><label>End Box<input id="end" type="number" value="2"></label></div><div id="rangeWarn" class="warn hidden">⚠️ Start Box Number must be less than or equal to End Box Number.</div></div>
+<div class="sec"><h3>🏷️ Label Content</h3><select id="content"><option value="both">🔗 Combined PO + Box</option><option value="po">🔢 PO Number Only</option><option value="box">📦 Box Number Only</option></select></div>
+<div class="sec"><h3>↕️ Layout</h3><select id="layout"><option value="separate">↕️ Separate Line</option><option value="same">↔️ Same Line</option></select></div>
+<div class="sec"><h3>🔀 Flow</h3><select id="flow"><option value="top">⬇️ Top → Bottom</option><option value="left">➡️ Left → Right</option></select></div>
+<div class="sec"><h3>📄 Page Size</h3><div class="choicegrid" id="sizes"><button class="choice active" data-size="4x6">📐 4×6</button><button class="choice" data-size="a4">📄 A4</button><button class="choice" data-size="70">📏 70×35</button><button class="choice" data-size="custom">⚙️ Custom</button></div><div id="custom" class="grid2 hidden" style="margin-top:7px"><label>Width mm<input id="cw" type="number" value="101.6"></label><label>Height mm<input id="ch" type="number" value="152.4"></label></div></div>
+<div class="sec"><h3>🔢 Labels Per Page</h3><div class="choicegrid" id="counts"></div></div>
+<div class="sec"><h3>📊 PO Barcode</h3><div class="toggle-row"><button id="barOn" class="toggle on">✅ Barcode ON</button><button id="barOff" class="toggle">🚫 Barcode OFF</button></div></div>
+<div class="sec"><h3>🖼️ Borders</h3><div class="grid3"><label>📄 Page<select id="pageBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label><label>🔢 PO<select id="poBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label><label>📦 Box<select id="boxBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label></div></div>
+<div class="sec"><h3>✂️ Cutting</h3><div class="toggle-row"><button id="cutOn" class="toggle on">✂️ Cutting ON</button><button id="cutOff" class="toggle">🚫 Cutting OFF</button></div></div>
+<div class="sec"><h3>🔤 Font</h3><div class="grid2"><label>Font<select id="font"><option>Arial</option><option>Verdana</option><option>Tahoma</option><option>Georgia</option><option>Times New Roman</option></select></label><label>Size<select id="fontSize"><option>20</option><option>28</option><option selected>36</option><option>44</option><option>52</option><option>60</option></select></label></div></div>
+</div><div class="preview"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0;font-size:11px">👁️ Live Print Preview</h3><span class="ready">● LIVE</span></div><div class="stage"><div id="previewPage" class="label-page page-4x6"></div></div><div id="info" class="info"></div></div></div>
+<div class="actions"><button id="clear">🧹 Clear</button><button id="generate" class="blue">⚙️ Generate PDF</button><button id="download" class="blue">⬇️ Download PDF</button><button id="print" class="dark">🖨️ Print PDF</button></div></div>
 
-<!-- COCOBLU -->
-<div class="panel active" id="coco">
-<div class="editor">
-<div class="controls">
+<div class="panel" id="other"><div class="editor"><div class="controls"><div class="sec"><h3>📋 Other PO</h3><label>PO Number<input id="otherPO"></label><div class="grid2"><label>Start<input id="otherStart" type="number" value="1"></label><label>End<input id="otherEnd" type="number" value="2"></label></div></div></div><div class="preview"><div class="stage"><div id="otherPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="otherGenerate" class="blue">⚙️ Generate PDF</button><button id="otherDownload" class="blue">⬇️ Download PDF</button><button id="otherPrint" class="dark">🖨️ Print PDF</button></div></div>
 
-<div class="section">
-<h3>📝 Input Mode</h3>
-<div class="modes">
-<button class="mode active" data-mode="manual">✍️ <b>Manual</b><small>10 PO fields</small></button>
-<button class="mode" data-mode="bulk">📚 <b>Bulk</b><small>Unlimited</small></button>
-<button class="mode" data-mode="excel">📊 <b>Excel / CSV</b><small>Column A</small></button>
-</div>
-</div>
+<div class="panel" id="isbn"><div class="editor"><div class="controls"><div class="sec"><h3>🔢 ISBN Barcode</h3><label>ISBN<input id="isbn"></label></div><div class="toggle-row"><button id="isbnOn" class="toggle on">✅ Barcode ON</button><button id="isbnOff" class="toggle">🚫 Barcode OFF</button></div></div><div class="preview"><div class="stage"><div id="isbnPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="isbnGenerate" class="blue">⚙️ Generate PDF</button><button id="isbnDownload" class="blue">⬇️ Download PDF</button><button id="isbnPrint" class="dark">🖨️ Print PDF</button></div></div>
 
-<div class="section" id="manualSection">
-<h3>🔢 PO Numbers</h3>
-<div id="poInputs" class="po-grid"></div>
-</div>
-
-<div class="section hidden" id="bulkSection">
-<h3>📚 Bulk PO Numbers</h3>
-<textarea id="bulkInput" placeholder="PO001, PO002, PO003..."></textarea>
-<div id="bulkInfo" class="note">0 PO numbers</div>
-</div>
-
-<div class="section hidden" id="excelSection">
-<h3>📊 Excel / CSV</h3>
-<input type="file" id="excelInput" accept=".xlsx,.xls,.csv">
-<div id="excelInfo" class="note">Column A is used. A1 is treated as the header.</div>
-</div>
-
-<div class="section">
-<h3>📦 Box Range</h3>
-<div class="grid2">
-<label>PO Prefix<input id="poPrefix" placeholder=""></label>
-<label>Box Prefix<input id="boxPrefix" value="BOX"></label>
-</div>
-<div class="grid2">
-<label>Start Box No.<input id="startBox" type="number" value="1"></label>
-<label>End Box No.<input id="endBox" type="number" value="2"></label>
-</div>
-<div id="rangeWarning" class="warning hidden">⚠️ Start Box Number cannot be greater than End Box Number.</div>
-</div>
-
-<div class="section">
-<h3>🏷️ Label Content</h3>
-<select id="contentType">
-<option value="both">🔗 Combined PO + Box</option>
-<option value="po">🔢 PO Number Only</option>
-<option value="box">📦 Box Number Only</option>
-</select>
-</div>
-
-<div class="section">
-<h3>↕️ PO / Box Layout</h3>
-<select id="layoutType"><option value="separate">↕️ Separate Line</option><option value="same">↔️ Same Line</option></select>
-</div>
-
-<div class="section">
-<h3>🔀 Label Flow</h3>
-<select id="flowType"><option value="top-bottom">⬇️ Top → Bottom</option><option value="left-right">➡️ Left → Right</option></select>
-</div>
-
-<div class="section">
-<h3>📄 Page Size</h3>
-<div class="choicegrid" id="pageChoices">
-<button class="choice active" data-size="4x6">📐 4×6</button>
-<button class="choice" data-size="a4">📄 A4</button>
-<button class="choice" data-size="70x35">📏 70×35mm</button>
-<button class="choice" data-size="custom">⚙️ Custom</button>
-</div>
-<div class="grid2 hidden" id="customSize" style="margin-top:8px">
-<label>Width mm<input id="customW" type="number" value="101.6"></label>
-<label>Height mm<input id="customH" type="number" value="152.4"></label>
-</div>
-</div>
-
-<div class="section">
-<h3>🔢 Labels Per Page</h3>
-<div class="choicegrid" id="labelsChoices"></div>
-</div>
-
-<div class="section">
-<h3>📊 PO Barcode</h3>
-<div class="toggle-row">
-<button id="barcodeYes" class="toggle on">✅ Barcode ON</button>
-<button id="barcodeNo" class="toggle">🚫 Barcode OFF</button>
-</div>
-<label style="margin-top:8px">📍 Barcode Position
-<select id="barcodePosition"><option value="bottom">⬇️ Bottom</option><option value="top">⬆️ Top</option><option value="middle">↕️ Middle</option></select></label>
-</div>
-
-<div class="section">
-<h3>🖼️ Border Settings</h3>
-<div class="grid3">
-<label>📄 Page Border<select id="pageBorder"><option value="none">🚫 None</option><option value="solid">━ Solid</option><option value="dashed">╌ Dashed</option><option value="dotted">⋯ Dotted</option><option value="double">Double</option></select></label>
-<label>🔢 PO Border<select id="poBorder"><option value="none">🚫 None</option><option value="solid">━ Solid</option><option value="dashed">╌ Dashed</option><option value="dotted">⋯ Dotted</option><option value="double">Double</option></select></label>
-<label>📦 Box Border<select id="boxBorder"><option value="none">🚫 None</option><option value="solid">━ Solid</option><option value="dashed">╌ Dashed</option><option value="dotted">⋯ Dotted</option><option value="double">Double</option></select></label>
-</div>
-<div class="toggle-row" style="margin-top:8px">
-<button id="allBorder" class="toggle">🖼️ All Borders</button>
-<button id="zeroBorder" class="toggle">🚫 Zero Border</button>
-</div>
-</div>
-
-<div class="section">
-<h3>✂️ Cutting Guide</h3>
-<div class="toggle-row"><button id="cutYes" class="toggle on">✂️ Cutting ON</button><button id="cutNo" class="toggle">🚫 Cutting OFF</button></div>
-</div>
-
-<div class="section">
-<h3>🔤 Font</h3>
-<div class="grid2">
-<label>🔤 Font<select id="fontFamily"><option>Arial</option><option>Verdana</option><option>Tahoma</option><option>Georgia</option><option>Times New Roman</option><option>Trebuchet MS</option><option>Courier New</option><option>Impact</option></select></label>
-<label>🔠 Size<select id="fontSize"><option>18</option><option>24</option><option selected>32</option><option>40</option><option>48</option><option>56</option><option>64</option><option>72</option></select></label>
-</div>
-</div>
-
-</div>
-
-<div class="preview">
-<div class="preview-head"><h3>👁️ Live Print Preview</h3><span class="status">● LIVE</span></div>
-<div class="preview-stage"><div id="previewPage" class="label-page page-4x6"></div></div>
-<div id="previewInfo" class="note">Enter PO number(s) to preview labels.</div>
-</div>
-</div>
-
-<div class="actions">
-<button id="clearBtn">🧹 Clear</button>
-<button id="generateBtn" class="blue">⚙️ Generate PDF</button>
-<button id="downloadBtn" class="blue">⬇️ Download PDF</button>
-<button id="printBtn" class="dark">🖨️ Print PDF</button>
-</div>
-</div>
-
-<!-- OTHER PO -->
-<div class="panel" id="other">
-<div class="editor">
-<div class="controls">
-<div class="section"><h3>📋 Other PO</h3>
-<label>🔢 PO Number<input id="otherPO" placeholder="Enter PO number"></label>
-<div class="grid2"><label>📦 Start Box<input id="otherStart" type="number" value="1"></label><label>📦 End Box<input id="otherEnd" type="number" value="2"></label></div>
-</div>
-<div class="section"><h3>📄 Page Size</h3><select id="otherSize"><option value="4x6">📐 4×6 inch</option><option value="a4">📄 A4</option><option value="70x35">📏 70×35 mm</option></select></div>
-</div>
-<div class="preview"><div class="preview-head"><h3>👁️ Live Preview</h3></div><div class="preview-stage"><div id="otherPreview" class="label-page page-4x6"></div></div></div>
-</div>
-<div class="actions"><button id="otherGenerate" class="blue">⚙️ Generate PDF</button><button id="otherDownload" class="blue">⬇️ Download PDF</button><button id="otherPrint" class="dark">🖨️ Print PDF</button></div>
-</div>
-
-<!-- ISBN -->
-<div class="panel" id="isbn">
-<div class="editor">
-<div class="controls">
-<div class="section"><h3>🔢 ISBN Barcode</h3><label>ISBN<input id="isbnInput" placeholder="978..."></label></div>
-<div class="section"><h3>📊 Barcode</h3><div class="toggle-row"><button id="isbnBarYes" class="toggle on">✅ Barcode ON</button><button id="isbnBarNo" class="toggle">🚫 Barcode OFF</button></div></div>
-</div>
-<div class="preview"><div class="preview-head"><h3>👁️ Live Preview</h3></div><div class="preview-stage"><div id="isbnPreview" class="label-page page-4x6"></div></div></div>
-</div>
-<div class="actions"><button id="isbnGenerate" class="blue">⚙️ Generate PDF</button><button id="isbnDownload" class="blue">⬇️ Download PDF</button><button id="isbnPrint" class="dark">🖨️ Print PDF</button></div>
-</div>
-
-<!-- ADDRESS -->
-<div class="panel" id="address">
-<div class="editor">
-<div class="controls">
-<div class="section"><h3>📮 Address Label</h3>
-<label>🏢 From / Sender<input id="fromAddress" placeholder="Business / House name & address"></label>
-<div class="grid3">
-<label>🌎 Country<input id="fromCountry" placeholder="Country"></label>
-<label>🗺️ State<input id="fromState" placeholder="State"></label>
-<label>📍 PIN Code<input id="fromPin" placeholder="PIN / ZIP"></label>
-</div>
-<label>🏠 To / Receiver<input id="toAddress" placeholder="House / Receiver address"></label>
-<div class="grid3">
-<label>🌎 Country<input id="toCountry" placeholder="Country"></label>
-<label>🗺️ State<input id="toState" placeholder="State"></label>
-<label>📍 PIN Code<input id="toPin" placeholder="PIN / ZIP"></label>
-</div>
-<div class="grid2">
-<label>🖼️ Label Border<select id="addressBorder">
-<option value="solid">━ Solid</option><option value="double">Double</option>
-<option value="dashed">╌ Dashed</option><option value="dotted">⋯ Dotted</option><option value="none">🚫 None</option>
-</select></label>
-<label>✂️ Cutting<select id="addressCut"><option value="on">✂️ ON</option><option value="off">🚫 OFF</option></select></label>
-</div>
-<div id="addressWarning" class="warning hidden">⚠️ From and To are required.</div>
-</div>
-</div>
-<div class="preview"><div class="preview-head"><h3>👁️ Live Preview</h3></div><div class="preview-stage"><div id="addressPreview" class="label-page page-4x6"></div></div></div>
-</div>
-<div class="actions"><button id="addressGenerate" class="blue">⚙️ Generate PDF</button><button id="addressDownload" class="blue">⬇️ Download PDF</button><button id="addressPrint" class="dark">🖨️ Print PDF</button></div>
-</div>
-
-</section>
-<footer>✍️ Created by Ashish Verma • 2026 • All Rights Reserved by Ashish Verma</footer>
-</div>
-</main>
-
-<div id="toast" class="toast"></div>
+<div class="panel" id="address"><div class="editor"><div class="controls"><div class="sec"><h3>📮 Address Label</h3><label>🏢 From / Sender<input id="from"></label><div class="grid3"><label>🌎 Country<input id="fromCountry"></label><label>🗺️ State<input id="fromState"></label><label>📍 PIN<input id="fromPin"></label></div><label>🏠 To / Receiver<input id="to"></label><div class="grid3"><label>🌎 Country<input id="toCountry"></label><label>🗺️ State<input id="toState"></label><label>📍 PIN<input id="toPin"></label></div><div class="grid2"><label>Border<select id="addrBorder"><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="none">None</option></select></label><label>Cutting<select id="addrCut"><option value="on">ON</option><option value="off">OFF</option></select></label></div><div id="addrWarn" class="warn hidden">⚠️ From and To are required.</div></div></div><div class="preview"><div class="stage"><div id="addressPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="addrGenerate" class="blue">⚙️ Generate PDF</button><button id="addrDownload" class="blue">⬇️ Download PDF</button><button id="addrPrint" class="dark">🖨️ Print PDF</button></div></div>
+</section><footer>✍️ Created by Ashish Verma • 2026 • All Rights Reserved by Ashish Verma</footer></div></main><div id="toast" class="toast"></div>
 
 <script>
 "use strict";
+const $=id=>document.getElementById(id), $$=s=>Array.from(document.querySelectorAll(s));
+let mode="manual",size="4x6",perPage=2,barcode=true,cutting=true,excelPO=[];
+function toast(m,b=false){const t=$("toast");t.textContent=m;t.className="toast show"+(b?" bad":"");clearTimeout(window.tt);window.tt=setTimeout(()=>t.className="toast",2600)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function theme(d){document.body.classList.toggle("dark",d==="dark");$("light").classList.toggle("active",d==="light");$("dark").classList.toggle("active",d==="dark")}theme("light");$("light").onclick=()=>theme("light");$("dark").onclick=()=>theme("dark");
 
-const $=id=>document.getElementById(id);
-const $$=s=>Array.from(document.querySelectorAll(s));
+const titles={coco:"📦 CocoBlu PO Label Maker",other:"📋 Other PO Label Maker",isbn:"🔢 ISBN Barcode Maker",address:"📮 Address Label Maker"};
+function openTab(id){$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));$$(".panel").forEach(p=>p.classList.toggle("active",p.id===id));$("title").textContent=titles[id]}
+$$(".tab").forEach(b=>b.onclick=()=>openTab(b.dataset.tab));$$(".cat").forEach(b=>b.onclick=()=>{openTab(b.dataset.open);document.querySelector(".workspace").scrollIntoView({behavior:"smooth"})});
 
-let inputMode="manual";
-let pageSize="4x6";
-let labelsPerPage=2;
-let barcodeEnabled=true;
-let cuttingEnabled=true;
-let excelPO=[];
-
-function toast(msg,bad=false){
- const t=$("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");
- clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.className="toast",2800);
-}
-
-function theme(mode){
- document.body.classList.toggle("dark",mode==="dark");
- $("lightBtn").classList.toggle("active",mode==="light");
- $("darkBtn").classList.toggle("active",mode==="dark");
- localStorage.setItem("bw_theme",mode);
-}
-theme(localStorage.getItem("bw_theme")==="dark"?"dark":"light");
-$("lightBtn").onclick=()=>theme("light");
-$("darkBtn").onclick=()=>theme("dark");
-
-function openPanel(id){
- $$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.panel===id));
- $$(".panel").forEach(x=>x.classList.toggle("active",x.id===id));
- $("title").textContent={
-  coco:"📦 CocoBlu PO Label Maker",
-  other:"📋 Other PO Label Maker",
-  isbn:"🔢 ISBN Barcode Maker",
-  address:"📮 Address Label Maker"
- }[id];
-}
-$$(".tab").forEach(x=>x.onclick=()=>openPanel(x.dataset.panel));
-$$(".openPanel").forEach(x=>x.onclick=()=>{openPanel(x.dataset.panel);document.querySelector(".workspace").scrollIntoView({behavior:"smooth"})});
-
-/* Manual 10 */
 $("poInputs").innerHTML=Array.from({length:10},(_,i)=>`<div class="po-row"><b>${i+1}</b><input class="poInput" placeholder="PO ${i+1}"></div>`).join("");
+[1,2,3,4,6,8,10,12,14,15,16,18,20].forEach(n=>{const b=document.createElement("button");b.className="choice"+(n===2?" active":"");b.dataset.n=n;b.textContent=n;$("counts").appendChild(b)});
+$("counts").onclick=e=>{const b=e.target.closest("[data-n]");if(!b)return;perPage=+b.dataset.n;$$("#counts .choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCoco()};
 
-function getPOs(){
- if(inputMode==="bulk") return $("bulkInput").value.split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
- if(inputMode==="excel") return excelPO.slice();
- return $$(".poInput").map(x=>x.value.trim()).filter(Boolean);
-}
+function pos(){if(mode==="bulk")return $("bulk").value.split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);if(mode==="excel")return excelPO.slice();return $$(".poInput").map(x=>x.value.trim()).filter(Boolean)}
+$$(".mode").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;$$(".mode").forEach(x=>x.classList.toggle("active",x===b));$("manualSec").classList.toggle("hidden",mode!=="manual");$("bulkSec").classList.toggle("hidden",mode!=="bulk");$("excelSec").classList.toggle("hidden",mode!=="excel");toast(b.textContent+" enabled");renderCoco()});
+$("bulk").oninput=renderCoco;
+$("excel").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const txt=await f.text();excelPO=txt.split(/\r?\n/).map(r=>r.split(",")[0].trim()).filter(Boolean).slice(1);toast("📊 CSV loaded: "+excelPO.length+" PO");renderCoco()}catch(err){toast("❌ CSV read failed",true)}};
+$$("input,select,textarea").forEach(el=>{if(el.id==="excel")return;el.addEventListener("input",()=>{renderCoco();renderOther();renderISBN();renderAddress()});el.addEventListener("change",()=>{renderCoco();renderOther();renderISBN();renderAddress()})});
+$("sizes").onclick=e=>{const b=e.target.closest("[data-size]");if(!b)return;size=b.dataset.size;$$("#sizes .choice").forEach(x=>x.classList.toggle("active",x===b));$("custom").classList.toggle("hidden",size!=="custom");renderCoco()};
+$("barOn").onclick=()=>{barcode=true;$("barOn").classList.add("on");$("barOff").classList.remove("off");toast("📊 Barcode enabled");renderCoco()};
+$("barOff").onclick=()=>{barcode=false;$("barOff").classList.add("off");$("barOn").classList.remove("on");toast("🚫 Barcode disabled",true);renderCoco()};
+$("cutOn").onclick=()=>{cutting=true;$("cutOn").classList.add("on");$("cutOff").classList.remove("off");renderCoco()};
+$("cutOff").onclick=()=>{cutting=false;$("cutOff").classList.add("off");$("cutOn").classList.remove("on");renderCoco()};
+function bd(v){return v==="solid"?"solid":v==="double"?"double":v==="dashed"?"dashed":v==="dotted"?"dotted":"none"}
+function dims(){if(size==="a4")return[210,297];if(size==="70")return[70,35];if(size==="custom")return[+$("cw").value||101.6,+$("ch").value||152.4];return[101.6,152.4]}
+function pageClass(){return size==="a4"?"page-a4":size==="70"?"page-70":size==="custom"?"page-custom":"page-4x6"}
+function gridSpec(){if(size==="4x6")return[1,perPage];const c=perPage<=1?1:perPage<=4?2:3;return[c,Math.ceil(perPage/c)]}
 
-$$(".mode").forEach(btn=>btn.onclick=()=>{
- $$(".mode").forEach(x=>x.classList.remove("active"));btn.classList.add("active");
- inputMode=btn.dataset.mode;
- $("manualSection").classList.toggle("hidden",inputMode!=="manual");
- $("bulkSection").classList.toggle("hidden",inputMode!=="bulk");
- $("excelSection").classList.toggle("hidden",inputMode!=="excel");
- toast(btn.textContent.trim()+" enabled");
- renderCoco();
-});
-$("bulkInput").oninput=()=>{ $("bulkInfo").textContent=getPOs().length+" PO numbers detected.";renderCoco(); };
+function code128(s){const p=["212222","222122","222221","121223","121322","131222","122213","122312","132212","221213","221312","231212","112232","122132","122231","113222","123122","123221","223211","221132","221231","213212","223112","312131","311222","321122","321221","312212","322112","322211","212123","212321","232121","111323","131123","131321","112313","132113","132311","211313","231113","231311","112133","112331","132131","113123","113321","133121","313121","211331","231131","213113","213311","213131","311123","311321","331121","312113","312311","332111","314111","221411","431111","111224","111422","121124","121421","141122","141221","112214","112412","122114","122411","142112","142211","241211","221114","413111","241112","134111","111242","121142","121241","114212","124112","124211","411212","421112","421211","212141","214121","412121","111143","111341","131141","114113","114311","411113","411311","113141","114131","311141","411131","211412","211214","211232","2331112"];let a=[104],sum=104;for(let i=0;i<s.length;i++){let c=s.charCodeAt(i);let v=c>=32&&c<=127?c-32:0;a.push(v);sum+=v*(i+1)}a.push(sum%103,106);return a.map(v=>p[v])}
+function barcodeSVG(s){const pats=code128(String(s));let total=0;pats.forEach(p=>{for(const n of p)total+=+n});let x=0,on=true,rect="";for(const p of pats){for(const q of p){const n=+q; if(on)rect+=`<rect x="${x}" y="0" width="${n}" height="56" fill="#000"/>`;x+=n;on=!on}on=!on}return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} 56" preserveAspectRatio="none">${rect}</svg>`}
 
-$("excelInput").onchange=async e=>{
- const f=e.target.files[0];if(!f)return;
- try{
-  if(f.name.toLowerCase().endsWith(".csv")){
-   const txt=await f.text();
-   excelPO=txt.split(/\r?\n/).map(r=>r.split(",")[0].trim()).filter(Boolean).slice(1);
-  }else{
-   if(!window.XLSX)throw new Error("Excel library not loaded");
-   const wb=XLSX.read(await f.arrayBuffer(),{type:"array"});
-   const ws=wb.Sheets[wb.SheetNames[0]];
-   excelPO=XLSX.utils.sheet_to_json(ws,{header:1,defval:""}).slice(1).map(r=>String(r[0]??"").trim()).filter(Boolean);
-  }
-  $("excelInfo").textContent="✅ "+excelPO.length+" PO numbers loaded from Column A.";
-  toast("📊 Excel / CSV loaded");renderCoco();
- }catch(err){console.error(err);toast("Excel / CSV could not be read.",true);}
-};
+function makeItems(){const a=pos(),s=+$("start").value,e=+$("end").value,r=[];a.forEach(po=>{for(let n=s;n<=e;n++)r.push({po:($("poPrefix").value||"")+po,box:n})});return r}
+function renderCoco(){const old=$("previewPage"),items=makeItems(),p=document.createElement("div");p.id="previewPage";p.className="label-page "+pageClass();p.style.border=bd($("pageBorder").value)==="none"?"none":`2px ${bd($("pageBorder").value)} #000`;const g=document.createElement("div");g.className="label-grid";const [cols,rows]=gridSpec();g.style.gridTemplateColumns=`repeat(${cols},1fr)`;g.style.gridTemplateRows=`repeat(${rows},1fr)`;items.slice(0,perPage).forEach((it,i)=>{let c=document.createElement("div");c.className="cell";if(cutting&&i>0)c.innerHTML='<div class="cutline"></div><div class="sc">✂️</div>';let inn=document.createElement("div");inn.className="inner";let po=document.createElement("div");po.className="po";po.textContent=it.po;po.style.fontFamily=$("font").value;po.style.fontSize=$("fontSize").value+"px";po.style.border=bd($("poBorder").value)==="none"?"none":`2px ${bd($("poBorder").value)} #000`;let bx=document.createElement("div");bx.className="box";bx.textContent=($("boxPrefix").value||"BOX")+" NO. "+it.box;bx.style.fontFamily=$("font").value;bx.style.fontSize=Math.max(18,+$("fontSize").value*.58)+"px";bx.style.border=bd($("boxBorder").value)==="none"?"none":`2px ${bd($("boxBorder").value)} #000`;if($("content").value==="po")inn.append(po);else if($("content").value==="box")inn.append(bx);else if($("layout").value==="same"){let row=document.createElement("div");row.className="same";row.append(po,bx);inn.append(row)}else inn.append(po,bx);
+if(barcode){let bb=document.createElement("div");bb.className="barcode-block";let bars=document.createElement("div");bars.className="barcode-bars";bars.innerHTML=barcodeSVG(it.po);let human=document.createElement("div");human.className="barcode-human";human.textContent=it.po;bb.append(bars,human);inn.append(bb)}c.append(inn);g.append(c)});p.append(g);old.replaceWith(p);$("rangeWarn").classList.toggle("hidden",+$("start").value>+$("end").value);$("info").textContent=`👁️ ${Math.min(items.length,perPage)} of ${items.length} labels • 📊 Barcode ${barcode?"ON":"OFF"}`}
 
-/* Page and label counts */
-[1,2,3,4,6,8,10,12,14,15,16,18,20].forEach(n=>{
- const b=document.createElement("button");b.className="choice"+(n===2?" active":"");b.dataset.n=n;b.textContent=n;
- $("labelsChoices").appendChild(b);
-});
-$("labelsChoices").onclick=e=>{
- const b=e.target.closest("[data-n]");if(!b)return;
- labelsPerPage=+b.dataset.n;
- $$("#labelsChoices .choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCoco();
-};
-$("pageChoices").onclick=e=>{
- const b=e.target.closest("[data-size]");if(!b)return;
- pageSize=b.dataset.size;
- $$("#pageChoices .choice").forEach(x=>x.classList.toggle("active",x===b));
- $("customSize").classList.toggle("hidden",pageSize!=="custom");
- renderCoco();
-};
+function renderOther(){const p=$("otherPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="repeat(2,1fr)";for(let n=+$("otherStart").value;n<=+$("otherEnd").value&&g.children.length<2;n++){let c=document.createElement("div");c.className="cell";c.innerHTML=`<div class="inner"><div class="po" style="font-size:32px;border:2px solid #000">${esc($("otherPO").value)}</div><div class="box" style="font-size:21px;border:2px solid #000">BOX NO. ${n}</div></div>`;g.append(c)}p.append(g)}
+function renderISBN(){const p=$("isbnPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";const c=document.createElement("div");c.className="cell";const inn=document.createElement("div");inn.className="inner";let v=$("isbn").value.trim();if(v){let t=document.createElement("div");t.style.cssText="font-size:25px;font-weight:900";t.textContent=v;inn.append(t);if($("isbnOn").classList.contains("on")){let bb=document.createElement("div");bb.className="barcode-block";bb.innerHTML=`<div class="barcode-bars">${barcodeSVG(v)}</div><div class="barcode-human">${esc(v)}</div>`;inn.append(bb)}}else inn.textContent="🔢 Enter ISBN";c.append(inn);g.append(c);p.append(g)}
+function renderAddress(){const p=$("addressPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";const c=document.createElement("div");c.className="cell";const card=document.createElement("div");card.className="address-card";card.style.border=bd($("addrBorder").value)==="none"?"none":`2px ${bd($("addrBorder").value)} #000`;card.innerHTML=`<div class="addr-block"><div class="addr-title">🏢 📤 FROM / SENDER</div>${esc($("from").value)}<div class="addr-meta">🌎 ${esc($("fromCountry").value)} • 🗺️ ${esc($("fromState").value)} • 📍 ${esc($("fromPin").value)}</div></div>${$("addrCut").value==="on"?'<div class="addr-cut"><span>✂️</span></div>':''}<div class="addr-block"><div class="addr-title">🏠 📥 TO / RECEIVER</div>${esc($("to").value)}<div class="addr-meta">🌎 ${esc($("toCountry").value)} • 🗺️ ${esc($("toState").value)} • 📍 ${esc($("toPin").value)}</div></div>`;c.append(card);g.append(c);p.append(g)}
 
-$("barcodeYes").onclick=()=>{barcodeEnabled=true;$("barcodeYes").classList.add("on");$("barcodeNo").classList.remove("off");toast("📊 PO Barcode enabled");renderCoco();};
-$("barcodeNo").onclick=()=>{barcodeEnabled=false;$("barcodeNo").classList.add("off");$("barcodeYes").classList.remove("on");toast("🚫 PO Barcode disabled",true);renderCoco();};
-$("cutYes").onclick=()=>{cuttingEnabled=true;$("cutYes").classList.add("on");$("cutNo").classList.remove("off");toast("✂️ Cutting enabled");renderCoco();};
-$("cutNo").onclick=()=>{cuttingEnabled=false;$("cutNo").classList.add("off");$("cutYes").classList.remove("on");toast("🚫 Cutting disabled",true);renderCoco();};
-
-$("allBorder").onclick=()=>{["pageBorder","poBorder","boxBorder"].forEach(id=>$(id).value="solid");toast("🖼️ All borders enabled");renderCoco();};
-$("zeroBorder").onclick=()=>{["pageBorder","poBorder","boxBorder"].forEach(id=>$(id).value="none");toast("🚫 All borders disabled",true);renderCoco();};
-
-function borderStyle(v){
- if(v==="solid")return"2px solid #000";
- if(v==="dashed")return"2px dashed #000";
- if(v==="dotted")return"2px dotted #000";
- if(v==="double")return"4px double #000";
- return"none";
-}
-function pageDimensions(){
- if(pageSize==="a4")return[210,297];
- if(pageSize==="70x35")return[70,35];
- if(pageSize==="custom")return[+($("customW").value||101.6),+($("customH").value||152.4)];
- return[101.6,152.4];
-}
-function pageClass(){
- return pageSize==="a4"?"page-a4":pageSize==="70x35"?"page-70x35":pageSize==="custom"?"page-custom":"page-4x6";
-}
-function gridSpec(){
- if(pageSize==="4x6")return[1,labelsPerPage];
- const cols=labelsPerPage<=1?1:labelsPerPage<=4?2:3;
- return[cols,Math.ceil(labelsPerPage/cols)];
-}
-function safeText(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-
-function makeBarcodeSVG(value){
- if(!window.JsBarcode)return null;
- const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
- try{
-  JsBarcode(svg,String(value),{
-   format:"CODE128",width:1.6,height:38,displayValue:true,fontSize:9,
-   textMargin:5,margin:1,background:"#fff",lineColor:"#000"
-  });
-  return svg;
- }catch(e){console.warn("Barcode:",e);return null}
-}
-
-/* Build ONE source DOM. Preview and PDF both use this exact DOM. */
-function buildCocoPage(){
- const page=document.createElement("div");
- page.className="label-page "+pageClass();
-
- const grid=document.createElement("div");
- grid.className="label-grid";
- const [cols,rows]=gridSpec();
- grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;
- grid.style.gridTemplateRows=`repeat(${rows},1fr)`;
-
- const pb=$("pageBorder").value;
- page.style.border=borderStyle(pb);
-
- const pos=getPOs();
- const s=+($("startBox").value),e=+($("endBox").value);
- const content=$("contentType").value;
- const layout=$("layoutType").value;
- const flow=$("flowType").value;
- const poPrefix=$("poPrefix").value||"";
- const boxPrefix=$("boxPrefix").value||"BOX";
- const fs=+($("fontSize").value)||32;
- const family=$("fontFamily").value;
-
- if(!pos.length){
-  const empty=document.createElement("div");
-  empty.style.cssText="height:100%;display:grid;place-items:center;text-align:center;color:#64748b;font-size:13px;padding:25px";
-  empty.innerHTML="🔢 Enter PO number(s)<br>📦 Enter Box range<br><br>👁️ Your exact print layout will appear here.";
-  grid.appendChild(empty);page.appendChild(grid);return page;
- }
- if(!Number.isFinite(s)||!Number.isFinite(e)||s>e){
-  const empty=document.createElement("div");
-  empty.style.cssText="height:100%;display:grid;place-items:center;text-align:center;color:#b91c1c;font-size:13px;padding:25px";
-  empty.textContent="⚠️ Invalid Box Range";
-  grid.appendChild(empty);page.appendChild(grid);return page;
- }
-
- const items=[];
- pos.forEach(po=>{for(let n=s;n<=e;n++)items.push({po:poPrefix+po,box:n});});
- const visible=items.slice(0,labelsPerPage);
-
- for(let i=0;i<visible.length;i++){
-  const item=visible[i];
-  const cell=document.createElement("div");
-  cell.className="label-cell";
-
-  if(cuttingEnabled&&i>0){
-   cell.classList.add("cut");
-   const line=document.createElement("div");line.className="cutline";
-   const sc=document.createElement("div");sc.className="scissor";sc.textContent="✂️";
-   cell.append(line,sc);
-  }
-
-  const contentWrap=document.createElement("div");contentWrap.className="cell-content";
-
-  const po=document.createElement("div");
-  po.className="po-box";
-  po.style.fontFamily=family;po.style.fontSize=fs+"px";po.style.fontWeight="900";po.textContent=item.po;
-  po.style.border=borderStyle($("poBorder").value);
-
-  const box=document.createElement("div");
-  box.className="po-box box-text";
-  box.style.fontFamily=family;box.style.fontSize=Math.max(20,Math.round(fs*.58))+"px";box.style.border=borderStyle($("boxBorder").value);
-  box.textContent=boxPrefix+" NO. "+item.box;
-
-  /* CRITICAL: no barcode element and no reserved barcode space when OFF */
-  const barcode=barcodeEnabled?makeBarcodeSVG(item.po):null;
-  if(content==="po"){
-   contentWrap.appendChild(po);
-  }else if(content==="box"){
-   contentWrap.appendChild(box);
-  }else if(layout==="same"){
-   const row=document.createElement("div");row.className="same-line";row.append(po,box);contentWrap.appendChild(row);
-  }else{
-   contentWrap.append(po,box);
-  }
-
-  if(barcode){
-   const bw=document.createElement("div");bw.className="barcode-wrap";bw.appendChild(barcode);
-   const bp=$("barcodePosition").value;
-   if(bp==="top")contentWrap.insertBefore(bw,contentWrap.firstChild);
-   else contentWrap.appendChild(bw);
-  }
-
-  cell.appendChild(contentWrap);
-  grid.appendChild(cell);
- }
- page.appendChild(grid);
- return page;
-}
-
-function renderCoco(){
- const holder=$("previewPage");
- const fresh=buildCocoPage();
- holder.replaceWith(fresh);
- fresh.id="previewPage";
- const s=+($("startBox").value),e=+($("endBox").value);
- $("rangeWarning").classList.toggle("hidden",!(Number.isFinite(s)&&Number.isFinite(e)&&s>e));
- const total=getPOs().length*Math.max(0,e-s+1);
- $("previewInfo").textContent=`👁️ ${Math.min(labelsPerPage,total||0)} label(s) previewed • ${flowLabel()} • 📊 Barcode ${barcodeEnabled?"ON":"OFF"}`;
-}
-function flowLabel(){return $("flowType").value==="top-bottom"?"⬇️ Top → Bottom":"➡️ Left → Right";}
-
-$$(".controls input,.controls select,.controls textarea").forEach(el=>{
- el.addEventListener("input",()=>{if(el.id!=="bulkInput")renderCoco()});
- el.addEventListener("change",renderCoco);
-});
-
-/* ---------- ZERO-DEPENDENCY PDF ENGINE ----------
-   PDF is written directly as valid PDF bytes. No html2canvas and no jsPDF
-   are required for Generate / Download / Print.
-*/
-const CODE128_PATTERNS=["212222","222122","222221","121223","121322","131222","122213","122312","132212","221213","221312","231212","112232","122132","122231","113222","123122","123221","223211","221132","221231","213212","223112","312131","311222","321122","321221","312212","322112","322211","212123","212321","232121","111323","131123","131321","112313","132113","132311","211313","231113","231311","112133","112331","132131","113123","113321","133121","313121","211331","231131","213113","213311","213131","311123","311321","331121","312113","312311","332111","314111","221411","431111","111224","111422","121124","121421","141122","141221","112214","112412","122114","122411","142112","142211","241211","221114","413111","241112","134111","111242","121142","121241","114212","124112","124211","411212","421112","421211","212141","214121","412121","111143","111341","131141","114113","114311","411113","411311","113141","114131","311141","411131","211412","211214","211232","2331112"];
-function code128BValues(v){const s=String(v??"");let a=[104];for(const ch of s){const n=ch.charCodeAt(0)-32;if(n<0||n>95)return null;a.push(n)}let sum=104;for(let i=1;i<a.length;i++)sum+=a[i]*i;a.push(sum%103,106);return a}
-function cleanPdfText(v){return String(v??"").replace(/[^\x20-\x7E]/g,"").replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")}
-function mmToPt(v){return v*72/25.4}
-function pdfNum(v){return String(Math.round(v*1000)/1000)}
-function pdfText(s,t,x,y,size,align="center"){t=cleanPdfText(t);if(!t)return;const width=size*.52*t.length;let tx=x;if(align==="center")tx=x-width/2;if(align==="right")tx=x-width;s.push(`BT /F1 ${pdfNum(size)} Tf 0 g 1 0 0 1 ${pdfNum(tx)} ${pdfNum(y)} Tm (${t}) Tj ET`)}
-function pdfRect(s,x,y,w,h,style="solid"){if(style==="none")return;let dash="";if(style==="dashed")dash="3 2";if(style==="dotted")dash="1 2";s.push(dash?`[${dash}] 0 d`:`[] 0 d`);s.push(`0 0 0 RG .7 w ${pdfNum(x)} ${pdfNum(y)} ${pdfNum(w)} ${pdfNum(h)} re S`);if(style==="double")s.push(`.35 w ${pdfNum(x+1.5)} ${pdfNum(y+1.5)} ${pdfNum(w-3)} ${pdfNum(h-3)} re S`)}
-function pdfLine(s,x1,y1,x2,y2,dash=""){s.push(dash?`[${dash}] 0 d`:`[] 0 d`);s.push(`0 0 0 RG .8 w ${pdfNum(x1)} ${pdfNum(y1)} m ${pdfNum(x2)} ${pdfNum(y2)} l S`)}
-function pdfBorderStream(s,x,y,w,h,style="solid"){
-  if(style==="none")return;
-  pdfRect(s,x,y,w,h,style);
-}
-function drawCode128PDF(s,v,x,y,w,h,size=7){
-  drawBarcodePDF(s,v,x,y,w,h);
-}
-function drawBarcodePDF(s,v,x,y,w,h){
- const a=code128BValues(v);if(!a)return;
- const p=a.map(i=>CODE128_PATTERNS[i]).join("");
- const total=[...p].reduce((n,d)=>n+Number(d),0);
- const mw=w/total;
- let cur=x,black=true;
- for(const d of p){
-  const bw=Number(d)*mw;
-  if(black)s.push(`0 0 0 rg ${pdfNum(cur)} ${pdfNum(y)} ${pdfNum(bw)} ${pdfNum(h)} re f`);
-  cur+=bw;black=!black;
- }
- /* IMPORTANT: human-readable text is INSIDE the reserved barcode block,
-    below the bars with a fixed safe gap, so it can never fall outside the label. */
- pdfText(s,v,x+w/2,y-12,8);
-}
-function pdfPageStream(items,wmm,hmm){const W=mmToPt(wmm),H=mmToPt(hmm),s=[];s.push(`1 1 1 rg 0 0 ${pdfNum(W)} ${pdfNum(H)} re f`);pdfRect(s,0,0,W,H,$("pageBorder").value);const [cols,rows]=gridSpec(),cw=W/cols,ch=H/rows;let order=items.map((_,i)=>i);if($("flowType").value==="top-bottom"&&cols>1){order=[];for(let c=0;c<cols;c++)for(let r=0;r<rows;r++){const i=r*cols+c;if(i<items.length)order.push(i)}}order.forEach((idx,slot)=>{const item=items[idx];let r=Math.floor(slot/cols),c=slot%cols;if($("flowType").value==="top-bottom"&&cols>1){c=Math.floor(slot/rows);r=slot%rows}const x=c*cw,y=H-(r+1)*ch;drawLabelPDFRaw(s,item,x,y,cw,ch);if(cuttingEnabled&&slot>0){if($("flowType").value==="top-bottom")pdfLine(s,3,y+ch,W-3,y+ch,"3 2");else pdfLine(s,x,3,x,H-3,"3 2")}});return s.join("\n")}
-function drawLabelPDFRaw(s,item,x,y,w,h){const content=$("contentType").value,layout=$("layoutType").value,fs=+$("fontSize").value||32,pad=Math.max(10,Math.min(24,w*.05)),po=item.po,box=($("boxPrefix").value||"BOX")+" NO. "+item.box,poSize=Math.max(12,Math.min(fs*.62,w*.11)),boxSize=Math.max(10,Math.min(fs*.40,w*.075)),gap=mmToPt(3),poH=mmToPt(14),boxH=mmToPt(11),barcodeH=barcodeEnabled?Math.min(mmToPt(24),h*.18):0;let total;if(content==="po")total=poH;else if(content==="box")total=boxH;else total=layout==="same"?Math.max(poH,boxH):poH+gap+boxH;if(barcodeEnabled)total+=gap+barcodeH+mmToPt(5);let top=y+(h+total)/2;const poW=Math.min(w-pad*2,w*.9),boxW=Math.min(w-pad*2,w*.68);if(content==="po"){top-=poH;pdfRect(s,x+(w-poW)/2,top,poW,poH,$("poBorder").value);pdfText(s,po,x+w/2,top+poH*.38,poSize)}else if(content==="box"){top-=boxH;pdfRect(s,x+(w-boxW)/2,top,boxW,boxH,$("boxBorder").value);pdfText(s,box,x+w/2,top+boxH*.38,boxSize)}else if(layout==="same"){const rw=Math.min(w-pad*2,w*.94),pw=rw*.58,bw=rw-pw-gap,rx=x+(w-rw)/2,yy=top-Math.max(poH,boxH);pdfRect(s,rx,yy,pw,poH,$("poBorder").value);pdfText(s,po,rx+pw/2,yy+poH*.38,poSize);pdfRect(s,rx+pw+gap,yy,bw,boxH,$("boxBorder").value);pdfText(s,box,rx+pw+gap+bw/2,yy+boxH*.38,boxSize);top=yy}else{top-=poH;pdfRect(s,x+(w-poW)/2,top,poW,poH,$("poBorder").value);pdfText(s,po,x+w/2,top+poH*.38,poSize);top-=gap+boxH;pdfRect(s,x+(w-boxW)/2,top,boxW,boxH,$("boxBorder").value);pdfText(s,box,x+w/2,top+boxH*.38,boxSize)}if(barcodeEnabled){
-  let bw=Math.min(w-pad*2,w*.84),bh=barcodeH,bx=x+(w-bw)/2;
-  /* Keep the complete barcode block (bars + readable number) inside the cell. */
-  const textGap=mmToPt(12),blockH=bh+textGap;
-  let by=y+mmToPt(18);
-  if($("barcodePosition").value==="top") by=y+h-blockH-mmToPt(10);
-  if($("barcodePosition").value==="middle") by=y+(h-blockH)/2+mmToPt(4);
-  by=Math.max(y+mmToPt(16),Math.min(by,y+h-blockH-mmToPt(6)));
-  drawBarcodePDF(s,po,bx,by+textGap,bw,bh);
-}}
-function buildRawPDF(streams,wmm,hmm){const W=mmToPt(wmm),H=mmToPt(hmm),objects=[];objects[1]='<< /Type /Catalog /Pages 2 0 R >>';objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';const kids=[];let n=4;for(const st of streams){const co=n++,po=n++,len=new TextEncoder().encode(st).length;objects[co]=`<< /Length ${len} >>\nstream\n${st}\nendstream`;objects[po]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfNum(W)} ${pdfNum(H)}] /Resources << /Font << /F1 3 0 R >> >> /Contents ${co} 0 R >>`;kids.push(`${po} 0 R`)}objects[2]=`<< /Type /Pages /Count ${kids.length} /Kids [${kids.join(" ")}] >>`;let pdf="%PDF-1.4\n",offs=[0];for(let i=1;i<objects.length;i++){offs[i]=new TextEncoder().encode(pdf).length;pdf+=`${i} 0 obj\n${objects[i]}\nendobj\n`}const xref=new TextEncoder().encode(pdf).length;pdf+=`xref\n0 ${objects.length}\n0000000000 65535 f \n`;for(let i=1;i<objects.length;i++)pdf+=String(offs[i]).padStart(10,"0")+" 00000 n \n";pdf+=`trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;return new Blob([pdf],{type:"application/pdf"})}
-function triggerBlobDownload(blob,name){const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),15000)}
-function openPdfBlob(blob,printMode){const u=URL.createObjectURL(blob),w=window.open(u,"_blank");if(!w){triggerBlobDownload(blob,"BooksWagon_Labels.pdf");toast("📄 Popup blocked — PDF downloaded instead",true);return}toast(printMode?"🖨️ PDF opened — use Chrome PDF viewer Print":"📄 PDF generated successfully");setTimeout(()=>URL.revokeObjectURL(u),60000)}
-function buildCocoRawPDF(){const pos=getPOs(),s=+$("startBox").value,e=+$("endBox").value;if(!pos.length)throw new Error("Enter at least one PO number");if(!Number.isFinite(s)||!Number.isFinite(e)||s>e)throw new Error("Invalid Box Range");const items=[];pos.forEach(po=>{for(let n=s;n<=e;n++)items.push({po:($("poPrefix").value||"")+po,box:n})});const [w,h]=pageDimensions(),per=Math.max(1,labelsPerPage),streams=[];for(let i=0;i<items.length;i+=per)streams.push(pdfPageStream(items.slice(i,i+per),w,h));return{blob:buildRawPDF(streams,w,h),count:streams.length,labels:items.length}}
-async function generateCoco(mode){try{const out=buildCocoRawPDF();if(mode==="download")triggerBlobDownload(out.blob,"BooksWagon_CocoBlu_ALL_Labels.pdf");else openPdfBlob(out.blob,mode==="print");toast(`✅ ${out.labels} label(s) • ${out.count} PDF page(s) ready`)}catch(e){console.error(e);toast("❌ PDF failed: "+e.message,true)}}
-$("generateBtn").onclick=()=>generateCoco("generate");$("downloadBtn").onclick=()=>generateCoco("download");$("printBtn").onclick=()=>generateCoco("print");
-
-/* ---------- Other PO preview/PDF ---------- */
-function buildOtherPage(){
- const page=document.createElement("div");page.className="label-page page-4x6";
- const grid=document.createElement("div");grid.className="label-grid";grid.style.gridTemplateColumns="1fr";grid.style.gridTemplateRows="repeat(2,1fr)";
- const po=$("otherPO").value.trim(),s=+($("otherStart").value),e=+($("otherEnd").value);
- for(let n=s;n<=e&&grid.children.length<2;n++){
-  const c=document.createElement("div");c.className="label-cell";
-  c.innerHTML=`<div class="cell-content"><div class="po-box" style="font-size:34px;font-weight:900;border:2px solid #000">${safeText(po)}</div><div class="po-box box-text" style="font-size:21px;border:2px solid #000">BOX NO. ${n}</div></div>`;
-  grid.appendChild(c);
- }
- page.appendChild(grid);return page;
-}
-function renderOther(){
- const old=$("otherPreview"),p=buildOtherPage();p.id="otherPreview";old.replaceWith(p);
-}
-["otherPO","otherStart","otherEnd"].forEach(id=>$(id).addEventListener("input",renderOther));
-
-async function simpleOther(mode){
- try{
-  const po=$("otherPO").value.trim(),s=+$("otherStart").value,e=+$("otherEnd").value;
-  if(!po){toast("⚠️ Enter Other PO number.",true);return}
-  if(!Number.isFinite(s)||!Number.isFinite(e)||s>e){toast("⚠️ Invalid Other PO box range.",true);return}
-  const streams=[];for(let n=s;n<=e;n++){
-   const st=[];const W=mmToPt(101.6),H=mmToPt(152.4);st.push(`q 1 1 1 rg 0 0 ${pdfNum(W)} ${pdfNum(H)} re f Q`);pdfBorderStream(st,0,0,W,H,"solid");
-   pdfBorderStream(st,mmToPt(10),mmToPt(85),W-mmToPt(20),mmToPt(22),"solid");pdfText(st,po,W/2,mmToPt(94),32,true,"center");
-   pdfBorderStream(st,mmToPt(24),mmToPt(48),W-mmToPt(48),mmToPt(16),"solid");pdfText(st,"BOX NO. "+n,W/2,mmToPt(53),20,true,"center");
-   streams.push(st.join("\n"));
-  }
-  const blob=buildRawPDF(streams,101.6,152.4);
-  if(mode==="download")triggerBlobDownload(blob,"BooksWagon_Other_PO_ALL_Labels.pdf");else openPdfBlob(blob,mode==="print");
-  toast("📄 "+streams.length+" Other PO page(s) ready");
- }catch(e){console.error(e);toast("❌ Other PO PDF failed: "+e.message,true)}
-}
-
-/* ---------- ISBN ---------- */
-function renderISBN(){
- const p=$("isbnPreview");p.innerHTML="";
- const v=$("isbnInput").value.trim();
- const grid=document.createElement("div");grid.className="label-grid";grid.style.gridTemplateColumns="1fr";grid.style.gridTemplateRows="1fr";
- const c=document.createElement("div");c.className="label-cell";
- if(!v)c.innerHTML="<div style='font-size:13px;color:#64748b'>🔢 Enter ISBN</div>";
- else{
-  c.innerHTML=`<div class="cell-content"><div style="font-size:25px;font-weight:900">${safeText(v)}</div></div>`;
-  if($("isbnBarYes").classList.contains("on")){
-   const bw=document.createElement("div");bw.className="barcode-wrap";const s=makeBarcodeSVG(v);if(s)bw.appendChild(s);c.querySelector(".cell-content").appendChild(bw);
-  }
- }
- grid.appendChild(c);p.appendChild(grid);
-}
-$("isbnInput").oninput=renderISBN;
-$("isbnBarYes").onclick=()=>{$("isbnBarYes").classList.add("on");$("isbnBarNo").classList.remove("off");renderISBN();toast("📊 ISBN Barcode enabled")};
-$("isbnBarNo").onclick=()=>{$("isbnBarNo").classList.add("off");$("isbnBarYes").classList.remove("on");renderISBN();toast("🚫 ISBN Barcode disabled",true)};
-
-async function simpleISBN(mode){
- const v=$("isbnInput").value.trim();if(!v){toast("⚠️ Enter ISBN.",true);return}
- try{
-  const st=[];const W=mmToPt(101.6),H=mmToPt(152.4);st.push(`q 1 1 1 rg 0 0 ${pdfNum(W)} ${pdfNum(H)} re f Q`);pdfBorderStream(st,0,0,W,H,"solid");
-  pdfText(st,v,W/2,mmToPt(95),24,true,"center");
-  if($("isbnBarYes").classList.contains("on"))drawCode128PDF(st,v,mmToPt(10),mmToPt(58),W-mmToPt(20),mmToPt(30),7);
-  const blob=buildRawPDF([st.join("\n")],101.6,152.4);
-  if(mode==="download")triggerBlobDownload(blob,"BooksWagon_ISBN.pdf");else openPdfBlob(blob,mode==="print");toast("📄 ISBN PDF ready");
- }catch(e){console.error(e);toast("❌ ISBN PDF failed: "+e.message,true)}
-}
-
-/* ---------- Address ---------- */
-function addressBorderStyle(v){
- return borderStyle(v);
-}
-function addressValue(id){return $(id)?.value.trim()||""}
-function renderAddress(){
- const p=$("addressPreview");
- const from=addressValue("fromAddress"),to=addressValue("toAddress");
- const fc=addressValue("fromCountry"),fs=addressValue("fromState"),fp=addressValue("fromPin");
- const tc=addressValue("toCountry"),ts=addressValue("toState"),tp=addressValue("toPin");
- p.innerHTML="";
- const grid=document.createElement("div");grid.className="label-grid";
- grid.style.gridTemplateColumns="1fr";grid.style.gridTemplateRows="1fr";
- const c=document.createElement("div");c.className="label-cell";c.style.padding="18px";
- const card=document.createElement("div");card.className="address-card";
- card.style.border=addressBorderStyle(addressValue("addressBorder")||"solid");
- card.innerHTML=`
-   <div class="address-block">
-     <div class="address-title">🏢 📤 FROM / SENDER</div>
-     <div>${safeText(from)}</div>
-     <div class="address-meta">🗺️ ${safeText(fc)} &nbsp; • &nbsp; 🌎 ${safeText(fs)} &nbsp; • &nbsp; 📍 ${safeText(fp)}</div>
-   </div>
-   <div class="address-cut" style="${addressValue("addressCut")==="off"?"display:none":""}"><span>✂️</span></div>
-   <div class="address-block">
-     <div class="address-title">🏠 📥 TO / RECEIVER</div>
-     <div>${safeText(to)}</div>
-     <div class="address-meta">🗺️ ${safeText(tc)} &nbsp; • &nbsp; 🌎 ${safeText(ts)} &nbsp; • &nbsp; 📍 ${safeText(tp)}</div>
-   </div>`;
- c.appendChild(card);grid.appendChild(c);p.appendChild(grid);
-}
-["fromAddress","fromCountry","fromState","fromPin","toAddress","toCountry","toState","toPin","addressBorder","addressCut"].forEach(id=>{
- $(id).addEventListener("input",renderAddress);$(id).addEventListener("change",renderAddress);
-});
-async function simpleAddress(mode){
- const f=addressValue("fromAddress"),t=addressValue("toAddress");
- if(!f||!t){$("addressWarning").classList.remove("hidden");toast("⚠️ From and To are required.",true);return}
- $("addressWarning").classList.add("hidden");
- try{
-  const st=[];const W=mmToPt(101.6),H=mmToPt(152.4);st.push(`q 1 1 1 rg 0 0 ${pdfNum(W)} ${pdfNum(H)} re f Q`);pdfBorderStream(st,mmToPt(4),mmToPt(4),W-mmToPt(8),H-mmToPt(8),addressValue("addressBorder")||"solid");
-  pdfBorderStream(st,mmToPt(9),mmToPt(92),W-mmToPt(18),mmToPt(35),"solid");pdfText(st,"FROM / SENDER",W/2,mmToPt(118),14,true,"center");
-  pdfText(st,f,W/2,mmToPt(108),10,false,"center");
-  pdfText(st,[addressValue("fromState"),addressValue("fromCountry"),addressValue("fromPin")].filter(Boolean).join(" | "),W/2,mmToPt(101),8,false,"center");
-  if(addressValue("addressCut")!=="off")pdfLine(st,mmToPt(7),mmToPt(78),W-mmToPt(7),mmToPt(78),.8,"3 2");
-  pdfBorderStream(st,mmToPt(9),mmToPt(20),W-mmToPt(18),mmToPt(45),"solid");pdfText(st,"TO / RECEIVER",W/2,mmToPt(58),14,true,"center");
-  pdfText(st,t,W/2,mmToPt(48),10,false,"center");
-  pdfText(st,[addressValue("toState"),addressValue("toCountry"),addressValue("toPin")].filter(Boolean).join(" | "),W/2,mmToPt(41),8,false,"center");
-  const blob=buildRawPDF([st.join("\n")],101.6,152.4);
-  if(mode==="download")triggerBlobDownload(blob,"BooksWagon_Address_Label.pdf");else openPdfBlob(blob,mode==="print");toast("📮 Address PDF ready");
- }catch(e){console.error(e);toast("❌ Address PDF failed: "+e.message,true)}
-}
-
-/* initial */
-$("pdfStatus").textContent="● PDF READY";
+const E=new TextEncoder(), pt=mm=>mm*72/25.4;
+function ptxt(x,y,s,sz,b=false,align="center"){let a=String(s).replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)").replace(/[^\x20-\x7E]/g,"?"),w=a.length*sz*.48,xx=align==="center"?x-w/2:align==="right"?x-w:x;return `BT /${b?"F2":"F1"} ${sz} Tf ${xx.toFixed(2)} ${y.toFixed(2)} Td (${a}) Tj ET\n`}
+function pborder(v){return v==="double"?2.2:1.2}function pdash(v){return v==="dashed"?"[5 4] 0 d":v==="dotted"?"[1 3] 0 d":"[] 0 d"}
+function drawBarcode(cmd,x,y,w,h,value){const pats=code128(String(value));let total=0;pats.forEach(p=>{for(const n of p)total+=+n});let xx=x,on=true;const unit=w/total;for(const p of pats){for(const q of p){const n=+q*unit;if(on)cmd.push(`0 0 0 rg ${xx.toFixed(2)} ${y.toFixed(2)} ${n.toFixed(2)} ${h.toFixed(2)} re f\n`);xx+=n;on=!on}on=!on}cmd.push(ptxt(x+w/2,y-10,String(value),8,false,"center"))}
+function drawPDFLabel(cmd,x,y,w,h,it,opts,cut){const cx=x+w/2,pad=Math.max(10,w*.06),po=String(it.po),box=(opts.boxPrefix||"BOX")+" NO. "+it.box,ps=Math.min(opts.fontSize,Math.max(13,w*.13)),bs=Math.max(12,ps*.55);if(opts.content!=="box"){let py=y+h*.72,pw=w-pad*2;if(opts.poBorder!=="none")cmd.push(`0 0 0 RG ${pborder(opts.poBorder)} w ${pdash(opts.poBorder)} ${x+pad} ${py-ps*.65} ${pw} ${ps*1.3} re S\n`);cmd.push(ptxt(cx,py,po,ps,true))}if(opts.content!=="po"){let by=y+h*.50,bw=w*.60;if(opts.boxBorder!=="none")cmd.push(`0 0 0 RG ${pborder(opts.boxBorder)} w ${pdash(opts.boxBorder)} ${cx-bw/2} ${by-bs*.65} ${bw} ${bs*1.35} re S\n`);cmd.push(ptxt(cx,by,box,bs,true))}if(opts.barcode){const bw=w*.78,bh=Math.min(42,h*.17),bx=cx-bw/2,by=y+h*.17;drawBarcode(cmd,bx,by,bw,bh,po)}if(cut){cmd.push(`1.5 w [5 4] 0 d ${x+7} ${y+h-4} m ${x+w-7} ${y+h-4} l S\n`);cmd.push(ptxt(cx,y+h-1,"x",12,true))}}
+function makeCoco(){const items=makeItems();if(!items.length)throw Error("Enter at least one PO number.");const s=+$("start").value,e=+$("end").value;if(s>e)throw Error("Start Box Number is greater than End Box Number.");let [wm,hm]=dims(),W=pt(wm),H=pt(hm),pages=[],[cols,rows]=gridSpec(),opts={content:$("content").value,boxPrefix:$("boxPrefix").value||"BOX",fontSize:+$("fontSize").value||36,poBorder:$("poBorder").value,boxBorder:$("boxBorder").value,barcode};for(let o=0;o<items.length;o+=perPage){let cmd=[];let pb=$("pageBorder").value;if(pb!=="none")cmd.push(`0 0 0 RG ${pborder(pb)} w ${pdash(pb)} 2 2 ${W-4} ${H-4} re S\n`);items.slice(o,o+perPage).forEach((it,i)=>{let col,row;if(size==="4x6"){col=0;row=i}else if($("flow").value==="left"){col=i%cols;row=Math.floor(i/cols)}else{row=i%rows;col=Math.floor(i/rows)}let cw=W/cols,ch=H/rows;drawPDFLabel(cmd,col*cw,H-(row+1)*ch,cw,ch,it,opts,cutting&&i>0)});pages.push(cmd.join(""))}return{W,H,pages}}
+function makeSimple(kind){if(kind==="other"){let po=$("otherPO").value.trim(),s=+$("otherStart").value,e=+$("otherEnd").value;if(!po)throw Error("Enter Other PO number.");let pages=[],W=pt(101.6),H=pt(152.4);for(let n=s;n<=e;n++){let c=[];drawPDFLabel(c,0,0,W,H,{po,box:n},{content:"both",boxPrefix:"BOX",fontSize:34,poBorder:"solid",boxBorder:"solid",barcode:false},false);pages.push(c.join(""))}return{W,H,pages}}if(kind==="isbn"){let v=$("isbn").value.trim();if(!v)throw Error("Enter ISBN.");let W=pt(101.6),H=pt(152.4),c=[];c.push(ptxt(W/2,H*.62,v,28,true));if($("isbnOn").classList.contains("on"))drawBarcode(c,W*.12,H*.32,W*.76,48,v);return{W,H,pages:[c.join("")]}}let f=$("from").value.trim(),t=$("to").value.trim();if(!f||!t)throw Error("From and To are required.");let W=pt(101.6),H=pt(152.4),c=[];c.push(`0 0 0 RG 1.5 w 12 12 ${W-24} ${H-24} re S\n`);c.push(ptxt(22,H-42,"🏢 FROM / SENDER",11,true,"left"));c.push(ptxt(22,H-60,f,9,false,"left"));c.push(ptxt(22,H-75,`${$("fromCountry").value} • ${$("fromState").value} • PIN ${$("fromPin").value}`,8,false,"left"));c.push(`1 w [5 4] 0 d 18 ${H/2} m ${W-18} ${H/2} l S\n`);c.push(ptxt(W/2,H/2+4,"x",12,true));c.push(ptxt(22,H/2-25,"🏠 TO / RECEIVER",11,true,"left"));c.push(ptxt(22,H/2-43,t,9,false,"left"));c.push(ptxt(22,H/2-58,`${$("toCountry").value} • ${$("toState").value} • PIN ${$("toPin").value}`,8,false,"left"));return{W,H,pages:[c.join("")]}}
+function buildPDF(d){const objs=[],add=x=>(objs.push(x),objs.length),pages=add(null),f1=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"),f2=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"),kids=[];for(const s of d.pages){const sid=add(`<< /Length ${E.encode(s).length} >>\nstream\n${s}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 ${d.W} ${d.H}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${sid} 0 R >>`))}objs[pages-1]=`<< /Type /Pages /Kids [${kids.map(x=>x+" 0 R").join(" ")}] /Count ${kids.length} >>`;const root=add(`<< /Type /Catalog /Pages ${pages} 0 R >>`);let out="%PDF-1.4\n%\xE2\xE3\xCF\xD3\n",off=[0];for(let i=0;i<objs.length;i++){off[i+1]=E.encode(out).length;out+=`${i+1} 0 obj\n${objs[i]}\nendobj\n`}let x=E.encode(out).length;out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objs.length;i++)out+=String(off[i]).padStart(10,"0")+" 00000 n \n";out+=`trailer\n<< /Size ${objs.length+1} /Root ${root} 0 R >>\nstartxref\n${x}\n%%EOF`;return new Blob([E.encode(out)],{type:"application/pdf"})}
+function current(kind){return kind==="coco"?makeCoco():makeSimple(kind)}
+function doPDF(kind,action){try{let blob=buildPDF(current(kind));if(action==="download"){let u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="BooksWagon_Label_Studio.pdf";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);toast("✅ All PDF pages downloaded")}else{let u=URL.createObjectURL(blob),w=window.open(u,"_blank");if(!w){toast("⚠️ Popup blocked. Use Download PDF.",true)}else toast(action==="print"?"🖨️ PDF opened — print from viewer":"📄 All PDF pages generated")}}catch(e){console.error(e);toast("❌ "+e.message,true)}}
+$("generate").onclick=()=>doPDF("coco","generate");$("download").onclick=()=>doPDF("coco","download");$("print").onclick=()=>doPDF("coco","print");$("clear").onclick=()=>{$$(".poInput").forEach(x=>x.value="");renderCoco()};
+$("otherGenerate").onclick=()=>doPDF("other","generate");$("otherDownload").onclick=()=>doPDF("other","download");$("otherPrint").onclick=()=>doPDF("other","print");
+$("isbnGenerate").onclick=()=>doPDF("isbn","generate");$("isbnDownload").onclick=()=>doPDF("isbn","download");$("isbnPrint").onclick=()=>doPDF("isbn","print");
+$("addrGenerate").onclick=()=>doPDF("address","generate");$("addrDownload").onclick=()=>doPDF("address","download");$("addrPrint").onclick=()=>doPDF("address","print");
 renderCoco();renderOther();renderISBN();renderAddress();
 </script>
 </body>
