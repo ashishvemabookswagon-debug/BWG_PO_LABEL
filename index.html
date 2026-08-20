@@ -455,8 +455,8 @@ function makeBarcodeSVG(value){
  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
  try{
   JsBarcode(svg,String(value),{
-   format:"CODE128",width:1.8,height:46,displayValue:true,fontSize:10,
-   margin:2,background:"#fff",lineColor:"#000"
+   format:"CODE128",width:1.6,height:38,displayValue:true,fontSize:9,
+   textMargin:5,margin:1,background:"#fff",lineColor:"#000"
   });
   return svg;
  }catch(e){console.warn("Barcode:",e);return null}
@@ -589,7 +589,20 @@ function pdfBorderStream(s,x,y,w,h,style="solid"){
 function drawCode128PDF(s,v,x,y,w,h,size=7){
   drawBarcodePDF(s,v,x,y,w,h);
 }
-function drawBarcodePDF(s,v,x,y,w,h){const a=code128BValues(v);if(!a)return;const p=a.map(i=>CODE128_PATTERNS[i]).join("");const total=[...p].reduce((n,d)=>n+Number(d),0);const mw=w/total;let cur=x,black=true;for(const d of p){const bw=Number(d)*mw;if(black)s.push(`0 0 0 rg ${pdfNum(cur)} ${pdfNum(y)} ${pdfNum(bw)} ${pdfNum(h)} re f`);cur+=bw;black=!black}pdfText(s,v,x+w/2,y-3,7)}
+function drawBarcodePDF(s,v,x,y,w,h){
+ const a=code128BValues(v);if(!a)return;
+ const p=a.map(i=>CODE128_PATTERNS[i]).join("");
+ const total=[...p].reduce((n,d)=>n+Number(d),0);
+ const mw=w/total;
+ let cur=x,black=true;
+ for(const d of p){
+  const bw=Number(d)*mw;
+  if(black)s.push(`0 0 0 rg ${pdfNum(cur)} ${pdfNum(y)} ${pdfNum(bw)} ${pdfNum(h)} re f`);
+  cur+=bw;black=!black;
+ }
+ /* Human-readable barcode value: centered and clearly separated BELOW bars. */
+ pdfText(s,v,x+w/2,y-10,8);
+}
 function pdfPageStream(items,wmm,hmm){const W=mmToPt(wmm),H=mmToPt(hmm),s=[];s.push(`1 1 1 rg 0 0 ${pdfNum(W)} ${pdfNum(H)} re f`);pdfRect(s,0,0,W,H,$("pageBorder").value);const [cols,rows]=gridSpec(),cw=W/cols,ch=H/rows;let order=items.map((_,i)=>i);if($("flowType").value==="top-bottom"&&cols>1){order=[];for(let c=0;c<cols;c++)for(let r=0;r<rows;r++){const i=r*cols+c;if(i<items.length)order.push(i)}}order.forEach((idx,slot)=>{const item=items[idx];let r=Math.floor(slot/cols),c=slot%cols;if($("flowType").value==="top-bottom"&&cols>1){c=Math.floor(slot/rows);r=slot%rows}const x=c*cw,y=H-(r+1)*ch;drawLabelPDFRaw(s,item,x,y,cw,ch);if(cuttingEnabled&&slot>0){if($("flowType").value==="top-bottom")pdfLine(s,3,y+ch,W-3,y+ch,"3 2");else pdfLine(s,x,3,x,H-3,"3 2")}});return s.join("\n")}
 function drawLabelPDFRaw(s,item,x,y,w,h){const content=$("contentType").value,layout=$("layoutType").value,fs=+$("fontSize").value||32,pad=Math.max(10,Math.min(24,w*.05)),po=item.po,box=($("boxPrefix").value||"BOX")+" NO. "+item.box,poSize=Math.max(12,Math.min(fs*.62,w*.11)),boxSize=Math.max(10,Math.min(fs*.40,w*.075)),gap=mmToPt(3),poH=mmToPt(14),boxH=mmToPt(11),barcodeH=barcodeEnabled?Math.min(mmToPt(24),h*.18):0;let total;if(content==="po")total=poH;else if(content==="box")total=boxH;else total=layout==="same"?Math.max(poH,boxH):poH+gap+boxH;if(barcodeEnabled)total+=gap+barcodeH+mmToPt(5);let top=y+(h+total)/2;const poW=Math.min(w-pad*2,w*.9),boxW=Math.min(w-pad*2,w*.68);if(content==="po"){top-=poH;pdfRect(s,x+(w-poW)/2,top,poW,poH,$("poBorder").value);pdfText(s,po,x+w/2,top+poH*.38,poSize)}else if(content==="box"){top-=boxH;pdfRect(s,x+(w-boxW)/2,top,boxW,boxH,$("boxBorder").value);pdfText(s,box,x+w/2,top+boxH*.38,boxSize)}else if(layout==="same"){const rw=Math.min(w-pad*2,w*.94),pw=rw*.58,bw=rw-pw-gap,rx=x+(w-rw)/2,yy=top-Math.max(poH,boxH);pdfRect(s,rx,yy,pw,poH,$("poBorder").value);pdfText(s,po,rx+pw/2,yy+poH*.38,poSize);pdfRect(s,rx+pw+gap,yy,bw,boxH,$("boxBorder").value);pdfText(s,box,rx+pw+gap+bw/2,yy+boxH*.38,boxSize);top=yy}else{top-=poH;pdfRect(s,x+(w-poW)/2,top,poW,poH,$("poBorder").value);pdfText(s,po,x+w/2,top+poH*.38,poSize);top-=gap+boxH;pdfRect(s,x+(w-boxW)/2,top,boxW,boxH,$("boxBorder").value);pdfText(s,box,x+w/2,top+boxH*.38,boxSize)}if(barcodeEnabled){let bw=Math.min(w-pad*2,w*.84),bh=barcodeH,bx=x+(w-bw)/2,by=top-bh-mmToPt(4);if($("barcodePosition").value==="top")by=y+h-bh-mmToPt(12);if($("barcodePosition").value==="middle")by=y+h/2-bh/2;drawBarcodePDF(s,po,bx,by,bw,bh)}}
 function buildRawPDF(streams,wmm,hmm){const W=mmToPt(wmm),H=mmToPt(hmm),objects=[];objects[1]='<< /Type /Catalog /Pages 2 0 R >>';objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';const kids=[];let n=4;for(const st of streams){const co=n++,po=n++,len=new TextEncoder().encode(st).length;objects[co]=`<< /Length ${len} >>\nstream\n${st}\nendstream`;objects[po]=`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfNum(W)} ${pdfNum(H)}] /Resources << /Font << /F1 3 0 R >> >> /Contents ${co} 0 R >>`;kids.push(`${po} 0 R`)}objects[2]=`<< /Type /Pages /Count ${kids.length} /Kids [${kids.join(" ")}] >>`;let pdf="%PDF-1.4\n",offs=[0];for(let i=1;i<objects.length;i++){offs[i]=new TextEncoder().encode(pdf).length;pdf+=`${i} 0 obj\n${objects[i]}\nendobj\n`}const xref=new TextEncoder().encode(pdf).length;pdf+=`xref\n0 ${objects.length}\n0000000000 65535 f \n`;for(let i=1;i<objects.length;i++)pdf+=String(offs[i]).padStart(10,"0")+" 00000 n \n";pdf+=`trailer\n<< /Size ${objects.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;return new Blob([pdf],{type:"application/pdf"})}
