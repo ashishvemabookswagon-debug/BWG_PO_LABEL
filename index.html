@@ -3,87 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BooksWagon Label Creations Studio — PDF & Barcode Fixed</title>
+<title>BooksWagon Label Creations Studio</title>
 <style>
-:root{--bg:#f4f7fb;--card:#fff;--text:#10233f;--muted:#66768b;--line:#d8e1eb;--blue:#1769e0;--nav:#091f38;--green:#16a34a;--red:#dc2626}
+:root{--bg:#f4f7fb;--card:#fff;--text:#10233f;--muted:#66758a;--line:#d8e1eb;--blue:#1769e0;--nav:#071d35;--green:#16a34a;--red:#dc2626}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-body.dark{--bg:#07111f;--card:#0e1b2b;--text:#f4f7fb;--muted:#aebaca;--line:#293b50;--nav:#040d18}
+body.dark{--bg:#07111f;--card:#0f1d2d;--text:#f5f7fb;--muted:#aab7c7;--line:#2b3b4e;--nav:#030b15}
 button,input,select,textarea{font:inherit}button{cursor:pointer}
-.sidebar{position:fixed;inset:0 auto 0 0;width:235px;background:linear-gradient(180deg,#0a223d,#061629);color:#fff;padding:20px;z-index:4}
-.logo{font-weight:900;font-size:23px}.logo b{color:#ff6b18}.sub{font-size:9px;color:#a8bbcf;margin-top:3px}
-.nav{margin-top:25px}.nav button{display:block;width:100%;border:0;background:transparent;color:#dfe9f2;text-align:left;padding:11px;border-radius:9px;margin:3px 0;font-size:11px;font-weight:800}.nav button:hover{background:#18579b}
-.sidefoot{position:absolute;bottom:18px;color:#9fb2c6;font-size:9px;line-height:1.6}
-.main{margin-left:235px}.top{height:78px;background:var(--card);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:14px 24px}.top h1{font-size:19px;margin:0}.top p{font-size:10px;color:var(--muted);margin:4px 0}
-.theme{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:9px}.theme button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:7px;font-size:10px;font-weight:800}.theme .active{background:var(--blue);color:#fff}
-.content{padding:18px;max-width:1450px;margin:auto}.hero{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:20px}.hero h2{margin:0;font-size:26px}.hero p{margin:6px 0 0;color:var(--muted);font-size:10px}
-.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:14px 0}.cat{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:13px;padding:14px;text-align:left;transition:.18s}.cat:hover{transform:translateY(-3px) scale(1.015)}.cat .ico{font-size:27px}.cat h3{font-size:13px;margin:6px 0 3px}.cat p{font-size:9px;color:var(--muted);margin:0}
-.workspace{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden}.head{padding:14px 17px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.head h2{font-size:16px;margin:0}.head p{font-size:9px;color:var(--muted);margin:4px 0}.ready{font-size:8px;font-weight:900;color:#15803d;background:#e9f8ef;padding:6px 9px;border-radius:20px;height:max-content}
-.tabs{display:flex;gap:6px;padding:9px;background:var(--bg);border-bottom:1px solid var(--line)}.tab{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:9px 11px;font-size:9px;font-weight:900}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.panel{display:none}.panel.active{display:block}.editor{display:grid;grid-template-columns:1fr 1fr}.controls{padding:17px;border-right:1px solid var(--line)}.preview{padding:17px;background:var(--bg)}
-.sec{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}.sec:last-child{border:0}.sec h3{font-size:11px;margin:0 0 8px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:7px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-label{display:block;color:var(--muted);font-size:9px;font-weight:900;margin-bottom:7px}input,select,textarea{width:100%;min-height:36px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);padding:8px;font-size:10px}textarea{min-height:80px}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mode,.choice,.toggle{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:9px 6px;font-size:9px;font-weight:900}.mode.active,.choice.active{background:#1769e012;border-color:var(--blue);color:var(--blue)}
-.po-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.po-row{display:flex;gap:5px;align-items:center}.po-row b{font-size:8px;color:var(--muted);width:15px}.choicegrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.toggle-row{display:flex;gap:6px}.toggle{flex:1}.toggle.on{background:var(--green);color:#fff;border-color:var(--green)}.toggle.off{background:var(--red);color:#fff;border-color:var(--red)}
-.warn{background:#fff1f2;border:1px solid #fecaca;color:#b91c1c;border-radius:8px;padding:8px;font-size:9px}.hidden{display:none!important}
-.stage{min-height:620px;border:1px solid var(--line);border-radius:10px;background:#dfe8f2;display:flex;justify-content:center;align-items:center;padding:22px;overflow:auto}
-.label-page{width:406px;height:600px;background:#fff;color:#000;position:relative;overflow:hidden;flex:none;box-shadow:0 12px 28px #0003}.page-a4{width:420px;height:594px}.page-70{width:420px;height:210px}.page-custom{width:420px;height:594px}
-.label-grid{width:100%;height:100%;display:grid}.cell{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:13px;overflow:hidden;background:#fff;color:#000}
-.inner{width:100%;height:100%;position:relative;display:block}
-.po{font-weight:900;line-height:1.05;word-break:break-word;padding:4px 8px;max-width:92%}.box{font-weight:900;line-height:1.05;word-break:break-word;padding:4px 8px;max-width:80%}.same{display:flex;align-items:center;justify-content:center;gap:7px;font-weight:900;max-width:94%;word-break:break-word}
-
-/* IMPORTANT BARCODE FIX */
-.barcode-block{
- width:92%;
- max-width:92%;
- min-height:102px;
- height:102px;
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:flex-start;
- overflow:hidden;
- flex:none;
-}
-.barcode-bars{
- width:100%;
- height:68px;
- flex:none;
- overflow:hidden;
- display:flex;
- justify-content:center;
- align-items:flex-start;
-}
-.barcode-bars svg{
- display:block;
- width:100%;
- height:68px;
- overflow:hidden;
-}
-.barcode-human{
- height:24px;
- line-height:24px;
- margin:0;
- padding:0;
- font-family:Arial,Helvetica,sans-serif;
- font-size:11px;
- font-weight:400;
- color:#000;
- text-align:center;
- white-space:nowrap;
-}
-.cutline{position:absolute;left:2%;right:2%;top:3px;border-top:2px dashed #000}.sc{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#fff;padding:0 5px;font-size:22px}
-.address-card{width:100%;border:2px solid #000;padding:12px;color:#000;background:#fff}.addr-block{border:1px solid #000;border-radius:8px;padding:10px;margin:5px 0;line-height:1.35}.addr-title{font-weight:900;font-size:12px}.addr-meta{font-size:9px}.addr-cut{border-top:2px dashed #000;text-align:center;margin:10px 0}.addr-cut span{position:relative;top:-14px;background:#fff;padding:0 6px;font-size:21px}
-.info{font-size:9px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:8px}
-.actions{display:flex;gap:7px;justify-content:flex-end;padding:12px 17px;border-top:1px solid var(--line);flex-wrap:wrap}.actions button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:10px 13px;border-radius:8px;font-size:9px;font-weight:900}.actions .blue{background:var(--blue);border-color:var(--blue);color:#fff}.actions .dark{background:#10233f;color:#fff;border-color:#10233f}
-.toast{position:fixed;right:17px;top:92px;background:var(--card);border-left:5px solid var(--green);padding:12px 14px;border-radius:9px;box-shadow:0 18px 40px #0003;font-size:10px;font-weight:900;z-index:99;opacity:0;transform:translateX(30px);transition:.2s}.toast.show{opacity:1;transform:none}.toast.bad{border-left-color:var(--red)}
-footer{text-align:center;padding:20px;color:var(--muted);font-size:9px}
-@media(max-width:1050px){.cats{grid-template-columns:repeat(2,1fr)}.editor{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line)}}@media(max-width:700px){.sidebar{width:62px;padding:9px}.logo,.sub,.nav span,.sidefoot{display:none}.main{margin-left:62px}.content{padding:9px}.cats{grid-template-columns:1fr 1fr}.grid2,.grid3,.po-grid{grid-template-columns:1fr}.page-4x6{width:300px;height:450px}}
+.sidebar{position:fixed;inset:0 auto 0 0;width:230px;background:linear-gradient(180deg,#09243f,#061528);color:#fff;padding:20px;z-index:10}
+.logo{font-size:22px;font-weight:900}.logo b{color:#ff6b18}.small{font-size:9px;color:#a9bdd1}
+.nav{margin-top:25px}.nav button{width:100%;border:0;background:transparent;color:#e8eff7;text-align:left;padding:11px 8px;border-radius:8px;margin:2px 0;font-size:10px;font-weight:800}.nav button:hover{background:#155796}
+.sidefoot{position:absolute;bottom:18px;font-size:8px;color:#9fb2c6;line-height:1.5}
+.main{margin-left:230px}.top{height:75px;background:var(--card);border-bottom:1px solid var(--line);padding:13px 22px;display:flex;justify-content:space-between;align-items:center}.top h1{font-size:18px;margin:0}.top p{font-size:9px;color:var(--muted);margin:4px 0}
+.theme{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:9px}.theme button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:7px;font-size:9px;font-weight:800}.theme .active{background:var(--blue);color:#fff}
+.content{max-width:1400px;margin:auto;padding:16px}.hero{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}.hero h2{margin:0;font-size:23px}.hero p{font-size:9px;color:var(--muted)}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}.cat{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;text-align:left;padding:13px;transition:.18s}.cat:hover{transform:translateY(-2px) scale(1.015)}.cat .ico{font-size:24px}.cat h3{font-size:11px;margin:5px 0}.cat p{font-size:8px;color:var(--muted);margin:0}
+.workspace{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}.head{display:flex;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--line)}.head h2{font-size:14px;margin:0}.head p{font-size:8px;color:var(--muted);margin:3px 0}.ready{font-size:7px;font-weight:900;color:#15803d;background:#e9f8ef;border-radius:20px;padding:6px 8px;height:max-content}
+.tabs{display:flex;gap:5px;padding:8px;background:var(--bg);border-bottom:1px solid var(--line)}.tab{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:7px;padding:8px 10px;font-size:8px;font-weight:900}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.panel{display:none}.panel.active{display:block}.editor{display:grid;grid-template-columns:1fr 1fr}.controls{padding:15px;border-right:1px solid var(--line)}.preview{padding:15px;background:var(--bg)}
+.sec{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:12px}.sec:last-child{border:0}.sec h3{font-size:10px;margin:0 0 7px}
+label{display:block;font-size:8px;font-weight:900;color:var(--muted);margin-bottom:6px}input,select,textarea{width:100%;min-height:34px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--text);padding:7px;font-size:9px}textarea{min-height:72px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.mode,.choice,.toggle{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:7px;padding:8px 5px;font-size:8px;font-weight:900}.mode.active,.choice.active{border-color:var(--blue);color:var(--blue);background:#1769e010}
+.po-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}.po-row{display:flex;gap:4px;align-items:center}.po-row b{font-size:7px;color:var(--muted);width:12px}
+.choicegrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.toggle-row{display:flex;gap:5px}.toggle{flex:1}.toggle.on{background:var(--green);color:#fff;border-color:var(--green)}.toggle.off{background:var(--red);color:#fff;border-color:var(--red)}
+.warn{font-size:8px;color:#b91c1c;background:#fff1f2;border:1px solid #fecaca;border-radius:7px;padding:7px;margin-top:6px}.hidden{display:none!important}
+.stage{min-height:600px;background:#dfe7f0;border:1px solid var(--line);border-radius:9px;display:flex;justify-content:center;align-items:center;padding:18px;overflow:auto}
+.label-page{width:406px;height:600px;background:#fff;color:#000;position:relative;overflow:hidden;flex:none;box-shadow:0 12px 30px #0003}
+.page-a4{width:420px;height:594px}.page-70{width:420px;height:210px}.page-custom{width:420px;height:594px}
+.label-grid{width:100%;height:100%;display:grid}.cell{position:relative;min-width:0;min-height:0;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;overflow:hidden}.inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;padding:16px 0 12px}
+.po{font-weight:900;line-height:1.02;padding:5px 8px;max-width:94%;word-break:break-word;flex:none}.box{font-weight:900;line-height:1.05;padding:5px 8px;max-width:84%;word-break:break-word;flex:none}.same{display:flex;align-items:center;justify-content:center;gap:7px;max-width:94%;font-weight:900;word-break:break-word;flex:none}
+.barcode-block{width:88%;height:105px;min-height:105px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#fff;overflow:hidden;padding-top:5px;margin-top:auto;margin-bottom:4px}
+.barcode-bars{width:100%;height:70px;min-height:70px;display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+.barcode-bars svg{display:block;width:100%;height:70px;overflow:hidden}
+.barcode-human{height:22px;min-height:22px;line-height:22px;margin:2px 0 0;padding:0;font:10px/22px Arial,sans-serif;color:#000;text-align:center;white-space:nowrap}
+.cutline{position:absolute;left:2%;right:2%;bottom:2px;border-top:2px dashed #000}.sc{position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);background:#fff;padding:0 5px;font-size:20px}
+.address-card{width:100%;border:2px solid #000;padding:10px;color:#000;background:#fff}.addr-block{border:1px solid #000;border-radius:7px;padding:8px;margin:4px 0;line-height:1.35}.addr-title{font-weight:900;font-size:11px}.addr-meta{font-size:8px}.addr-cut{border-top:2px dashed #000;text-align:center;margin:9px 0}.addr-cut span{position:relative;top:-13px;background:#fff;padding:0 5px;font-size:19px}
+.info{font-size:8px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:7px;padding:7px;margin-top:7px}
+.actions{display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;padding:11px 15px;border-top:1px solid var(--line)}.actions button{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 12px;border-radius:7px;font-size:8px;font-weight:900}.actions .blue{background:var(--blue);border-color:var(--blue);color:#fff}.actions .dark{background:#10233f;color:#fff;border-color:#10233f}
+.toast{position:fixed;right:16px;top:88px;background:var(--card);border-left:5px solid var(--green);padding:11px 13px;border-radius:8px;box-shadow:0 15px 35px #0003;font-size:9px;font-weight:900;z-index:100;opacity:0;transform:translateX(25px);transition:.2s}.toast.show{opacity:1;transform:none}.toast.bad{border-left-color:var(--red)}
+footer{text-align:center;padding:18px;color:var(--muted);font-size:8px}
+@media(max-width:1000px){.cats{grid-template-columns:repeat(2,1fr)}.editor{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line)}}@media(max-width:650px){.sidebar{width:58px;padding:8px}.logo,.small,.nav span,.sidefoot{display:none}.main{margin-left:58px}.content{padding:8px}.cats{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}.page-4x6{width:300px;height:450px}}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
-<aside class="sidebar"><div class="logo">Books<b>Wagon</b></div><div class="sub">LABEL CREATIONS STUDIO</div><nav class="nav"><button>🏠 <span>Dashboard</span></button><button>🏷️ <span>Create Labels</span></button><button>📦 <span>Bulk Processing</span></button><button>🖨️ <span>Print Center</span></button></nav><div class="sidefoot">✍️ Created by Ashish Verma<br>© 2026 All Rights Reserved</div></aside>
+<aside class="sidebar"><div class="logo">Books<b>Wagon</b></div><div class="small">LABEL CREATIONS STUDIO</div><nav class="nav"><button>🏠 <span>Dashboard</span></button><button>🏷️ <span>Create Labels</span></button><button>📦 <span>Bulk Processing</span></button><button>🖨️ <span>Print Center</span></button></nav><div class="sidefoot">✍️ Created by Ashish Verma<br>© 2026 All Rights Reserved</div></aside>
 <main class="main">
 <header class="top"><div><h1>📚 BooksWagon Label Creations Studio</h1><p>Create • Preview • Generate • Download • Print</p></div><div class="theme"><button id="light" class="active">☀️ Light</button><button id="dark">🌙 Dark</button></div></header>
 <div class="content">
@@ -94,247 +58,315 @@ footer{text-align:center;padding:20px;color:var(--muted);font-size:9px}
 <div class="tabs"><button class="tab active" data-tab="coco">📦 CocoBlu</button><button class="tab" data-tab="other">📋 Other PO</button><button class="tab" data-tab="isbn">🔢 ISBN</button><button class="tab" data-tab="address">📮 Address</button></div>
 
 <div class="panel active" id="coco"><div class="editor"><div class="controls">
-<div class="sec"><h3>📝 Input Mode</h3><div class="modes"><button class="mode active" data-mode="manual">✍️ Manual<small>10 PO fields</small></button><button class="mode" data-mode="bulk">📚 Bulk<small>Unlimited</small></button><button class="mode" data-mode="excel">📊 Excel / CSV<small>Column A</small></button></div></div>
+<div class="sec"><h3>📝 Input Mode</h3><div class="modes"><button class="mode active" data-mode="manual">✍️ Manual<small>10 PO fields</small></button><button class="mode" data-mode="bulk">📚 Bulk<small>Unlimited</small></button><button class="mode" data-mode="excel">📊 Excel / CSV<small>A1 header</small></button></div></div>
 <div class="sec" id="manualSec"><h3>🔢 PO Numbers</h3><div id="poInputs" class="po-grid"></div></div>
 <div class="sec hidden" id="bulkSec"><h3>📚 Bulk PO Numbers</h3><textarea id="bulk" placeholder="PO001, PO002, PO003..."></textarea></div>
-<div class="sec hidden" id="excelSec"><h3>📊 Excel / CSV</h3><input id="excel" type="file" accept=".csv,.xlsx,.xls"><div class="info">A1 is header. For Excel, save the sheet as CSV first.</div></div>
+<div class="sec hidden" id="excelSec"><h3>📊 Excel / CSV</h3><input id="excel" type="file" accept=".csv,.xls,.xlsx"><div class="info">First row is header. PO numbers are read from Column A.</div></div>
 <div class="sec"><h3>📦 Box Range</h3><div class="grid2"><label>PO Prefix<input id="poPrefix"></label><label>Box Prefix<input id="boxPrefix" value="BOX"></label></div><div class="grid2"><label>Start Box<input id="start" type="number" value="1"></label><label>End Box<input id="end" type="number" value="2"></label></div><div id="rangeWarn" class="warn hidden">⚠️ Start Box Number must be less than or equal to End Box Number.</div></div>
 <div class="sec"><h3>🏷️ Label Content</h3><select id="content"><option value="both">🔗 Combined PO + Box</option><option value="po">🔢 PO Number Only</option><option value="box">📦 Box Number Only</option></select></div>
 <div class="sec"><h3>↕️ Layout</h3><select id="layout"><option value="separate">↕️ Separate Line</option><option value="same">↔️ Same Line</option></select></div>
 <div class="sec"><h3>🔀 Flow</h3><select id="flow"><option value="top">⬇️ Top → Bottom</option><option value="left">➡️ Left → Right</option></select></div>
-<div class="sec"><h3>📄 Page Size</h3><div class="choicegrid" id="sizes"><button class="choice active" data-size="4x6">📐 4×6</button><button class="choice" data-size="a4">📄 A4</button><button class="choice" data-size="70">📏 70×35</button><button class="choice" data-size="custom">⚙️ Custom</button></div><div id="custom" class="grid2 hidden" style="margin-top:7px"><label>Width mm<input id="cw" type="number" value="101.6"></label><label>Height mm<input id="ch" type="number" value="152.4"></label></div></div>
+<div class="sec"><h3>📄 Page Size</h3><div class="grid4" id="sizes"><button class="choice active" data-size="4x6">📐 4×6</button><button class="choice" data-size="a4">📄 A4</button><button class="choice" data-size="70">📏 70×35</button><button class="choice" data-size="custom">⚙️ Custom</button></div><div id="custom" class="grid2 hidden" style="margin-top:6px"><label>Width mm<input id="cw" type="number" value="101.6"></label><label>Height mm<input id="ch" type="number" value="152.4"></label></div></div>
 <div class="sec"><h3>🔢 Labels Per Page</h3><div class="choicegrid" id="counts"></div></div>
 <div class="sec"><h3>📊 PO Barcode</h3><div class="toggle-row"><button id="barOn" class="toggle on">✅ Barcode ON</button><button id="barOff" class="toggle">🚫 Barcode OFF</button></div></div>
 <div class="sec"><h3>🖼️ Borders</h3><div class="grid3"><label>📄 Page<select id="pageBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label><label>🔢 PO<select id="poBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label><label>📦 Box<select id="boxBorder"><option value="none">None</option><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="dotted">Dotted</option></select></label></div></div>
 <div class="sec"><h3>✂️ Cutting</h3><div class="toggle-row"><button id="cutOn" class="toggle on">✂️ Cutting ON</button><button id="cutOff" class="toggle">🚫 Cutting OFF</button></div></div>
 <div class="sec"><h3>🔤 Font</h3><div class="grid2"><label>Font<select id="font"><option>Arial</option><option>Verdana</option><option>Tahoma</option><option>Georgia</option><option>Times New Roman</option></select></label><label>Size<select id="fontSize"><option>20</option><option>28</option><option selected>36</option><option>44</option><option>52</option><option>60</option></select></label></div></div>
-</div><div class="preview"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><h3 style="margin:0;font-size:11px">👁️ Live Print Preview</h3><span class="ready">● LIVE</span></div><div class="stage"><div id="previewPage" class="label-page page-4x6"></div></div><div id="info" class="info"></div></div></div>
+</div><div class="preview"><div style="display:flex;justify-content:space-between;margin-bottom:7px"><h3 style="margin:0;font-size:10px">👁️ Live Print Preview</h3><span class="ready">● LIVE</span></div><div class="stage"><div id="previewPage" class="label-page page-4x6"></div></div><div id="info" class="info"></div></div></div>
 <div class="actions"><button id="clear">🧹 Clear</button><button id="generate" class="blue">⚙️ Generate PDF</button><button id="download" class="blue">⬇️ Download PDF</button><button id="print" class="dark">🖨️ Print PDF</button></div></div>
 
 <div class="panel" id="other"><div class="editor"><div class="controls"><div class="sec"><h3>📋 Other PO</h3><label>PO Number<input id="otherPO"></label><div class="grid2"><label>Start<input id="otherStart" type="number" value="1"></label><label>End<input id="otherEnd" type="number" value="2"></label></div></div></div><div class="preview"><div class="stage"><div id="otherPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="otherGenerate" class="blue">⚙️ Generate PDF</button><button id="otherDownload" class="blue">⬇️ Download PDF</button><button id="otherPrint" class="dark">🖨️ Print PDF</button></div></div>
 
 <div class="panel" id="isbn"><div class="editor"><div class="controls"><div class="sec"><h3>🔢 ISBN Barcode</h3><label>ISBN<input id="isbn"></label></div><div class="toggle-row"><button id="isbnOn" class="toggle on">✅ Barcode ON</button><button id="isbnOff" class="toggle">🚫 Barcode OFF</button></div></div><div class="preview"><div class="stage"><div id="isbnPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="isbnGenerate" class="blue">⚙️ Generate PDF</button><button id="isbnDownload" class="blue">⬇️ Download PDF</button><button id="isbnPrint" class="dark">🖨️ Print PDF</button></div></div>
 
-<div class="panel" id="address"><div class="editor"><div class="controls"><div class="sec"><h3>📮 Address Label</h3><label>🏢 From / Sender<input id="from"></label><div class="grid3"><label>🌎 Country<input id="fromCountry"></label><label>🗺️ State<input id="fromState"></label><label>📍 PIN<input id="fromPin"></label></div><label>🏠 To / Receiver<input id="to"></label><div class="grid3"><label>🌎 Country<input id="toCountry"></label><label>🗺️ State<input id="toState"></label><label>📍 PIN<input id="toPin"></label></div><div class="grid2"><label>Border<select id="addrBorder"><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="none">None</option></select></label><label>Cutting<select id="addrCut"><option value="on">ON</option><option value="off">OFF</option></select></label></div><div id="addrWarn" class="warn hidden">⚠️ From and To are required.</div></div></div><div class="preview"><div class="stage"><div id="addressPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="addrGenerate" class="blue">⚙️ Generate PDF</button><button id="addrDownload" class="blue">⬇️ Download PDF</button><button id="addrPrint" class="dark">🖨️ Print PDF</button></div></div>
+<div class="panel" id="address"><div class="editor"><div class="controls"><div class="sec"><h3>📮 Address Label</h3><label>🏢 From / Sender<input id="from"></label><div class="grid3"><label>🌎 Country<input id="fromCountry"></label><label>🗺️ State<input id="fromState"></label><label>📍 PIN<input id="fromPin"></label></div><label>🏠 To / Receiver<input id="to"></label><div class="grid3"><label>🌎 Country<input id="toCountry"></label><label>🗺️ State<input id="toState"></label><label>📍 PIN<input id="toPin"></label></div><div class="grid2"><label>Border<select id="addrBorder"><option value="solid">Solid</option><option value="double">Double</option><option value="dashed">Dashed</option><option value="none">None</option></select></label><label>Cutting<select id="addrCut"><option value="on">ON</option><option value="off">OFF</option></select></label></div></div></div><div class="preview"><div class="stage"><div id="addressPreview" class="label-page page-4x6"></div></div></div></div><div class="actions"><button id="addrGenerate" class="blue">⚙️ Generate PDF</button><button id="addrDownload" class="blue">⬇️ Download PDF</button><button id="addrPrint" class="dark">🖨️ Print PDF</button></div></div>
 </section><footer>✍️ Created by Ashish Verma • 2026 • All Rights Reserved by Ashish Verma</footer></div></main><div id="toast" class="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script>
 "use strict";
-const $=id=>document.getElementById(id), $$=s=>Array.from(document.querySelectorAll(s));
+const $=id=>document.getElementById(id),$$=s=>Array.from(document.querySelectorAll(s));
 let mode="manual",size="4x6",perPage=2,barcode=true,cutting=true,excelPO=[];
-function toast(m,b=false){const t=$("toast");t.textContent=m;t.className="toast show"+(b?" bad":"");clearTimeout(window.tt);window.tt=setTimeout(()=>t.className="toast",2600)}
+function toast(m,b=false){const t=$("toast");t.textContent=m;t.className="toast show"+(b?" bad":"");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.className="toast",2600)}
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function theme(d){document.body.classList.toggle("dark",d==="dark");$("light").classList.toggle("active",d==="light");$("dark").classList.toggle("active",d==="dark")}theme("light");$("light").onclick=()=>theme("light");$("dark").onclick=()=>theme("dark");
+function theme(d){document.body.classList.toggle("dark",d==="dark");$("light").classList.toggle("active",d==="light");$("dark").classList.toggle("active",d==="dark")}
+$("light").onclick=()=>theme("light");$("dark").onclick=()=>theme("dark");
 
 const titles={coco:"📦 CocoBlu PO Label Maker",other:"📋 Other PO Label Maker",isbn:"🔢 ISBN Barcode Maker",address:"📮 Address Label Maker"};
 function openTab(id){$$(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));$$(".panel").forEach(p=>p.classList.toggle("active",p.id===id));$("title").textContent=titles[id]}
 $$(".tab").forEach(b=>b.onclick=()=>openTab(b.dataset.tab));$$(".cat").forEach(b=>b.onclick=()=>{openTab(b.dataset.open);document.querySelector(".workspace").scrollIntoView({behavior:"smooth"})});
 
 $("poInputs").innerHTML=Array.from({length:10},(_,i)=>`<div class="po-row"><b>${i+1}</b><input class="poInput" placeholder="PO ${i+1}"></div>`).join("");
-[1,2,3,4,6,8,10,12,14,15,16,18,20].forEach(n=>{const b=document.createElement("button");b.className="choice"+(n===2?" active":"");b.dataset.n=n;b.textContent=n;$("counts").appendChild(b)});
-$("counts").onclick=e=>{const b=e.target.closest("[data-n]");if(!b)return;perPage=+b.dataset.n;$$("#counts .choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCoco()};
+[1,2,3,4,6,8,10,12,14,15,16,18,20].forEach(n=>{let b=document.createElement("button");b.className="choice"+(n===2?" active":"");b.dataset.n=n;b.textContent=n;$("counts").appendChild(b)});
+$("counts").onclick=e=>{let b=e.target.closest("[data-n]");if(!b)return;perPage=+b.dataset.n;$$("#counts .choice").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderCoco()};
 
-function pos(){if(mode==="bulk")return $("bulk").value.split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);if(mode==="excel")return excelPO.slice();return $$(".poInput").map(x=>x.value.trim()).filter(Boolean)}
+function poList(){if(mode==="bulk")return $("bulk").value.split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);if(mode==="excel")return excelPO.slice();return $$(".poInput").map(x=>x.value.trim()).filter(Boolean)}
 $$(".mode").forEach(b=>b.onclick=()=>{mode=b.dataset.mode;$$(".mode").forEach(x=>x.classList.toggle("active",x===b));$("manualSec").classList.toggle("hidden",mode!=="manual");$("bulkSec").classList.toggle("hidden",mode!=="bulk");$("excelSec").classList.toggle("hidden",mode!=="excel");toast(b.textContent+" enabled");renderCoco()});
 $("bulk").oninput=renderCoco;
 $("excel").onchange=async e=>{
-  const f=e.target.files[0];
-  if(!f)return;
-  try{
-    const ext=(f.name.split(".").pop()||"").toLowerCase();
-    let values=[];
-    if(ext==="csv"){
-      const raw=await f.text();
-      values=raw.split(/\r?\n/)
-        .map(r=>r.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)[0].replace(/^"|"$/g,"").trim())
-        .filter(Boolean)
-        .slice(1);
-    }else if((ext==="xlsx"||ext==="xls") && window.XLSX){
-      const buf=await f.arrayBuffer();
-      const wb=XLSX.read(buf,{type:"array",cellDates:false});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const rows=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:""});
-      values=rows.slice(1).map(r=>String(r[0]??"").trim()).filter(Boolean);
-    }else{
-      throw new Error("Unsupported file. Use CSV, XLSX, or XLS (Excel 97-2003).");
-    }
-    excelPO=values;
-    toast("📊 "+ext.toUpperCase()+" loaded: "+excelPO.length+" PO");
-    renderCoco();
-  }catch(err){
-    console.error(err);
-    toast("❌ "+err.message,true);
-  }
+ const f=e.target.files[0];if(!f)return;
+ try{
+   const ext=f.name.toLowerCase().split(".").pop();
+   if(ext==="csv"){
+     const txt=await f.text();
+     excelPO=txt.split(/\r?\n/).map(r=>r.split(",")[0].trim()).filter(Boolean).slice(1);
+   }else{
+     if(typeof XLSX==="undefined")throw Error("Excel library did not load. Refresh once with internet enabled.");
+     const data=await f.arrayBuffer();
+     const wb=XLSX.read(data,{type:"array"});
+     const ws=wb.Sheets[wb.SheetNames[0]];
+     const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:""});
+     excelPO=rows.slice(1).map(r=>String(r[0]??"").trim()).filter(Boolean);
+   }
+   toast("📊 "+ext.toUpperCase()+" loaded: "+excelPO.length+" PO");
+   renderCoco();
+ }catch(err){console.error(err);toast("❌ "+err.message,true)}
 };
 $$("input,select,textarea").forEach(el=>{if(el.id==="excel")return;el.addEventListener("input",()=>{renderCoco();renderOther();renderISBN();renderAddress()});el.addEventListener("change",()=>{renderCoco();renderOther();renderISBN();renderAddress()})});
-$("sizes").onclick=e=>{const b=e.target.closest("[data-size]");if(!b)return;size=b.dataset.size;$$("#sizes .choice").forEach(x=>x.classList.toggle("active",x===b));$("custom").classList.toggle("hidden",size!=="custom");renderCoco()};
+
+$("sizes").onclick=e=>{let b=e.target.closest("[data-size]");if(!b)return;size=b.dataset.size;$$("#sizes .choice").forEach(x=>x.classList.toggle("active",x===b));$("custom").classList.toggle("hidden",size!=="custom");renderCoco()};
 $("barOn").onclick=()=>{barcode=true;$("barOn").classList.add("on");$("barOff").classList.remove("off");toast("📊 Barcode enabled");renderCoco()};
 $("barOff").onclick=()=>{barcode=false;$("barOff").classList.add("off");$("barOn").classList.remove("on");toast("🚫 Barcode disabled",true);renderCoco()};
-$("cutOn").onclick=()=>{cutting=true;$("cutOn").classList.add("on");$("cutOff").classList.remove("off");renderCoco()};
-$("cutOff").onclick=()=>{cutting=false;$("cutOff").classList.add("off");$("cutOn").classList.remove("on");renderCoco()};
-function bd(v){return v==="solid"?"solid":v==="double"?"double":v==="dashed"?"dashed":v==="dotted"?"dotted":"none"}
+$("cutOn").onclick=()=>{cutting=true;$("cutOn").classList.add("on");$("cutOff").classList.remove("off");toast("✂️ Cutting enabled");renderCoco()};
+$("cutOff").onclick=()=>{cutting=false;$("cutOff").classList.add("off");$("cutOn").classList.remove("on");toast("🚫 Cutting disabled",true);renderCoco()};
+
+function border(v){return v==="solid"?"solid":v==="double"?"double":v==="dashed"?"dashed":v==="dotted"?"dotted":"none"}
+function mm(v){return v*72/25.4}
 function dims(){if(size==="a4")return[210,297];if(size==="70")return[70,35];if(size==="custom")return[+$("cw").value||101.6,+$("ch").value||152.4];return[101.6,152.4]}
 function pageClass(){return size==="a4"?"page-a4":size==="70"?"page-70":size==="custom"?"page-custom":"page-4x6"}
-function gridSpec(){if(size==="4x6")return[1,perPage];const c=perPage<=1?1:perPage<=4?2:3;return[c,Math.ceil(perPage/c)]}
+function gridSpec(){if(size==="4x6")return[1,perPage];let cols=perPage<=1?1:perPage<=4?2:3;return[cols,Math.ceil(perPage/cols)]}
 
-/* ---------- SCANNER-SAFE CODE 128B ---------- */
-const C128B=[
-"212222","222122","222221","121223","121322","131222","122213","122312","132212","221213",
-"221312","231212","112232","122132","122231","113222","123122","123221","223211","221132",
-"221231","213212","223112","312131","311222","321122","321221","312212","322112","322211",
-"212123","212321","232121","111323","131123","131321","112313","132113","132311","211313",
-"231113","231311","112133","112331","132131","113123","113321","133121","313121","211331",
-"231131","213113","213311","213131","311123","311321","331121","312113","312311","332111",
-"314111","221411","431111","111224","111422","121124","121421","141122","141221","112214",
-"112412","122114","122411","142112","142211","241211","221114","413111","241112","134111",
-"111242","121142","121241","114212","124112","124211","411212","421112","421211","212141",
-"214121","412121","111143","111341","131141","114113","114311","411113","411311","113141",
-"114131","311141","411131","211412","211214","211232","2331112"
+/* Scanner-safe Code 128-B:
+   - explicit start B
+   - checksum
+   - stop pattern
+   - quiet zone is supplied by the container/PDF margins
+*/
+const C128=[
+"212222","222122","222221","121223","121322","131222","122213","122312","132212","221213","221312","231212","112232","122132","122231","113222","123122","123221","223211","221132","221231","213212","223112","312131","311222","321122","321221","312212","322112","322211","212123","212321","232121","111323","131123","131321","112313","132113","132311","211313","231113","231311","112133","112331","132131","113123","113321","133121","313121","211331","231131","213113","213311","213131","311123","311321","331121","312113","312311","332111","314111","221411","431111","111224","111422","121124","121421","141122","112214","112412","122114","122411","142112","142211","241211","221114","413111","241112","134111","111242","121142","121241","114212","124112","124211","411212","421112","421211","212141","214121","412121","111143","111341","131141","114113","114311","411113","411311","113141","114131","311141","411131","211412","211214","211232","2331112"
 ];
-
-function code128BModules(value){
-  value=String(value??"");
-  // Code 128B supports ASCII 32..127. Replace unsupported characters safely.
-  value=[...value].map(ch=>{
-    const n=ch.charCodeAt(0);
-    return (n>=32 && n<=127) ? ch : "?";
-  }).join("");
-
-  const vals=[...value].map(ch=>ch.charCodeAt(0)-32);
-  let checksum=104;
-  vals.forEach((v,i)=>checksum+=v*(i+1));
-
-  // Quiet zones are added outside the symbol, not encoded as bars.
-  const patterns=[C128B[104], ...vals.map(v=>C128B[v]), C128B[checksum%103], C128B[106]];
-  let modules=0;
-  for(const p of patterns) for(const d of p) modules+=Number(d);
-
-  return {value,patterns,modules};
+function code128Values(str){
+ let vals=[104],sum=104;
+ for(let i=0;i<str.length;i++){
+   let c=str.charCodeAt(i);
+   if(c<32||c>127)c=32;
+   let v=c-32;vals.push(v);sum+=v*(i+1);
+ }
+ vals.push(sum%103,106);
+ return vals;
 }
-
 function barcodeSVG(value){
-  const b=code128BModules(value);
-  let x=12; // left quiet zone
-  let bars="";
-  for(const pat of b.patterns){
-    let black=true;
-    for(const ch of pat){
-      const n=Number(ch);
-      if(black) bars+=`<rect x="${x}" y="0" width="${n}" height="68"/>`;
-      x+=n;
-      black=!black;
-    }
-  }
-  x+=10; // right quiet zone
-  const total=x;
-  return `<svg xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 ${total} 68"
-      preserveAspectRatio="none"
-      aria-label="Code 128 barcode"
-      shape-rendering="crispEdges">
-      <rect x="0" y="0" width="${total}" height="68" fill="#fff"/>
-      <g fill="#000">${bars}</g>
-    </svg>`;
+ const vals=code128Values(String(value));
+ let total=0;vals.forEach(v=>{for(const n of C128[v])total+=+n});
+ let x=0,on=true,rect="";
+ for(const v of vals){
+   for(const ch of C128[v]){
+     const n=+ch;
+     if(on)rect+=`<rect x="${x}" y="0" width="${n}" height="70" fill="#000"/>`;
+     x+=n;on=!on;
+   }
+   on=!on;
+ }
+ const quiet=10;
+ return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-quiet} 0 ${total+quiet*2} 70" preserveAspectRatio="none" shape-rendering="crispEdges"><rect x="${-quiet}" y="0" width="${total+quiet*2}" height="70" fill="#fff"/>${rect}</svg>`;
 }
 
-function barcodeValid(value){
-  const s=String(value??"");
-  return s.length>0 && [...s].every(ch=>ch.charCodeAt(0)>=32 && ch.charCodeAt(0)<=127);
+function items(){
+ const list=poList(),s=+$("start").value,e=+$("end").value,r=[];
+ list.forEach(po=>{for(let n=s;n<=e;n++)r.push({po:($("poPrefix").value||"")+po,box:n})});
+ return r;
 }
-
-function makeItems(){const a=pos(),s=+$("start").value,e=+$("end").value,r=[];a.forEach(po=>{for(let n=s;n<=e;n++)r.push({po:($("poPrefix").value||"")+po,box:n})});return r}
 function renderCoco(){
- const old=$("previewPage"),items=makeItems(),p=document.createElement("div");
+ const old=$("previewPage"),p=document.createElement("div");
  p.id="previewPage";p.className="label-page "+pageClass();
- const pb=bd($("pageBorder").value);p.style.border=pb==="none"?"none":`2px ${pb} #000`;
- const g=document.createElement("div");g.className="label-grid";const [cols,rows]=gridSpec();
- g.style.gridTemplateColumns=`repeat(${cols},1fr)`;g.style.gridTemplateRows=`repeat(${rows},1fr)`;
- items.slice(0,perPage).forEach((it,i)=>{
+ const pb=border($("pageBorder").value);if(pb!=="none")p.style.border=`2px ${pb} #000`;
+ const g=document.createElement("div");g.className="label-grid";
+ const [cols,rows]=gridSpec();g.style.gridTemplateColumns=`repeat(${cols},1fr)`;g.style.gridTemplateRows=`repeat(${rows},1fr)`;
+ const data=items().slice(0,perPage);
+ data.forEach((it,i)=>{
    let c=document.createElement("div");c.className="cell";
-   if(cutting&&i>0)c.innerHTML='<div class="cutline"></div><div class="sc">✂️</div>';
+   if(cutting&&i>0){c.innerHTML='<div class="cutline"></div><div class="sc">✂️</div>'}
    let inn=document.createElement("div");inn.className="inner";
-   const requested=+$('fontSize').value||36;
-   const safePo=Math.min(requested, Math.max(16, Math.floor(300/(String(it.po).length||1)*1.35)));
-   let po=document.createElement("div");po.className="po";po.textContent=it.po;po.style.fontFamily=$("font").value;po.style.fontSize=safePo+"px";
-   const pbd=bd($("poBorder").value);po.style.border=pbd==="none"?"none":`2px ${pbd} #000`;
-   let bx=document.createElement("div");bx.className="box";bx.textContent=($("boxPrefix").value||"BOX")+" NO. "+it.box;bx.style.fontFamily=$("font").value;bx.style.fontSize=Math.max(15,Math.min(25,requested*.58))+"px";
-   const bbd=bd($("boxBorder").value);bx.style.border=bbd==="none"?"none":`2px ${bbd} #000`;
+   let po=document.createElement("div");po.className="po";po.textContent=it.po;po.style.fontFamily=$("font").value;po.style.fontSize=$("fontSize").value+"px";
+   let poB=border($("poBorder").value);if(poB!=="none")po.style.border=`2px ${poB} #000`;
+   let bx=document.createElement("div");bx.className="box";bx.textContent=($("boxPrefix").value||"BOX")+" NO. "+it.box;bx.style.fontFamily=$("font").value;bx.style.fontSize=Math.max(18,+$("fontSize").value*.58)+"px";
+   let bxB=border($("boxBorder").value);if(bxB!=="none")bx.style.border=`2px ${bxB} #000`;
    if($("content").value==="po")inn.append(po);
    else if($("content").value==="box")inn.append(bx);
    else if($("layout").value==="same"){let row=document.createElement("div");row.className="same";row.append(po,bx);inn.append(row)}
    else inn.append(po,bx);
-   if(barcode){let bb=document.createElement("div");bb.className="barcode-block";let bars=document.createElement("div");bars.className="barcode-bars";bars.innerHTML=barcodeSVG(it.po);let human=document.createElement("div");human.className="barcode-human";human.textContent=it.po;bb.append(bars,human);inn.append(bb)}
-   c.append(inn);g.append(c)
+   if(barcode){
+     let bb=document.createElement("div");bb.className="barcode-block";
+     bb.innerHTML=`<div class="barcode-bars">${barcodeSVG(it.po)}</div><div class="barcode-human">${esc(it.po)}</div>`;
+     inn.append(bb);
+   }
+   c.append(inn);g.append(c);
  });
  p.append(g);old.replaceWith(p);
- $("rangeWarn").classList.toggle("hidden",+$('start').value>+$('end').value);
- $("info").textContent=`👁️ ${Math.min(items.length,perPage)} of ${items.length} labels • 📊 Barcode ${barcode?"ON":"OFF"}`
-}
-function renderOther(){const p=$("otherPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="repeat(2,1fr)";for(let n=+$("otherStart").value;n<=+$("otherEnd").value&&g.children.length<2;n++){let c=document.createElement("div");c.className="cell";c.innerHTML=`<div class="inner"><div class="po" style="font-size:32px;border:2px solid #000">${esc($("otherPO").value)}</div><div class="box" style="font-size:21px;border:2px solid #000">BOX NO. ${n}</div></div>`;g.append(c)}p.append(g)}
-function renderISBN(){const p=$("isbnPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";const c=document.createElement("div");c.className="cell";const inn=document.createElement("div");inn.className="inner";let v=$("isbn").value.trim();if(v){let t=document.createElement("div");t.style.cssText="font-size:25px;font-weight:900";t.textContent=v;inn.append(t);if($("isbnOn").classList.contains("on")){let bb=document.createElement("div");bb.className="barcode-block";bb.innerHTML=`<div class="barcode-bars">${barcodeSVG(v)}</div><div class="barcode-human">${esc(v)}</div>`;inn.append(bb)}}else inn.textContent="🔢 Enter ISBN";c.append(inn);g.append(c);p.append(g)}
-function renderAddress(){const p=$("addressPreview");p.innerHTML="";const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";const c=document.createElement("div");c.className="cell";const card=document.createElement("div");card.className="address-card";card.style.border=bd($("addrBorder").value)==="none"?"none":`2px ${bd($("addrBorder").value)} #000`;card.innerHTML=`<div class="addr-block"><div class="addr-title">🏢 📤 FROM / SENDER</div>${esc($("from").value)}<div class="addr-meta">🌎 ${esc($("fromCountry").value)} • 🗺️ ${esc($("fromState").value)} • 📍 ${esc($("fromPin").value)}</div></div>${$("addrCut").value==="on"?'<div class="addr-cut"><span>✂️</span></div>':''}<div class="addr-block"><div class="addr-title">🏠 📥 TO / RECEIVER</div>${esc($("to").value)}<div class="addr-meta">🌎 ${esc($("toCountry").value)} • 🗺️ ${esc($("toState").value)} • 📍 ${esc($("toPin").value)}</div></div>`;c.append(card);g.append(c);p.append(g)}
-
-const E=new TextEncoder(), pt=mm=>mm*72/25.4;
-function ptxt(x,y,s,sz,b=false,align="center"){let a=String(s).replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)").replace(/[^\x20-\x7E]/g,"?"),w=a.length*sz*.48,xx=align==="center"?x-w/2:align==="right"?x-w:x;return `BT /${b?"F2":"F1"} ${sz} Tf ${xx.toFixed(2)} ${y.toFixed(2)} Td (${a}) Tj ET\n`}
-function pborder(v){return v==="double"?2.2:1.2}function pdash(v){return v==="dashed"?"[5 4] 0 d":v==="dotted"?"[1 3] 0 d":"[] 0 d"}
-function drawBarcode(cmd,x,y,w,h,value){
-  const b=code128BModules(value);
-  const quietModules=12;
-  const totalModules=b.modules + quietModules*2;
-  const unit=w/totalModules;
-  let xx=x + quietModules*unit;
-  for(const pat of b.patterns){
-    let black=true;
-    for(const ch of pat){
-      const n=Number(ch)*unit;
-      if(black) cmd.push(`0 0 0 rg ${xx.toFixed(2)} ${y.toFixed(2)} ${n.toFixed(2)} ${h.toFixed(2)} re f\n`);
-      xx+=n;
-      black=!black;
-    }
-  }
-  // Human-readable text is deliberately below the bars with a safe gap.
-  cmd.push(ptxt(x+w/2,y-13,String(value),8,false,"center"));
+ $("rangeWarn").classList.toggle("hidden",+$("start").value<=+$("end").value);
+ $("info").textContent=`👁️ ${Math.min(data.length,perPage)} of ${items().length} labels • 📊 Barcode ${barcode?"ON":"OFF"}`;
 }
 
-function drawPDFLabel(cmd,x,y,w,h,it,opts,cut){
-  const cx=x+w/2, po=String(it.po??''), box=(opts.boxPrefix||'BOX')+' NO. '+it.box;
-  const pad=Math.max(10,w*0.055);
-  const requested=Math.max(12,Number(opts.fontSize)||36);
-  const poSize=Math.min(requested, Math.max(12, Math.floor((w-pad*2)/(Math.max(1,po.length)*0.52))));
-  const boxSize=Math.max(11,Math.min(requested*0.58,w*0.12));
-  const top=h-28;
-  if(opts.content!=='box'){
-    const poW=Math.min(w-pad*2, Math.max(w*0.72, po.length*poSize*0.52+18));
-    const poX=cx-poW/2, poY=y+h*0.68;
-    if(opts.poBorder!=='none') cmd.push(`0 0 0 RG ${pborder(opts.poBorder)} w ${pdash(opts.poBorder)} ${poX.toFixed(2)} ${(poY-poSize*0.78).toFixed(2)} ${poW.toFixed(2)} ${(poSize*1.45).toFixed(2)} re S\n`);
-    cmd.push(ptxt(cx,poY,po,poSize,true,'center'));
-  }
-  if(opts.content!=='po'){
-    const bw=Math.min(w*0.72,w-2*pad), by=y+h*0.49;
-    if(opts.boxBorder!=='none') cmd.push(`0 0 0 RG ${pborder(opts.boxBorder)} w ${pdash(opts.boxBorder)} ${(cx-bw/2).toFixed(2)} ${(by-boxSize*0.78).toFixed(2)} ${bw.toFixed(2)} ${(boxSize*1.45).toFixed(2)} re S\n`);
-    cmd.push(ptxt(cx,by,box,boxSize,true,'center'));
-  }
-  if(opts.barcode && barcodeValid(po)){
-    // Fixed barcode zone at the bottom; it cannot overlap PO/Box text.
-    const bw=w*0.78, bh=Math.min(44,h*0.16), bx=cx-bw/2, by=y+h*0.13;
-    drawBarcode(cmd,bx,by,bw,bh,po);
-  }
-  if(cut){
-    const ly=y+h-5;
-    cmd.push(`0 0 0 RG 1.2 w [5 4] 0 d ${x+7} ${ly.toFixed(2)} m ${x+w-7} ${ly.toFixed(2)} l S\n`);
-    cmd.push(ptxt(cx,ly+1,'✂',10,true,'center'));
-  }
+function renderOther(){
+ const p=$("otherPreview");p.innerHTML="";
+ const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="repeat(2,1fr)";
+ for(let n=+$("otherStart").value;n<=+$("otherEnd").value&&g.children.length<2;n++){
+   let c=document.createElement("div");c.className="cell";
+   c.innerHTML=`<div class="inner"><div class="po" style="font-size:30px;border:2px solid #000">${esc($("otherPO").value)}</div><div class="box" style="font-size:20px;border:2px solid #000">BOX NO. ${n}</div></div>`;
+   g.append(c);
+ }
+ p.append(g);
+}
+let isbnBarcode=true;
+$("isbnOn").onclick=()=>{isbnBarcode=true;$("isbnOn").classList.add("on");$("isbnOff").classList.remove("off");renderISBN()};
+$("isbnOff").onclick=()=>{isbnBarcode=false;$("isbnOff").classList.add("off");$("isbnOn").classList.remove("on");renderISBN()};
+function renderISBN(){
+ const p=$("isbnPreview");p.innerHTML="";
+ const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";
+ const c=document.createElement("div");c.className="cell";const inn=document.createElement("div");inn.className="inner";
+ const v=$("isbn").value.trim();
+ if(v){let t=document.createElement("div");t.style.cssText="font-size:25px;font-weight:900";t.textContent=v;inn.append(t);if(isbnBarcode){let bb=document.createElement("div");bb.className="barcode-block";bb.innerHTML=`<div class="barcode-bars">${barcodeSVG(v)}</div><div class="barcode-human">${esc(v)}</div>`;inn.append(bb)}}else inn.textContent="🔢 Enter ISBN";
+ c.append(inn);g.append(c);p.append(g);
+}
+function renderAddress(){
+ const p=$("addressPreview");p.innerHTML="";
+ const g=document.createElement("div");g.className="label-grid";g.style.gridTemplateColumns="1fr";g.style.gridTemplateRows="1fr";
+ const c=document.createElement("div");c.className="cell";const card=document.createElement("div");card.className="address-card";
+ const b=border($("addrBorder").value);if(b!=="none")card.style.border=`2px ${b} #000`;else card.style.border="none";
+ card.innerHTML=`<div class="addr-block"><div class="addr-title">🏢 📤 FROM / SENDER</div>${esc($("from").value)}<div class="addr-meta">🌎 ${esc($("fromCountry").value)} • 🗺️ ${esc($("fromState").value)} • 📍 ${esc($("fromPin").value)}</div></div>${$("addrCut").value==="on"?'<div class="addr-cut"><span>✂️</span></div>':''}<div class="addr-block"><div class="addr-title">🏠 📥 TO / RECEIVER</div>${esc($("to").value)}<div class="addr-meta">🌎 ${esc($("toCountry").value)} • 🗺️ ${esc($("toState").value)} • 📍 ${esc($("toPin").value)}</div></div>`;
+ c.append(card);g.append(c);p.append(g);
 }
 
-function makeCoco(){const items=makeItems();if(!items.length)throw Error("Enter at least one PO number.");if(barcode && items.some(it=>!barcodeValid(it.po)))throw Error("PO contains unsupported characters. Code 128 supports ASCII characters only.");const s=+$("start").value,e=+$("end").value;if(s>e)throw Error("Start Box Number is greater than End Box Number.");let [wm,hm]=dims(),W=pt(wm),H=pt(hm),pages=[],[cols,rows]=gridSpec(),opts={content:$("content").value,boxPrefix:$("boxPrefix").value||"BOX",fontSize:+$("fontSize").value||36,poBorder:$("poBorder").value,boxBorder:$("boxBorder").value,barcode};for(let o=0;o<items.length;o+=perPage){let cmd=[];let pb=$("pageBorder").value;if(pb!=="none")cmd.push(`0 0 0 RG ${pborder(pb)} w ${pdash(pb)} 2 2 ${W-4} ${H-4} re S\n`);items.slice(o,o+perPage).forEach((it,i)=>{let col,row;if(size==="4x6"){col=0;row=i}else if($("flow").value==="left"){col=i%cols;row=Math.floor(i/cols)}else{row=i%rows;col=Math.floor(i/rows)}let cw=W/cols,ch=H/rows;drawPDFLabel(cmd,col*cw,H-(row+1)*ch,cw,ch,it,opts,cutting&&i>0)});pages.push(cmd.join(""))}return{W,H,pages}}
-function makeSimple(kind){if(kind==="other"){let po=$("otherPO").value.trim(),s=+$("otherStart").value,e=+$("otherEnd").value;if(!po)throw Error("Enter Other PO number.");let pages=[],W=pt(101.6),H=pt(152.4);for(let n=s;n<=e;n++){let c=[];drawPDFLabel(c,0,0,W,H,{po,box:n},{content:"both",boxPrefix:"BOX",fontSize:34,poBorder:"solid",boxBorder:"solid",barcode:false},false);pages.push(c.join(""))}return{W,H,pages}}if(kind==="isbn"){let v=$("isbn").value.trim();if(!v)throw Error("Enter ISBN.");let W=pt(101.6),H=pt(152.4),c=[];c.push(ptxt(W/2,H*.62,v,28,true));if($("isbnOn").classList.contains("on"))drawBarcode(c,W*.12,H*.32,W*.76,48,v);return{W,H,pages:[c.join("")]}}let f=$("from").value.trim(),t=$("to").value.trim();if(!f||!t)throw Error("From and To are required.");let W=pt(101.6),H=pt(152.4),c=[];c.push(`0 0 0 RG 1.5 w 12 12 ${W-24} ${H-24} re S\n`);c.push(ptxt(22,H-42,"🏢 FROM / SENDER",11,true,"left"));c.push(ptxt(22,H-60,f,9,false,"left"));c.push(ptxt(22,H-75,`${$("fromCountry").value} • ${$("fromState").value} • PIN ${$("fromPin").value}`,8,false,"left"));c.push(`1 w [5 4] 0 d 18 ${H/2} m ${W-18} ${H/2} l S\n`);c.push(ptxt(W/2,H/2+4,"x",12,true));c.push(ptxt(22,H/2-25,"🏠 TO / RECEIVER",11,true,"left"));c.push(ptxt(22,H/2-43,t,9,false,"left"));c.push(ptxt(22,H/2-58,`${$("toCountry").value} • ${$("toState").value} • PIN ${$("toPin").value}`,8,false,"left"));return{W,H,pages:[c.join("")]}}
-function buildPDF(d){const objs=[],add=x=>(objs.push(x),objs.length),pages=add(null),f1=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"),f2=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"),kids=[];for(const s of d.pages){const sid=add(`<< /Length ${E.encode(s).length} >>\nstream\n${s}\nendstream`);kids.push(add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 ${d.W} ${d.H}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${sid} 0 R >>`))}objs[pages-1]=`<< /Type /Pages /Kids [${kids.map(x=>x+" 0 R").join(" ")}] /Count ${kids.length} >>`;const root=add(`<< /Type /Catalog /Pages ${pages} 0 R >>`);let out="%PDF-1.4\n%\xE2\xE3\xCF\xD3\n",off=[0];for(let i=0;i<objs.length;i++){off[i+1]=E.encode(out).length;out+=`${i+1} 0 obj\n${objs[i]}\nendobj\n`}let x=E.encode(out).length;out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objs.length;i++)out+=String(off[i]).padStart(10,"0")+" 00000 n \n";out+=`trailer\n<< /Size ${objs.length+1} /Root ${root} 0 R >>\nstartxref\n${x}\n%%EOF`;return new Blob([E.encode(out)],{type:"application/pdf"})}
-function current(kind){return kind==="coco"?makeCoco():makeSimple(kind)}
-function doPDF(kind,action){try{let blob=buildPDF(current(kind));if(action==="download"){let u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="BooksWagon_Label_Studio.pdf";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);toast("✅ All PDF pages downloaded")}else{let u=URL.createObjectURL(blob),w=window.open(u,"_blank");if(!w){toast("⚠️ Popup blocked. Use Download PDF.",true)}else toast(action==="print"?"🖨️ PDF opened — print from viewer":"📄 All PDF pages generated")}}catch(e){console.error(e);toast("❌ "+e.message,true)}}
-$("generate").onclick=()=>doPDF("coco","generate");$("download").onclick=()=>doPDF("coco","download");$("print").onclick=()=>doPDF("coco","print");$("clear").onclick=()=>{$$(".poInput").forEach(x=>x.value="");renderCoco()};
+/* PDF engine */
+const enc=new TextEncoder();
+function pdfText(x,y,text,size,bold=false,align="center"){
+ let s=String(text??"").replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)").replace(/[^\x20-\x7E]/g,"?");
+ let width=s.length*size*.49;
+ let xx=align==="center"?x-width/2:align==="right"?x-width:x;
+ return `BT /${bold?"F2":"F1"} ${size} Tf ${xx.toFixed(2)} ${y.toFixed(2)} Td (${s}) Tj ET\n`;
+}
+function pdfDash(v){return v==="dashed"?"[5 4] 0 d":v==="dotted"?"[1 3] 0 d":"[] 0 d"}
+function pdfBorder(v){return v==="double"?2.2:1.1}
+
+/* Critical PDF barcode fix:
+   bars and human-readable text occupy two non-overlapping zones.
+   bars are ABOVE, text is BELOW, with a bottom safety margin.
+*/
+function drawPDFBarcode(cmd,value,x,y,w){
+ const vals=code128Values(String(value));let total=0;
+ vals.forEach(v=>{for(const n of C128[v])total+=+n});
+ const barH=Math.min(48, w*.12), humanY=y-13;
+ let xx=x, on=true;
+ const scale=w/total;
+ for(const v of vals){
+   for(const ch of C128[v]){
+     const n=+ch*scale;
+     if(on)cmd.push(`0 0 0 rg ${xx.toFixed(2)} ${y.toFixed(2)} ${n.toFixed(2)} ${barH.toFixed(2)} re f\n`);
+     xx+=n;on=!on;
+   }
+   on=!on;
+ }
+ cmd.push(pdfText(x+w/2,humanY,String(value),8,false,"center"));
+}
+function drawPDFLabel(cmd,x,y,w,h,it,opt,cut){
+ const cx=x+w/2,pad=Math.max(10,w*.06);
+ const ps=Math.min(opt.fontSize,Math.max(13,w*.115)),bs=Math.max(12,ps*.54);
+ let content=opt.content;
+ let topY=y+h-28;
+ if(content!=="box"){
+   const text=String(it.po), pw=w-pad*2;
+   if(opt.poBorder!=="none")cmd.push(`0 0 0 RG ${pdfBorder(opt.poBorder)} w ${pdfDash(opt.poBorder)} ${x+pad} ${(topY-ps*.72).toFixed(2)} ${pw.toFixed(2)} ${(ps*1.42).toFixed(2)} re S\n`);
+   cmd.push(pdfText(cx,topY,text,ps,true,"center"));
+ }
+ if(content!=="po"){
+   let by=y+h*.57,bw=w*.62;
+   if(opt.boxBorder!=="none")cmd.push(`0 0 0 RG ${pdfBorder(opt.boxBorder)} w ${pdfDash(opt.boxBorder)} ${(cx-bw/2).toFixed(2)} ${(by-bs*.72).toFixed(2)} ${bw.toFixed(2)} ${(bs*1.45).toFixed(2)} re S\n`);
+   cmd.push(pdfText(cx,by,(opt.boxPrefix||"BOX")+" NO. "+it.box,bs,true,"center"));
+ }
+ if(opt.barcode){
+   /* Reserve a complete barcode zone near the bottom.
+      This is deliberately separated from PO/Box zones. */
+   const bw=w*.72, bx=cx-bw/2, barH=Math.min(48,w*.12), textGap=13;
+   const bottomSafe=y+18;
+   const barsY=bottomSafe+textGap+2;
+   drawPDFBarcode(cmd,it.po,bx,barsY,bw);
+ }
+ if(cut){
+   cmd.push(`1.2 w [5 4] 0 d ${(x+8).toFixed(2)} ${(y+6).toFixed(2)} m ${(x+w-8).toFixed(2)} ${(y+6).toFixed(2)} l S\n`);
+   cmd.push(pdfText(cx,y+9,"x",11,true,"center"));
+ }
+}
+function makeCocoPDF(){
+ const list=items();if(!list.length)throw Error("Enter at least one PO number.");
+ const s=+$("start").value,e=+$("end").value;if(s>e)throw Error("Start Box Number is greater than End Box Number.");
+ const [wm,hm]=dims(),W=mm(wm),H=mm(hm),pages=[];const [cols,rows]=gridSpec();
+ const opt={content:$("content").value,boxPrefix:$("boxPrefix").value||"BOX",fontSize:+$("fontSize").value||36,poBorder:$("poBorder").value,boxBorder:$("boxBorder").value,barcode};
+ for(let base=0;base<list.length;base+=perPage){
+   let cmd=[],pb=$("pageBorder").value;
+   if(pb!=="none")cmd.push(`0 0 0 RG ${pdfBorder(pb)} w ${pdfDash(pb)} 2 2 ${(W-4).toFixed(2)} ${(H-4).toFixed(2)} re S\n`);
+   list.slice(base,base+perPage).forEach((it,i)=>{
+     let col,row;
+     if(size==="4x6"){col=0;row=i}
+     else if($("flow").value==="left"){col=i%cols;row=Math.floor(i/cols)}
+     else{row=i%rows;col=Math.floor(i/rows)}
+     const cw=W/cols,ch=H/rows;
+     drawPDFLabel(cmd,col*cw,H-(row+1)*ch,cw,ch,it,opt,cutting&&i>0);
+   });
+   pages.push(cmd.join(""));
+ }
+ return {W,H,pages};
+}
+function makeSimplePDF(kind){
+ const W=mm(101.6),H=mm(152.4),pages=[];
+ if(kind==="other"){
+   const po=$("otherPO").value.trim(),s=+$("otherStart").value,e=+$("otherEnd").value;if(!po)throw Error("Enter Other PO number.");
+   for(let n=s;n<=e;n++){let c=[];drawPDFLabel(c,0,0,W,H,{po,box:n},{content:"both",boxPrefix:"BOX",fontSize:34,poBorder:"solid",boxBorder:"solid",barcode:false},false);pages.push(c.join(""))}
+ }else if(kind==="isbn"){
+   const v=$("isbn").value.trim();if(!v)throw Error("Enter ISBN.");let c=[];c.push(pdfText(W/2,H*.68,v,26,true));if(isbnBarcode)drawPDFBarcode(c,v,W*.14,H*.31,W*.72);pages.push(c.join(""));
+ }else{
+   const f=$("from").value.trim(),t=$("to").value.trim();if(!f||!t)throw Error("From and To are required.");
+   let c=[];c.push(`0 0 0 RG 1.5 w 12 12 ${(W-24).toFixed(2)} ${(H-24).toFixed(2)} re S\n`);
+   c.push(pdfText(24,H-38,"FROM / SENDER",11,true,"left"));c.push(pdfText(24,H-55,f,9,false,"left"));c.push(pdfText(24,H-70,`${$("fromCountry").value} • ${$("fromState").value} • PIN ${$("fromPin").value}`,8,false,"left"));
+   if($("addrCut").value==="on"){c.push(`1.2 w [5 4] 0 d 18 ${(H/2).toFixed(2)} m ${(W-18).toFixed(2)} ${(H/2).toFixed(2)} l S\n`);c.push(pdfText(W/2,H/2+4,"x",11,true))}
+   c.push(pdfText(24,H/2-25,"TO / RECEIVER",11,true,"left"));c.push(pdfText(24,H/2-42,t,9,false,"left"));c.push(pdfText(24,H/2-57,`${$("toCountry").value} • ${$("toState").value} • PIN ${$("toPin").value}`,8,false,"left"));pages.push(c.join(""));
+ }
+ return {W,H,pages};
+}
+function buildPDF(d){
+ const objs=[];const add=x=>(objs.push(x),objs.length);
+ const pagesObj=add(null),f1=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"),f2=add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>"),kids=[];
+ for(const stream of d.pages){
+   const sid=add(`<< /Length ${enc.encode(stream).length} >>\nstream\n${stream}\nendstream`);
+   kids.push(add(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 ${d.W.toFixed(2)} ${d.H.toFixed(2)}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${sid} 0 R >>`));
+ }
+ objs[pagesObj-1]=`<< /Type /Pages /Kids [${kids.map(n=>n+" 0 R").join(" ")}] /Count ${kids.length} >>`;
+ const root=add(`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`);
+ let pdf="%PDF-1.4\n%\xE2\xE3\xCF\xD3\n",offsets=[0];
+ for(let i=0;i<objs.length;i++){offsets[i+1]=enc.encode(pdf).length;pdf+=`${i+1} 0 obj\n${objs[i]}\nendobj\n`}
+ const xref=enc.encode(pdf).length;
+ pdf+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;
+ for(let i=1;i<=objs.length;i++)pdf+=String(offsets[i]).padStart(10,"0")+" 00000 n \n";
+ pdf+=`trailer\n<< /Size ${objs.length+1} /Root ${root} 0 R >>\nstartxref\n${xref}\n%%EOF`;
+ return new Blob([enc.encode(pdf)],{type:"application/pdf"});
+}
+function currentPDF(kind){return kind==="coco"?makeCocoPDF():makeSimplePDF(kind)}
+function doPDF(kind,action){
+ try{
+   const blob=buildPDF(currentPDF(kind)),url=URL.createObjectURL(blob);
+   if(action==="download"){
+     const a=document.createElement("a");a.href=url;a.download="BooksWagon_Label_Studio.pdf";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);toast("✅ All PDF pages downloaded");
+   }else{
+     const w=window.open(url,"_blank");
+     if(!w){toast("⚠️ Popup blocked. Use Download PDF.",true)}
+     else{if(action==="print"){w.addEventListener("load",()=>setTimeout(()=>w.print(),500));toast("🖨️ PDF opened for printing")}else toast("📄 All PDF pages generated")}
+   }
+ }catch(err){console.error(err);toast("❌ "+err.message,true)}
+}
+$("generate").onclick=()=>doPDF("coco","generate");$("download").onclick=()=>doPDF("coco","download");$("print").onclick=()=>doPDF("coco","print");
 $("otherGenerate").onclick=()=>doPDF("other","generate");$("otherDownload").onclick=()=>doPDF("other","download");$("otherPrint").onclick=()=>doPDF("other","print");
 $("isbnGenerate").onclick=()=>doPDF("isbn","generate");$("isbnDownload").onclick=()=>doPDF("isbn","download");$("isbnPrint").onclick=()=>doPDF("isbn","print");
 $("addrGenerate").onclick=()=>doPDF("address","generate");$("addrDownload").onclick=()=>doPDF("address","download");$("addrPrint").onclick=()=>doPDF("address","print");
+$("clear").onclick=()=>{$$(".poInput").forEach(x=>x.value="");renderCoco()};
 renderCoco();renderOther();renderISBN();renderAddress();
 </script>
 </body>
